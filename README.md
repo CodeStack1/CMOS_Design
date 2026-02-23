@@ -29,4 +29,32 @@ The lecture raises three critical questions: (1) Where do delay tables come from
 
 # L2 Introduction to basic element in Circuit design – NMOS
 
+This lecture explains the fundamental structure of an NMOS transistor and builds the foundation for understanding threshold voltage and SPICE modeling. An NMOS is a four-terminal device consisting of gate, source, drain, and body (or bulk). It is built on a p-type substrate, and the source and drain are formed using heavily doped n+ diffusion regions. Above the substrate lies a thin gate oxide layer, and on top of the oxide is a polysilicon or metal gate. Isolation regions are also present to electrically separate adjacent transistors so that the operation of one device does not affect another. While the body terminal is often not explicitly shown in simplified circuit symbols because it is usually grounded, it plays a very important role in determining the threshold voltage. Any potential applied to the body can modify the threshold voltage, which directly affects device behavior.
+
+<p align="center">
+<img width="602" height="268" alt="image" src="https://github.com/user-attachments/assets/9737419d-99b7-4b90-9b57-6fa56ab35e66" /> </p>
+
+The PMOS transistor has a similar structure but is complementary to the NMOS. It is built on an n-type substrate with p+ source and drain regions. Apart from the doping differences, the general structure remains the same. Understanding this structural difference is important for CMOS design.
+
+##
+The most critical parameter governing transistor operation is the threshold voltage (Vₜ). Threshold voltage determines when a conducting channel forms between source and drain. In SPICE simulations, transistor behavior is represented through mathematical models, and threshold voltage is a key component of these models. Although the full SPICE model contains complex equations, conceptually threshold voltage can be viewed as a function of several physical and electrical parameters. Accurate modeling of Vₜ ensures that SPICE simulations correctly represent real transistor behavior.
+
+<p align="center">
+<img width="677" height="257" alt="image" src="https://github.com/user-attachments/assets/cee5ef2e-fb4b-4312-92d4-139f2e76d419" /> </p>
+
+To understand threshold voltage formation, consider the case when the gate-to-source voltage (VGS) is zero and all terminals are grounded. In this condition, the NMOS contains two back-to-back PN junctions: one between source and body and another between drain and body. Since no bias is applied, both junctions are effectively off, resulting in very high resistance between source and drain. No conducting channel exists, and therefore no current flows. The transistor is in the OFF state.
+
+##
+
+When a small positive voltage is applied to the gate, the gate, oxide, and substrate form a capacitor structure. The gate acts as one plate, the substrate acts as the other plate, and the oxide serves as the dielectric. Applying a positive voltage charges the gate positively. Because the substrate is p-type and contains holes as majority carriers, the positive gate voltage repels these holes away from the surface region beneath the gate. As holes move deeper into the substrate, they leave behind negatively charged ions. This creates a depletion region under the gate. At this stage, although charge redistribution has begun, a conducting channel has not yet formed.
+
+<p align="center">
+<img width="672" height="258" alt="image" src="https://github.com/user-attachments/assets/cb5fb083-3d40-4d8d-9720-d09797cf7102" /> </p>
+
+If the gate voltage is increased further, the depletion region widens, and more holes are pushed away. Eventually, the electric field becomes strong enough to attract electrons (minority carriers in the p-type substrate) toward the surface. When sufficient electrons accumulate, an inversion layer forms beneath the gate oxide. This inversion layer creates a continuous conducting path between the n+ source and n+ drain regions. The gate voltage at which this conducting channel is formed is defined as the threshold voltage. Once VGS exceeds Vₜ, the transistor turns ON and current can flow between source and drain.
+
+Understanding this physical process is essential because SPICE models are built upon these device physics principles. The threshold voltage, channel formation mechanism, and charge behavior directly influence I–V characteristics, delay, and overall transistor performance. Since all timing libraries and delay models used in digital design ultimately originate from SPICE-based characterization, a strong understanding of NMOS structure and threshold voltage formation is fundamental to accurate circuit design and timing analysis.
+
+***
+
 
