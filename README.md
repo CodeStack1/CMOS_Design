@@ -490,3 +490,204 @@ The derivation in the resistive region will continue in the next discussion.
 
 ---
 
+# L2: Drift Current Theory
+
+
+## 1️. Definition of V(x) Along the Channel
+
+<p align="center">
+  <img width="682" height="318" alt="image" src="https://github.com/user-attachments/assets/4908d633-8758-4df2-b903-d993cca1da8d" />
+</p>
+
+In the previous discussion, the term **V(x)** was introduced.
+
+V(x) represents the voltage at each point along the channel (x-axis).
+
+- At x = 0 → V(0) = 0 V  
+- At x = L → V(L) = VDS  
+
+Thus, voltage varies from source to drain.
+
+
+## 2️. Effective Channel Voltage (VGS − V(x))
+
+Because VGS is applied at the gate, the effective channel voltage at any point becomes:
+
+### **VGS − V(x)**
+
+Example:
+
+If:
+- VGS = 1 V  
+- V(0) = 0 V  
+
+Effective voltage at source = 1 − 0 = 1 V  
+
+If:
+- VGS = 1 V  
+- V(L) = VDS = 0.05 V  
+
+Effective voltage at drain = 1 − 0.05 = 0.95 V  
+
+So the channel voltage lies between **1 V and 0.95 V**.
+
+
+## 3️. Voltage Gradient Across the Channel
+
+Because V(x) changes from 0 to VDS:
+
+- Channel voltage is not constant  
+- A voltage gradient exists  
+
+If VDS were grounded, the channel voltage would be constant.  
+With VDS applied, it gradually decreases from source to drain.
+
+
+## 4️. Induced Charge in Presence of VDS
+
+<p align="center">
+  <img width="672" height="323" alt="image" src="https://github.com/user-attachments/assets/a7f82b30-55e3-4d94-afb3-0cbf46e7a97f" />
+</p>
+
+The induced charge at each point depends on:
+
+### **VGS − V(x) − VT**
+
+Since VT is the threshold voltage that turns on the transistor, it must be subtracted.
+
+Thus, induced charge varies along the channel.
+
+
+## 5️. Charge Equation (Q = C × V)
+
+<p align="center">
+  <img width="673" height="317" alt="image" src="https://github.com/user-attachments/assets/f0297e8d-82e5-4add-be53-e8246784379d" />
+</p>
+
+Using the charge relation:
+
+### **Q = C × V**
+
+The induced charge at each point becomes:
+
+### **Q(x) = Cox (VGS − V(x) − VT)**
+
+Where:
+
+Cox = Gate oxide capacitance  
+Cox = εox / tox  
+
+These are constants for a given technology.
+
+
+## 6️. Oxide Capacitance Parameters
+
+<p align="center">
+  <img width="661" height="318" alt="image" src="https://github.com/user-attachments/assets/2c3fbed5-59f4-43e4-9ba2-d3c7dd294a3d" />
+</p>
+
+Cox depends on:
+
+- εox (oxide permittivity)  
+- tox (oxide thickness)  
+
+εox = 3.97 × ε₀  
+tox = Gate oxide thickness  
+
+The oxide lies between:
+
+- Gate  
+- p-type substrate  
+
+These are technology constants from the foundry.
+
+
+## 7. Two Types of Currents in Device Physics
+
+<p align="center">
+  <img width="675" height="316" alt="image" src="https://github.com/user-attachments/assets/4af8ca1c-3801-4fca-bd2b-028e81419fb2" />
+</p>
+
+Two types of currents exist:
+
+### (a) Drift Current  
+Current due to potential difference between two points.
+
+### (b) Diffusion Current  
+Current due to difference in carrier concentration.
+
+Analogy used:
+
+- One tank filled with water  
+- One tank empty  
+- Water flows due to difference in water levels  
+
+Similarly, diffusion current flows due to difference in carrier concentration.
+
+
+## 8. Current Considered in This Discussion
+
+<p align="center">
+  <img width="647" height="318" alt="image" src="https://github.com/user-attachments/assets/0c0773bd-7e66-4247-a590-1baa1087b833" />
+</p>
+
+This discussion focuses on **drift current**.
+
+Because:
+
+- Source = 0 V  
+- Drain = VDS  
+
+There is a potential difference.
+
+Therefore, current flowing from source to drain is drift current.
+
+Diffusion current related to PN junction behavior will be discussed separately.
+
+
+## 9. Definition of Drift Current
+
+<p align="center">
+  <img width="682" height="317" alt="image" src="https://github.com/user-attachments/assets/672f1957-6c27-4fdd-9964-aa4aaae28667" />
+</p>
+
+Drift current is defined as:
+
+### **Velocity of charge carriers × Available charge**
+
+This happens over a certain area — the channel width.
+
+
+## 10. Channel Width (Top View Perspective)
+
+<p align="center">
+  <img width="646" height="367" alt="image" src="https://github.com/user-attachments/assets/03e3bd33-e946-4ab5-8cab-1973bc5acc3f" />
+</p>
+
+From the side view, only channel length is visible.
+
+From the top view:
+
+- Gate appears rectangular  
+- Source and drain are visible  
+- Channel lies between them  
+- Gate overlaps source and drain  
+
+Current flows across the complete channel width.
+
+
+## 11. Current as Function of Area
+
+Current depends on:
+
+- Carrier velocity  
+- Available charge  
+- Channel width  
+
+To derive the drain current equation:
+
+- Substitute velocity expression  
+- Substitute charge expression  
+- Integrate across the channel  
+
+---
