@@ -1209,3 +1209,178 @@ There exists a channel length modulation factor that can be added to the equatio
 
 ---
 
+# L1: Basic SPICE Setup
+
+## 1️. Feeding Models to SPICE Engine
+
+
+<p align="center">
+<img width="631" height="292" alt="image" src="https://github.com/user-attachments/assets/a0b62562-29c1-4512-8a94-dd146128542e" /> </p>
+
+
+Now the next part is to feed the derived models correctly into the SPICE engine so that it understands them and evaluates the drain current equations as expected.
+
+Previously, we worked with:
+
+- The MOSFET structure  
+- Applied VDS  
+- Applied VGS  
+- Grounded source and substrate  
+
+We also derived model equations:
+
+- Threshold voltage equation  
+- Linear region drain current equation  
+- Saturation region drain current equation  
+
+These represent the MOSFET behavior.
+
+Some of these equations are more complex and will be studied later in semiconductor device physics lectures.
+
+For now, these are the models that represent the MOSFET.
+
+
+## 2️. Linear Region Model Review
+
+<p align="center">
+<img width="167" height="60" alt="image" src="https://github.com/user-attachments/assets/ec39eb2b-5fff-4ee8-9865-f5284e442e92" /> </p>
+
+In hand calculations, we ignored the term:
+
+VDS² / 2
+
+because VDS was assumed small.
+
+That allowed us to approximate drain current as a linear function of VDS.
+
+However, in SPICE:
+
+We do not ignore terms manually.
+
+The engine handles full expressions for better accuracy.
+
+
+## 3️. Saturation Region Model Review
+
+<p align="center">
+<img width="206" height="61" alt="image" src="https://github.com/user-attachments/assets/ce48dffd-5daa-4d4d-982b-c1804fae6590" /> </p>
+
+In saturation:
+
+Channel voltage becomes:
+
+VGS − VT
+
+Replacing VDS in the equation gives:
+
+I<sub>D</sub> = (k<sub>n</sub> / 2) (VGS − VT)²
+
+This is the saturation region current equation.
+
+This equation is no longer linear in VDS.
+
+
+## 4️. Technology Constants (Model Parameters)
+
+<p align="center">
+<img width="462" height="278" alt="image" src="https://github.com/user-attachments/assets/5f70f1dc-b838-4068-8cb5-c90f1789e902" /> </p>
+
+Certain parameters are technology constants, for example:
+
+- μn  
+- Cox  
+- k'n  
+- k<sub>n</sub>  
+- VT  
+- γ  
+- φf  
+
+These constants come from the foundry for each technology node.
+
+Examples:
+
+- 1.2 micron  
+- 180 nanometers  
+- 20 nanometers  
+
+Each node has unique values.
+
+These values are provided to SPICE through a special file called:
+
+**Model File**
+
+We do not derive these again.
+
+They are supplied as constants.
+
+Correct model parameters are essential to obtain correct voltage and current waveforms.
+
+
+## 5️. SPICE Inputs Required
+
+Two main inputs are required:
+
+1. SPICE Model Parameters (Technology constants)  
+2. SPICE Netlist  
+
+Both must be provided correctly to the SPICE engine.
+
+
+## 6️. SPICE Output
+
+<p align="center">
+<img width="592" height="296" alt="image" src="https://github.com/user-attachments/assets/a59dcde1-8517-4102-ab49-06df419838b8" /> </p>
+
+When both:
+
+- Model file  
+- Netlist  
+
+are fed into SPICE,
+
+We obtain:
+
+- IDS vs VDS curves  
+- Different curves for different VGS values  
+
+Previously, we observed behavior where part of curve was linear and part entered saturation.
+
+SPICE reproduces these curves automatically.
+
+
+## 7️. Netlist 
+
+<p align="center">
+<img width="268" height="186" alt="image" src="https://github.com/user-attachments/assets/19dfb3f4-643b-4b74-82ec-5f2eb374905d" /> </p>
+
+
+SPICE requires a special syntax (like C or C++ program syntax).
+
+The MOSFET cannot be given directly as a diagram.
+
+It must be written in a special formatted netlist.
+
+This formatted description is called a:
+
+**SPICE Deck**
+
+
+## 8️. MOSFET Circuit Setup
+
+<p align="center">
+  ![Uploading image.png…]()
+</p>
+
+Circuit connections:
+
+- Drain connected to VDD  
+- Source connected to ground  
+- Substrate connected to ground  
+- Gate connected through a protection resistor  
+
+The protection resistor is used because:
+
+Current should not directly enter the gate and damage it.
+
+---
+
