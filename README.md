@@ -691,3 +691,212 @@ To derive the drain current equation:
 - Integrate across the channel  
 
 ---
+
+# L3 Drain current model for linear region of operation
+
+
+## 1️. Objective of Derivation
+
+<p align="center">
+  <img width="235" height="293" alt="image" src="https://github.com/user-attachments/assets/9f758ec3-e3d5-4422-be32-65a4235dc9d3" />
+</p>
+
+Previously, drain current was identified as:
+
+**Drain Current = Velocity of charge carriers × Available charge × Channel width**
+
+Now the goal is to derive a mathematical model for I<sub>D</sub> that can be used by an engine.
+
+SPICE already has complicated and accurate models.  
+Here, we derive a simple working model to understand the basics behind SPICE simulations.
+
+
+## 2️. Drain Current Expression Setup
+
+Drain current is expressed as:
+
+- Velocity → v<sub>n</sub>(x)  
+- Induced charge → q<sub>i</sub>(x)
+
+So,
+
+I<sub>D</sub> = v<sub>n</sub>(x) × q<sub>i</sub>(x) × W
+
+Where:
+- W = channel width
+
+
+## 3️. Velocity Expression
+
+Velocity is defined as:
+
+v<sub>n</sub>(x) = μ<sub>n</sub> (dV/dx)
+
+Where:
+- μ<sub>n</sub> = mobility  
+- dV/dx = electric field  
+
+Since there is a voltage gradient along the channel, velocity is proportional to the electric field.
+
+
+## 4️. Induced Charge Expression
+
+<p align="center">
+  <img width="225" height="292" alt="image" src="https://github.com/user-attachments/assets/9e655fe6-9483-4699-8f4f-40bad2b1a8dd" />
+</p>
+
+Previously derived:
+
+q<sub>i</sub>(x) = C<sub>ox</sub> (V<sub>GS</sub> − V(x) − V<sub>T</sub>)
+
+Where:
+
+C<sub>ox</sub> = ε<sub>ox</sub> / t<sub>ox</sub>
+
+These are technology constants.
+
+
+## 5️. Substitution into Drain Current
+
+<p align="center">
+  <img width="242" height="357" alt="image" src="https://github.com/user-attachments/assets/f5b0a66a-f964-4954-8e9d-bbf9e79f1879" />
+</p>
+
+Substitute:
+
+v<sub>n</sub>(x) = μ<sub>n</sub> (dV/dx)
+
+q<sub>i</sub>(x) = C<sub>ox</sub> (V<sub>GS</sub> − V(x) − V<sub>T</sub>)
+
+Multiply by W and integrate across the channel length.
+
+
+## 6️. Integration Limits
+
+Integration conditions:
+
+- dx from 0 to L  
+- dV from 0 to V<sub>DS</sub>  
+
+Voltage varies from source to drain.
+
+
+## 7️. Result After Integration
+
+<p align="center">
+<img width="242" height="263" alt="image" src="https://github.com/user-attachments/assets/f952a453-bf69-41a7-a168-fbc71aed3797" />
+</p>
+
+After integration:
+
+I<sub>D</sub> = μ<sub>n</sub> C<sub>ox</sub> (W/L)  
+[(V<sub>GS</sub> − V<sub>T</sub>) V<sub>DS</sub> − V<sub>DS</sub><sup>2</sup> / 2]
+
+Where:
+
+- μ<sub>n</sub>  
+- C<sub>ox</sub>  
+- W  
+- L  
+
+are technology constants.
+
+These form part of the model parameters in SPICE.
+
+
+## 8️. Process Transconductance Parameter
+
+<p align="center">
+<img width="248" height="340" alt="image" src="https://github.com/user-attachments/assets/ce21fe61-aab8-4886-93d2-fec73dc4b5fe" />
+</p>
+
+Define:
+
+k'<sub>n</sub> = μ<sub>n</sub> C<sub>ox</sub>
+
+This is the process transconductance parameter.
+
+Then define:
+
+k<sub>n</sub> = k'<sub>n</sub> (W/L)
+
+This is called the gain factor.
+
+The drain current becomes:
+
+I<sub>D</sub> = k<sub>n</sub>  
+[(V<sub>GS</sub> − V<sub>T</sub>) V<sub>DS</sub> − V<sub>DS</sub><sup>2</sup> / 2]
+
+
+
+## 9️. Observation: Quadratic Term in VDS
+
+The equation contains:
+
+V<sub>DS</sub><sup>2</sup> / 2
+
+So I<sub>D</sub> is quadratic in V<sub>DS</sub>.
+
+But this applies when V<sub>DS</sub> is small.
+
+
+## 10. Numerical Example
+
+<p align="center">
+  <img width="645" height="361" alt="image" src="https://github.com/user-attachments/assets/a6238142-c831-405c-a324-7964268ad63d" />
+</p>
+
+Given:
+
+- V<sub>GS</sub> = 1 V  
+- V<sub>T</sub> = 0.45 V  
+- V<sub>DS</sub> = 0.05 V  
+
+Compute:
+
+(V<sub>GS</sub> − V<sub>T</sub>) = 0.55  
+
+(V<sub>GS</sub> − V<sub>T</sub>) V<sub>DS</sub> = 0.0275  
+
+V<sub>DS</sub><sup>2</sup> / 2 = 0.00125  
+
+The second term is very small compared to the first.
+
+
+## 11. Linear Region Condition
+
+For:
+
+V<sub>DS</sub> < (V<sub>GS</sub> − V<sub>T</sub>)
+
+The term:
+
+V<sub>DS</sub><sup>2</sup> / 2
+
+can be neglected.
+
+Then:
+
+I<sub>D</sub> ≈ k<sub>n</sub> (V<sub>GS</sub> − V<sub>T</sub>) V<sub>DS</sub>
+
+Now I<sub>D</sub> becomes linear in V<sub>DS</sub>.
+
+This defines the **linear (resistive) region of operation**.
+
+
+## 1️2. Final Linear Region Model
+
+<p align="center">
+ <img width="666" height="363" alt="image" src="https://github.com/user-attachments/assets/087dfb7f-4de5-470f-b19c-f726fc6f8d3a" />
+</p>
+
+For:
+
+V<sub>DS</sub> < (V<sub>GS</sub> − V<sub>T</sub>)
+
+The drain current model is:
+
+I<sub>D</sub> = k<sub>n</sub> (V<sub>GS</sub> − V<sub>T</sub>) V<sub>DS</sub>
+
+---
+
