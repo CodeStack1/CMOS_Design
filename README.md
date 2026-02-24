@@ -1746,3 +1746,90 @@ This replaces manual hand calculation.
 
 ---
 
+
+# L4 First SPICE simulation
+
+## 1️. Clone Repository
+
+```bash
+git clone https://github.com/kunalg123/sky130CircuitDesignWorkshop
+cd sky130CircuitDesignWorkshop/design
+ls
+```
+
+
+## 2️. Go to Device Models
+
+```bash
+cd sky130
+cd antiphase
+cd cells
+```
+
+Use:
+
+- `nfet_01v8`
+
+Only use **W/L values provided inside the model corner files**.
+
+
+## 3️. Select Corner
+
+Open library file:
+
+```bash
+less sky130.lib.spice
+```
+
+Corners available:
+
+- TT → Typical  
+- SS → Slow-Slow  
+- FF → Fast-Fast  
+- SF → Slow-Fast  
+
+Modify `.lib` line to change corner.
+
+
+## 4️. Transistor Format
+
+SPICE syntax:
+
+```
+M1 Drain Gate Source Bulk nfet_01v8 W=1.68 L=0.15
+```
+
+Source = 0  
+Bulk = 0  
+Supply = 1.8V  
+
+
+## 5️. DC Sweep
+
+Sweep:
+
+- VDS → 0 to 1.8V (step 0.1V)
+- VGS → 0 to 1.8V (step 0.2V)
+
+```spice
+.dc VDS 0 1.8 0.1 VGS 0 1.8 0.2
+```
+
+
+## 6️. Run Simulation
+
+Inside NGSpice:
+
+```bash
+plot -i(VDS)
+```
+
+
+## Result
+
+<p align="center"> <img width="493" height="502" alt="image" src="https://github.com/user-attachments/assets/4b894ab8-9b01-43bd-b5ce-49ed9a7d5f7c" />
+</p>
+
+- ID vs VDS curves generated  
+- Low VDS → Linear region  
+- High VDS → Saturation (quadratic behavior)  
