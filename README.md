@@ -1,3 +1,7 @@
+# Day 1:
+
+---
+
 # L1 Why do we need SPICE simulations?
 
 ## Overview
@@ -140,8 +144,6 @@ The conductivity of this channel is controlled by **VGS**.
 
 Current will flow only when a drain voltage is applied.
 
-## Body Effect and Threshold Voltage Shift
-
 ## 8️. Case 1: VSB = 0
 
 <p align="center">
@@ -187,8 +189,138 @@ The depletion layer near the source becomes slightly larger compared to the VSB 
 
 Therefore, inversion is delayed.
 
-> Increasing VSB increases Threshold Voltage (Vₜ)
+***
 
-This phenomenon is known as the: Body Effect
+# L4: Threshold Voltage in Presence of Body Bias (VSB ≠ 0)
+
+## 1️. Comparing Two Cases: VSB = 0 and VSB > 0
+
+<p align="center">
+  <img width="680" height="321" alt="image" src="https://github.com/user-attachments/assets/569f37d4-d52a-45a0-892c-71f21319728c" />
+</p>
+
+We consider two scenarios:
+
+- Case 1: VSB = 0  
+- Case 2: VSB > 0  
+
+In both cases, the gate-to-source voltage (VGS) is increased gradually.  
+The depletion width increases in both scenarios.  
+
+However, a key difference appears when VSB is positive.
+
+
+## 2️. Effect of Positive VSB on Charge Distribution
+
+<p align="center">
+ <img width="613" height="262" alt="image" src="https://github.com/user-attachments/assets/ed4638e0-6360-414a-8a8b-82b4b9ee0dd8" />
+</p>
+
+When VSB is positive, the source is at a higher potential relative to the body.  
+This creates additional reverse bias across the source–body PN junction.
+
+As negative charges accumulate under the gate due to increasing VGS,  
+the positive source terminal attracts some of these charges toward itself.
+
+In the VSB = 0 case, charges simply accumulate under the gate region.
+
+This causes inversion to be delayed when VSB > 0.
+
+
+## 3️. Surface Inversion Comparison
+
+<p align="center">
+  <img width="627" height="257" alt="image" src="https://github.com/user-attachments/assets/449ad035-648f-416d-a07e-a0a974fe297e" />
+</p>
+
+As VGS increases:
+
+- Inversion occurs earlier when VSB = 0  
+- Inversion is delayed when VSB > 0  
+
+At the same VGS value, the device without body bias may already show strong inversion,  
+while the device with positive VSB has not yet fully inverted.
+
+
+## 4️. Definition of VTO (Threshold Voltage at VSB = 0)
+
+<p align="center">
+  <img width="647" height="317" alt="image" src="https://github.com/user-attachments/assets/343099b0-b525-4660-9fa8-cca860d2b8ac" />
+</p>
+
+**VTO** is defined as the threshold voltage when VSB = 0.
+
+At:
+
+- VGS = VTO → Strong inversion occurs when VSB = 0  
+- The same VGS does not produce inversion when VSB > 0
+- 
+
+## 5️. Additional Gate Voltage Required (VTO + V1)
+
+<p align="center">
+<img width="680" height="316" alt="image" src="https://github.com/user-attachments/assets/cdda03c0-90f7-4f45-b576-6f0fd469d4a1" />
+</p>
+
+When VSB is positive, additional gate voltage is required to achieve inversion.
+
+If:
+
+- VGS = VTO → inversion only when VSB = 0  
+- VGS = VTO + V1 → inversion when VSB > 0  
+
+An extra voltage **V1** is required due to body bias.
+
+
+## 6️. Conclusion: 
+
+<p align="center">
+  <img width="680" height="364" alt="image" src="https://github.com/user-attachments/assets/3149b3e0-bc04-4dfb-9794-8ec8f973b1db" />
+</p>
+
+In the presence of substrate bias VSB:
+
+- Strong inversion requires additional gate voltage  
+- Threshold voltage increases  
+
+
+## 7️. Threshold Voltage Equation
+
+<p align="center">
+  <img width="678" height="302" alt="image" src="https://github.com/user-attachments/assets/563a39cd-6dd7-4601-9871-d919c2db2767" />
+</p>
+- Vto = Threshold voltage at Vsb = 0, and is a function of manufacturing process.
+
+
+## 8. Body Effect Coefficient (γ)
+
+<p align="center">
+  <img width="222" height="117" alt="image" src="https://github.com/user-attachments/assets/8eae9769-4617-4d54-bc37-7f1b6b0a9dd3" />
+      </p>
+
+γ (Gamma) is called the **Body Effect Coefficient**.
+
+It represents how strongly VSB influences the threshold voltage.
+
+Gamma depends on:
+
+- Substrate doping concentration (NA)  
+- Oxide capacitance (Cox)  
+- Relative permittivity of Si = 11.7
+- Electron charge (q)   
+
+These parameters are technology-dependent and provided by the foundry.
+
+
+## 9. Fermi Potential (ΦF)
+
+<p align="center">
+  <img width="270" height="76" alt="image" src="https://github.com/user-attachments/assets/f0fa453f-9270-48ee-86ba-a3c1f31e56db" />
+</p>
+
+The Fermi potential (ΦF) appears in the threshold voltage equation.
+
+---
+
 
 
