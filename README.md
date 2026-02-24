@@ -1329,7 +1329,8 @@ Both must be provided correctly to the SPICE engine.
 ## 6️. SPICE Output
 
 <p align="center">
-<img width="592" height="296" alt="image" src="https://github.com/user-attachments/assets/a59dcde1-8517-4102-ab49-06df419838b8" /> </p>
+<img width="131" height="247" alt="image" src="https://github.com/user-attachments/assets/09c12adb-5648-4ce7-bb1f-d026309b0652" />
+ </p>
 
 When both:
 
@@ -1351,8 +1352,7 @@ SPICE reproduces these curves automatically.
 ## 7️. Netlist 
 
 <p align="center">
-<img width="268" height="186" alt="image" src="https://github.com/user-attachments/assets/19dfb3f4-643b-4b74-82ec-5f2eb374905d" /> </p>
-
+<img width="592" height="296" alt="image" src="https://github.com/user-attachments/assets/a59dcde1-8517-4102-ab49-06df419838b8" /> </p>
 
 SPICE requires a special syntax (like C or C++ program syntax).
 
@@ -1368,8 +1368,7 @@ This formatted description is called a:
 ## 8️. MOSFET Circuit Setup
 
 <p align="center">
-  ![Uploading image.png…]()
-</p>
+<img width="268" height="186" alt="image" src="https://github.com/user-attachments/assets/19dfb3f4-643b-4b74-82ec-5f2eb374905d" /> </p>
 
 Circuit connections:
 
