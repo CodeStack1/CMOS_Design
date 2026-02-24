@@ -1548,3 +1548,201 @@ M1 VDD n1 0 0 NMOS W=1.8u L=1.2u
 R1 in n1 55
 VDD VDD 0 2.5
 VIN in 0 2.5
+```
+
+---
+
+# L3: Define Technology Parameters
+
+## Model Definition for NMOS
+
+<p align="center">
+  <img width="310" height="273" alt="image" src="https://github.com/user-attachments/assets/885d43d5-2e31-468a-8c60-fb0bd69ee8f0" />
+</p>
+
+We have already defined the SPICE netlist.  
+The next step is to define the model for this NMOS.
+
+A model describes how a device behaves.
+
+For example:
+
+- AND gate → output is Boolean multiplication of inputs  
+- OR gate → output is Boolean addition of inputs  
+
+Similarly, NMOS has its own models.
+
+When we plug in the model for this NMOS, the SPICE engine understands:
+
+- Where NMOS is picked from  
+- What constants must be used  
+- How to evaluate threshold voltage  
+- How to evaluate drain current equations  
+
+All model parameters come as a package.
+
+
+## Important Model Parameters
+
+We previously introduced model parameters such as:
+
+- VTO → Needed for threshold voltage  
+- Gamma → Body effect coefficient  
+- k'n  
+- Lambda  
+- Cox  
+- Epsilon values  
+
+Once these constants are provided, it becomes easy for the engine to calculate:
+
+- VT  
+- ID (linear region)  
+- ID (saturation region)
+
+These values are used during simulation.
+
+
+## .MODEL Statement
+
+The model is defined using:
+
+```spice
+.model NMOS nmos (parameters)
+```
+
+
+## Important Rule
+
+The name **NMOS** in the model file must match exactly with the name used in the netlist.
+
+If the names do not match, simulation will not work correctly.
+
+This is a very important step.
+
+Similarly, if PMOS is used in the circuit, the PMOS name must match its model definition.
+
+
+## Example Model Parameters
+
+Some parameter mappings:
+
+- VTH0 → Threshold voltage without body bias  
+- TOX → Oxide thickness  
+- U0 → Mobility  
+- Gamma1 → Body effect coefficient  
+
+Example format:
+
+```spice
+.model NMOS nmos
++ TOX = value
++ VTH0 = value
++ U0 = value
++ GAMMA1 = value
+```
+
+Once these are defined:
+
+The engine automatically substitutes:
+
+- Gamma value into VT equation  
+- Mobility into current equation  
+- TOX into Cox calculation  
+
+The engine evaluates all equations internally.
+
+Provided correct inputs are given.
+
+
+## Model Files for Technology Node
+
+<p align="center">
+<img width="323" height="145" alt="image" src="https://github.com/user-attachments/assets/2da7ca09-bd26-4db7-93fd-2355a768afde" /> </p>
+
+For each technology node:
+
+- 1.2 micron  
+- 350 nanometer  
+- Lower nodes  
+
+Foundry provides all constants.
+
+You package all model parameters into a single file.
+
+Example section:
+
+```spice
+.lib CMOS_models
+...
+.endl CMOS_models
+```
+
+This defines a library block.
+
+The list inside a real technology file is very large.
+
+Only required parameters are used for our purpose here.
+
+
+## Including Model File in Netlist
+
+<p align="center">
+<img width="317" height="252" alt="image" src="https://github.com/user-attachments/assets/9483a948-b5f2-4ac1-9401-d574498bd264" /> </p>
+
+To use the model file in the top-level netlist:
+
+```spice
+.lib filename.mod CMOS_models
+```
+
+- `filename.mod` → Model file  
+- `CMOS_models` → Section name inside file  
+
+After inclusion:
+
+- NMOS model parameters are loaded  
+- Equations are evaluated  
+- VT and ID models are active  
+
+
+## Complete SPICE Deck Structure
+
+We now have three sections:
+
+### 1. Netlist Description
+
+```spice
+M1 VDD n1 0 0 NMOS W=1.8u L=1.2u
+R1 in n1 55
+VDD VDD 0 2.5
+VIN in 0 2.5
+```
+
+### 2. Model File Inclusion
+
+```spice
+.lib filename.mod CMOS_models
+```
+
+### 3. Simulation Commands
+
+Simulation commands are used to sweep voltages.
+
+Previously, we calculated drain current for a single VGS.
+
+But to evaluate:
+
+- ID for multiple VGS values  
+- While sweeping VDS from 0 to supply voltage  
+
+We use SPICE simulation commands.
+
+These commands allow:
+
+- Sweeping VGS  
+- Sweeping VDS  
+
+This replaces manual hand calculation.
+
+---
+
