@@ -322,5 +322,171 @@ The Fermi potential (ΦF) appears in the threshold voltage equation.
 
 ---
 
+# L5: Resistive (Linear) Region of Operation
 
+
+## 1️. Three Modes of Operation
+
+<p align="center">
+ <img width="652" height="247" alt="image" src="https://github.com/user-attachments/assets/61555aa1-95e0-4e67-8621-2d1d447da8ec" />
+</p>
+
+The MOSFET operates in three regions:
+
+- Cutoff region  
+- Resistive (Linear) region  
+- Saturation region  
+
+Previous discussions focused on the cutoff region, where strong inversion occurs at VGS = VT.  
+This section begins the discussion of the resistive (linear) region.
+
+
+## 2️. Threshold Voltage Recap
+
+<p align="center">
+<img width="670" height="261" alt="image" src="https://github.com/user-attachments/assets/c98efddf-f63f-4f7a-810e-c126b0e9ea4a" />
+</p>
+
+At VGS = VT, strong inversion occurs and the semiconductor surface becomes n-type.  
+
+When VGS > VT:
+
+- More charge carriers are induced  
+- Channel width increases  
+- Conducting path between source and drain strengthens  
+
+
+## 3️. Effective Channel Length
+
+<p align="center">
+  <img width="403" height="321" alt="image" src="https://github.com/user-attachments/assets/005be098-892a-45b3-819b-0030fd7e0eb1" />
+</p>
+
+Due to fabrication techniques, the effective channel length is smaller than the designed channel length.
+
+For example:
+
+- Designed channel length may be 100 nm  
+- Effective channel length may be smaller  
+
+For simplicity in this discussion, the effective channel length is assumed to be L.
+
+
+## 4️. Channel Representation Along x-Axis
+
+<p align="center">
+  <img width="662" height="303" alt="image" src="https://github.com/user-attachments/assets/04f4f7b6-e02c-4daa-affd-85f79036641f" />
+</p>
+
+The channel is represented from:
+
+- x = 0 (source)  
+- x = L (drain)  
+
+At every point along the channel, the voltage can be different once VDS is applied.
+
+
+## 5️. Induced Charge and Gate Voltage Relationship
+
+As VGS increases:
+
+- Channel width increases  
+- Induced charge increases  
+- Conducting region expands  
+
+The induced charge in the channel is proportional to:
+
+VGS − VT  
+
+Only the portion of VGS greater than VT contributes to channel formation.
+
+
+## 6️. Applying Small Drain-to-Source Voltage (VDS)
+
+<p align="center">
+  <img width="422" height="318" alt="image" src="https://github.com/user-attachments/assets/917eefc4-388d-4853-b1e1-a1cc607a4fba" />
+</p>
+
+Now a small drain-to-source voltage is applied.
+
+Example values used:
+
+- VGS = 1 V  
+- VDS = 0.05 V (50 mV)  
+
+VDS is kept very small initially.  
+Higher VDS cases will be discussed later.
+
+
+## 7️. Voltage is No Longer Constant Across the Channel
+
+<p align="center">
+  <img width="422" height="318" alt="image" src="https://github.com/user-attachments/assets/4c697de7-1a51-4dc5-9620-610d6baedc49" />
+</p>
+
+In the absence of VDS, the channel voltage is constant.
+
+Once VDS is applied:
+
+- A voltage gradient appears  
+- Voltage varies along the channel  
+
+At different positions:
+
+- At source end → V(x) ≈ 0  
+- At drain end → V(x) ≈ VDS  
+- Intermediate points → Voltage lies between 0 and VDS  
+
+This is an important observation.
+
+
+## 8️. Gate-to-Channel Voltage Variation
+
+<p align="center">
+  <img width="421" height="330" alt="image" src="https://github.com/user-attachments/assets/534aca29-ebf4-463f-a657-c79f11b67d24" />
+</p>
+
+With VDS applied, the effective gate-to-channel voltage at any point x becomes:
+
+VGS − V(x)
+
+Because:
+
+- V(x) = 0 at source  
+- V(x) = VDS at drain  
+- V(x) varies continuously along channel  
+
+Therefore, channel charge varies along the channel length.
+
+
+## 9️. Condition on VDS
+
+Two different behaviors are mentioned:
+
+- When VDS < VGS − VT  
+- When VDS > VGS − VT  
+
+These two cases behave differently and will be discussed later.
+
+For now, VDS is assumed to be small.
+
+
+## 10. Transition to Drain Current Derivation
+
+Because V(x) varies across the channel:
+
+- Induced charge varies  
+- Current will vary along the channel  
+
+The drain current equation will be derived next.
+
+The drain current equation:
+
+- Drives transistor behavior  
+- Determines delay  
+- Is used in simulations and circuit design  
+
+The derivation in the resistive region will continue in the next discussion.
+
+---
 
