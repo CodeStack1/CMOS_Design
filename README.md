@@ -900,3 +900,161 @@ I<sub>D</sub> = k<sub>n</sub> (V<sub>GS</sub> − V<sub>T</sub>) V<sub>DS</sub>
 
 ---
 
+# L5: Pinch-Off Region Condition
+
+
+## 1. Sweeping VDS
+
+<p align="center">
+<img width="1112" height="607" alt="image" src="https://github.com/user-attachments/assets/133c40e1-d2b5-480b-b374-f3e969f30c52" />
+</p>
+
+Now:
+
+- VGS is kept constant at 1 V  
+- VT is kept constant at 0.45 V  
+- VDS is increased from 0.05 V to 0.95 V  
+  in steps of 0.1 V  
+
+This sweep could be fed directly into a SPICE engine.
+
+But before simulations, the physical concept must be understood.
+
+
+## 2. Linear Region Behavior 
+
+<p align="center">
+<img width="1260" height="620" alt="image" src="https://github.com/user-attachments/assets/64c1c298-daa4-40b2-b2fe-71e815a2a946" />
+</p>
+
+As VDS increases from:
+
+0.05 → 0.45 V
+
+The channel voltage:
+
+VGS − VDS
+
+takes values:
+
+- 0.95 V  
+- 0.85 V  
+- 0.75 V  
+- 0.65 V  
+- 0.55 V  
+
+All of these are greater than VT (0.45 V).
+
+Therefore:
+
+- Channel exists
+- Surface inversion is maintained
+- Device operates in linear region
+
+
+## 3. Critical Condition: VDS = 0.55 V
+
+<p align="center">
+<img width="1208" height="591" alt="image" src="https://github.com/user-attachments/assets/24237e50-417c-4fd8-a066-5f7fa152b518" />
+</p>
+
+When:
+
+VDS = 0.55 V
+
+<img width="1220" height="577" alt="image" src="https://github.com/user-attachments/assets/dbbce28d-601e-436e-8523-502719c01df4" />
+
+Channel voltage becomes:
+
+VGS − VDS = 1 − 0.55 = 0.45 V
+
+Now:
+
+Channel Voltage = VT
+
+At this exact point:
+
+- Surface inversion just happens at the drain end
+- One end of channel is at threshold
+- Other end (near source) is still greater than threshold
+
+This creates a mixed condition:
+
+- Near source → inversion already exists  
+- Near drain → inversion just disappears  
+
+
+## 4. Beginning of Channel Disappearance
+
+<p align="center">
+<img width="1230" height="586" alt="image" src="https://github.com/user-attachments/assets/4548c733-ce9c-495c-b059-86cba4e6427b" />
+</p>
+
+Since channel voltage no longer satisfies:
+
+VGS − VDS > VT
+
+The channel begins to disappear near the drain region.
+
+The channel still exists near the source.
+
+
+## 5. Does Current Stop?
+
+No.
+
+Even though the channel begins to disappear near the drain:
+
+- There is still potential difference between source and drain
+- Current still flows
+
+However:
+
+- The linearity of current changes
+- Behavior transitions from linear region
+
+
+## 6. When VDS Increases Further
+
+<p align="center">
+<img width="656" height="308" alt="image" src="https://github.com/user-attachments/assets/bc86950b-baca-4d95-843c-a0d2cdafeaa2" />
+</p>
+
+If VDS increases further:
+
+0.65 V  
+0.75 V  
+0.85 V  
+0.95 V  
+
+Then:
+
+VGS − VDS < VT
+
+In this condition:
+
+- No channel near drain
+- Channel exists only near source
+- Drain-end channel completely disappears
+
+
+## 7. Saturation Region Condition
+
+This condition is referred to as:
+
+**Saturation Region**
+
+Pinch-off occurs when:
+
+VGS − VDS ≤ VT
+
+This means:
+
+The device enters saturation region.
+
+From this point onward:
+
+- Channel near drain vanishes
+- Device behavior changes
+
+---
