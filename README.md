@@ -1383,3 +1383,168 @@ Current should not directly enter the gate and damage it.
 
 ---
 
+# L2: Circuit Description in SPICE Syntax
+
+## Writing the SPICE Netlist
+
+<p align="center">
+<img width="612" height="298" alt="image" src="https://github.com/user-attachments/assets/d1d151fb-2c42-463c-b04f-504e2b920c7e" /> </p>
+
+Now that we understand the basic SPICE setup, the next step is to write the SPICE netlist in the correct syntax so that it is properly understood by the SPICE engine.
+
+Just like a C program or any software language has its own syntax, SPICE also has its own syntactical format.
+
+We now write the SPICE netlist for this circuit and simulate it.
+
+
+## Assigning Circuit Values
+
+<p align="center">
+<img width="282" height="157" alt="image" src="https://github.com/user-attachments/assets/84b52116-dfc6-44b3-98aa-d3d6a31a1205" /> </p>
+
+Before defining nodes, assign values:
+
+- VDD = 2.5V  
+- R1 = 55 ohms  
+- MOSFET M1:
+  - Width (W) = 1.8 micron  
+  - Length (L) = 1.2 micron  
+
+VSS = 0V
+
+This must now be written in a SPICE-understandable format.
+
+
+## Step 1: Defining Nodes
+
+<p align="center"> <img width="293" height="176" alt="image" src="https://github.com/user-attachments/assets/4d650baf-db72-47dd-bbac-9abf13807311" />
+</p>
+
+A component must be defined between nodes.
+
+A node is formed where there is no electrical obstruction along a connected wire.
+
+For example:
+
+- Continuous wire from R1 to voltage source → one node  
+- Continuous wire from supply to ground → one node  
+- Continuous wire from transistor terminal to supply → one node  
+
+The circuit contains four nodes.
+
+<p align="center">
+  <img width="597" height="256" alt="image" src="https://github.com/user-attachments/assets/2c60183c-db18-4682-8286-f82f0e68cc87" />
+</p>
+
+We assign names:
+
+- in  
+- n1  
+- 0  
+- VDD  
+
+There is no restriction on node names. They can be numeric or text.
+
+
+## Step 2: Writing MOSFET Entry
+
+<p align="center">
+<img width="611" height="178" alt="image" src="https://github.com/user-attachments/assets/e85124f1-41ce-42ef-9c08-25b3979b96db" /> </p>
+
+MOSFET has four terminals:
+
+Drain, Gate, Source, Substrate.
+
+SPICE expects the order:
+
+Drain Gate Source Substrate (DGSS)
+
+Syntax format:
+
+Mname Drain Gate Source Substrate ModelName W= L=
+
+For this circuit:
+
+M1 vdd n1 0 0 NMOS W=1.8u L=1.2u
+
+Explanation:
+
+- M1 → first MOSFET  
+- vdd → Drain node  
+- n1 → Gate node  
+- 0 → Source node  
+- 0 → Substrate node  
+- NMOS → model name (comes from technology file)  
+- W and L → width and length  
+
+The name "NMOS" comes from the technology file, which defines device parameters.
+
+We start with a long channel length (1.2 micron) intentionally to later compare with short-channel behavior.
+
+
+## Step 3: Writing Resistor Entry
+
+<p align="center">
+<img width="606" height="186" alt="image" src="https://github.com/user-attachments/assets/f8ffc04a-1cc4-4b56-b60d-49dc03d28967" /> </p>
+
+
+Resistors start with R.
+
+Syntax:
+
+Rname Node1 Node2 Value
+
+For this circuit:
+
+R1 in n1 55
+
+This defines:
+
+- R1 between node "in" and node "n1"  
+- Value = 55 ohms  
+
+
+## Step 4: Writing VDD Supply
+
+<p align="center">
+<img width="640" height="210" alt="image" src="https://github.com/user-attachments/assets/a00465ed-e016-48ad-9f34-380b455a4352" /> </p>
+
+Voltage sources start with V.
+
+Syntax:
+
+Vname PositiveNode NegativeNode Value
+
+For VDD:
+
+VDD VDD 0 2.5
+
+- Between node VDD and ground  
+- Value = 2.5V  
+
+
+## Step 5: Writing Gate Voltage Source
+
+<p align="center">
+<img width="617" height="203" alt="image" src="https://github.com/user-attachments/assets/26d0cab3-6674-4db5-9228-2772c301cf3b" /> </p>
+
+Gate voltage source:
+
+VIN in 0 2.5
+
+- Between node "in" and ground  
+- Value = 2.5V  
+
+Any element starting with V represents a voltage source.
+
+
+## Complete SPICE Netlist
+
+<p align="center">
+<img width="262" height="68" alt="image" src="https://github.com/user-attachments/assets/18675667-e02c-4a30-9ec7-d799037171d9" /> </p>
+
+```spice
+M1 VDD n1 0 0 NMOS W=1.8u L=1.2u
+R1 in n1 55
+VDD VDD 0 2.5
+VIN in 0 2.5
