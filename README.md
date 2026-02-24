@@ -57,4 +57,138 @@ Understanding this physical process is essential because SPICE models are built 
 
 ***
 
+# L3: Strong Inversion and Threshold Voltage
+
+## 1️. Initial Condition – VGS = 0 (Cutoff Region)
+
+<p align="center">
+  <img width="1292" height="488" alt="image" src="https://github.com/user-attachments/assets/311990e5-b4a9-4071-ade6-ed13e3b31c2e" />
+</p>
+
+When **VGS = 0** and drain, source, and bulk are connected to ground, the source–body and drain–body form two PN junction diodes. Since no bias is applied, both junctions are OFF.  
+
+Therefore, the **source-to-drain resistance is very high**, and no current flows.  
+The MOSFET operates in the **cutoff region**.
+
+## 2️. Formation of Depletion Region
+
+<p align="center">
+  <img width="1282" height="481" alt="image" src="https://github.com/user-attachments/assets/ad2085f2-e233-4db5-ae60-4cf4c7466d30" />
+</p>
+
+When a small positive **VGS** is applied, the gate becomes positively charged.  
+This repels holes (majority carriers in the p-substrate) away from the surface.  
+
+As holes move deeper into the substrate, negative charge remains near the surface, forming a **depletion region**, similar to a reverse-biased PN junction diode.
+
+## 3️. Increasing Gate Voltage – Surface Inversion Begins
+
+<p align="center">
+ <img width="830" height="483" alt="image" src="https://github.com/user-attachments/assets/920012a3-1082-41f8-a5da-f3de455427dc" />
+</p>
+
+As **VGS** increases further, the depletion region widens.  
+
+Eventually, the electric field becomes strong enough to attract electrons (minority carriers) toward the surface.  
+The semiconductor surface begins to behave like **n-type material**.
+
+## 4️. Strong Inversion and Threshold Voltage (Vₜ)
+
+<p align="center">
+  <img width="1281" height="482" alt="image" src="https://github.com/user-attachments/assets/ba7f0a44-4e81-4218-9a80-5adafa64dae2" />
+</p>
+
+When the surface is fully inverted and a thin n-type layer forms beneath the gate oxide, the device reaches **strong inversion**.  
+
+The gate voltage at which strong inversion occurs is defined as the:
+
+> ### **Threshold Voltage (Vₜ)**
+
+This voltage determines when the MOSFET turns ON and forms the foundation of SPICE modeling.
+
+## 5️. Increasing VGS Beyond Threshold
+
+<p align="center">
+  <img width="1281" height="471" alt="image" src="https://github.com/user-attachments/assets/a7cba5be-0e80-45c0-bc50-1cf6649a08d4" />
+</p>
+
+After threshold is reached:
+
+- The depletion width does **not increase significantly**
+- The region is already depleted of majority carriers
+- Additional gate voltage increases **inversion charge density**
+
+## 6️. Electron Attraction from n+ Source
+
+<p align="center">
+  <img width="598" height="470" alt="image" src="https://github.com/user-attachments/assets/4fc44052-0988-4904-93b7-ad0df55ad515" />
+</p>
+
+When VGS increases beyond Vₜ, electrons are drawn from the heavily doped **n+ source region** into the area under the gate.  
+
+This strengthens the inversion layer and increases channel charge.
+
+## 7️. Continuous n-Channel Formation
+
+<p align="center">
+ <img width="1297" height="605" alt="image" src="https://github.com/user-attachments/assets/92d4c137-1887-44f1-a4bd-afc199624af8" />
+</p>
+
+Once sufficient electrons accumulate, a **continuous n-type channel** forms between source and drain.  
+
+The conductivity of this channel is controlled by **VGS**.  
+
+Current will flow only when a drain voltage is applied.
+
+## Body Effect and Threshold Voltage Shift
+
+## 8️. Case 1: VSB = 0
+
+<p align="center">
+  <img width="536" height="477" alt="image" src="https://github.com/user-attachments/assets/269a4ba3-0b9c-44c6-8493-1604815f415f" />
+</p>
+
+When source and body are at the same potential:
+
+- No additional reverse bias exists
+- Depletion width is normal
+- Threshold voltage is at nominal value
+
+## Case 2: VSB > 0
+
+<p align="center">
+ <img width="647" height="453" alt="image" src="https://github.com/user-attachments/assets/a2dcf7a2-fc18-4d3c-ae0b-76f94e3353a9" />
+</p>
+
+When a positive voltage is applied between source and body:
+
+- The source–body PN junction becomes more reverse biased
+- Depletion region width increases near the source
+
+## 9. Additional Reverse Bias Effect
+
+<p align="center">
+  <img width="1175" height="542" alt="image" src="https://github.com/user-attachments/assets/dd2a5b07-beef-4a4e-afa0-20d30efb2eb0" />
+</p>
+
+The additional reverse bias makes inversion harder to achieve because:
+
+- A larger depletion region must be overcome
+- More gate voltage is required
+
+
+## 10. Depletion Width Increases Near Source
+
+<p align="center">
+ <img width="1212" height="582" alt="image" src="https://github.com/user-attachments/assets/098eff6e-9fdb-4bb6-952d-2e4db412f7a3" />
+</p>
+
+The depletion layer near the source becomes slightly larger compared to the VSB = 0 case.  
+
+Therefore, inversion is delayed.
+
+> Increasing VSB increases Threshold Voltage (Vₜ)
+
+This phenomenon is known as the: Body Effect
+
 
