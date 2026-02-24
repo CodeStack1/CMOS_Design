@@ -962,7 +962,8 @@ When:
 
 VDS = 0.55 V
 
-<img width="1220" height="577" alt="image" src="https://github.com/user-attachments/assets/dbbce28d-601e-436e-8523-502719c01df4" />
+<p align="center">
+<img width="1220" height="577" alt="image" src="https://github.com/user-attachments/assets/dbbce28d-601e-436e-8523-502719c01df4" /> </p>
 
 Channel voltage becomes:
 
@@ -1058,3 +1059,153 @@ From this point onward:
 - Device behavior changes
 
 ---
+
+# L6 Drain current model for saturation region of operation
+
+
+## 1️. When VDS Increases Beyond Limit
+
+When VDS is increased to such an extent that:
+
+VGS − VDS < VT
+
+the channel begins to disappear near the drain.
+
+This creates a contradiction compared to the linear region.
+
+
+## 2️. Contradiction Between Linear and Pinch-Off Region
+
+In the linear region:
+
+Channel voltage = VGS − VDS  
+and the transistor operates normally.
+
+But when:
+
+VGS − VDS < VT
+
+the channel is no longer valid near the drain.
+
+Only a small channel beneath the gate near the source remains.
+
+
+## 3️. Channel Voltage Behavior in Saturation
+
+<p align="center">
+  <img width="663" height="331" alt="image" src="https://github.com/user-attachments/assets/85f4fa66-8be9-4c45-be5d-0537ec93f0c4" />
+</p>
+
+In the saturation region:
+
+Channel voltage remains approximately constant.
+
+It becomes:
+
+VGS − VT
+
+It is no longer dependent on VDS the way it was in the linear region.
+
+This is the important difference between linear and saturation region.
+
+
+## 4. Revisiting Linear Region Equation
+
+Previously derived linear region equation:
+
+I<sub>D</sub> = k<sub>n</sub> (VGS − VT) VDS − (k<sub>n</sub> / 2) VDS²
+
+For small VDS:
+
+The VDS² term was neglected.
+
+This made drain current linear in VDS.
+
+
+## 5. Replacing Channel Voltage in Saturation
+
+<p align="center">
+<img width="681" height="342" alt="image" src="https://github.com/user-attachments/assets/28e5eb63-1db7-49e7-898f-bfe3441bfffe" /> </p>
+
+In saturation:
+
+Channel voltage becomes constant:
+
+VGS − VT
+
+So in the drain current equation:
+
+VDS is replaced by VGS − VT
+
+Because:
+
+Channel voltage = Drain-to-source voltage  
+And in saturation, it is fixed at VGS − VT
+
+
+## 6. Saturation Drain Current Equation
+
+<p align="center">
+<img width="151" height="42" alt="image" src="https://github.com/user-attachments/assets/90b8f1bd-9bd1-4101-919c-aeecf3a2e527" /> </p>
+
+After substitution:
+
+I<sub>D</sub> = (k<sub>n</sub> / 2) (VGS − VT)²
+
+This is the drain current equation in the saturation region.
+
+It is no longer a linear function of VDS.
+
+
+## 7. Constant Current Behavior
+
+<p align="center">
+  <img width="622" height="251" alt="image" src="https://github.com/user-attachments/assets/b3d1b5dd-e5be-4dce-a547-60529d8b47c8" />
+    </p>
+  
+If:
+
+- VT is constant  
+- VGS is constant  
+
+Then:
+
+I<sub>D</sub> becomes constant.
+
+As VDS increases further beyond pinch-off:
+
+Drain current remains approximately constant.
+
+This makes the MOSFET appear like a constant current source in saturation.
+
+
+## 8. Revisiting k<sub>n</sub> Expression
+
+k<sub>n</sub> = k'<sub>n</sub> (W / L)
+
+From this equation:
+
+It appears that reducing channel length L increases drain current.
+
+However, this is not always true.
+
+
+## 9. Effective Channel Length Modulation
+
+<p align="center">
+  <img width="655" height="337" alt="image" src="https://github.com/user-attachments/assets/2bd99e07-9de6-4dc6-b48f-700b5b780e65" />
+</p>
+
+Although channel voltage becomes constant:
+
+The effective channel length is still modulated by VDS.
+
+As VDS increases further:
+
+- Effective channel length reduces  
+- Depletion region at drain increases 
+
+There exists a channel length modulation factor that can be added to the equation for completeness.
+
+---
+
