@@ -1833,3 +1833,302 @@ plot -i(VDS)
 - ID vs VDS curves generated  
 - Low VDS → Linear region  
 - High VDS → Saturation (quadratic behavior)  
+
+---
+
+# SL5 SPICE Lab with sky130 models
+
+## 1️. Clone and Navigate
+
+```bash
+cd
+git clone https://github.com/kunalg123/sky130CircuitDesignWorkshop
+cd sky130_circuit_design_workshop
+cd sky130
+cd cells
+cd nfet_01v8
+```
+
+## 2️. Open Library File
+
+```bash
+less sky130.lib.spice
+```
+
+Use **TT (Typical corner)**.
+
+## 3️. Transistor Parameters
+
+- Model: `nfet_01v8`
+- W = **5 µm**
+- L = **2 µm**
+- Supply Voltage = **1.8 V**
+- Source = 0
+- Bulk = 0
+
+## 4️. DC Sweep Settings
+
+- VDS: 0 → 1.8 V (step 0.1 V)
+- VGS: 0 → 1.8 V (step 0.2 V)
+
+
+## 5️. Run Simulation
+
+Inside NGSpice:
+
+```bash
+plot -VDD#branch
+```
+
+## 6️. Results
+
+<p align="center"> <img width="493" height="318" alt="image" src="https://github.com/user-attachments/assets/56efd682-2a6b-472c-926f-1602bf6c2ac4" />
+</p>
+  
+- ID vs VDS curves generated  
+- Cutoff below **Vth ≈ 0.55 V**  
+- Small current at VGS = 0.6 V (~2 µA)  
+
+---
+
+# Day 2:
+---
+# L1 SPICE simulation for lower nodes
+
+## SPICE Simulation Results
+
+<p align="center">
+  <img src="IMAGE_ID_VDS_CURVE" width="700">
+</p>
+
+In the previous simulation:
+
+- Y-axis → Drain Current (ID)  
+- X-axis → Drain-to-Source Voltage (VDS)
+
+Multiple curves correspond to different values of VGS.
+
+
+## Understanding the Curves
+
+### VGS = 0 V
+
+- Curve overlaps the X-axis.
+- Drain current = 0.
+- Reason: Device is OFF.
+- No channel formed.
+
+
+### VGS ≈ Threshold
+
+A curve slightly above zero current:
+
+- VGS just crosses threshold voltage.
+- Minimum channel is formed.
+- Small drain current appears.
+
+
+### Higher VGS Values
+
+Curves correspond to:
+
+- VGS = 1 V  
+- VGS = 1.5 V  
+- VGS = 2 V  
+- VGS = 2.5 V  
+
+All previously derived equations are encapsulated in these curves.
+
+Each curve represents ID vs VDS for a specific VGS.
+
+
+## Two Distinct Regions of Operation
+
+<p align="center">
+  <img src="IMAGE_LINEAR_SATURATION_SPLIT" width="700">
+</p>
+
+The curve has two behavioral regions:
+
+### 1️. Linear (Resistive) Region
+
+- Drain current increases linearly with VDS.
+- Occurs at low VDS.
+- Derived equation:
+
+```
+ID = kn [(VGS − VT)VDS − VDS²/2]
+```
+
+At small VDS:
+
+```
+VDS²/2 → negligible
+```
+
+So:
+
+```
+ID ≈ kn (VGS − VT)VDS
+```
+
+Drain current is linear in VDS.
+
+
+### 2️. Saturation Region
+
+Condition:
+
+```
+VDS ≥ (VGS − VT)
+```
+
+At this point:
+
+- Replace VDS with (VGS − VT)
+- Drain current becomes:
+
+```
+ID = (kn/2)(VGS − VT)² (1 + λVDS)
+```
+
+- Not perfectly constant.
+- Slight increase due to channel length modulation.
+- Appears almost constant.
+
+
+### 3️. Cutoff Region
+
+Condition:
+
+```
+VGS ≤ VT
+```
+
+- No channel formed.
+- Device OFF.
+- ID = 0.
+
+
+## Moving to Lower Node
+
+Now consider new device dimensions:
+
+- W = 0.375 µm  
+- L = 0.25 µm  
+
+W/L ratio is kept constant.
+
+Expectation:
+
+If W/L is constant → Drain current should remain same.
+
+But this does **not** happen at lower nodes.
+
+
+## New SPICE Simulation Setup
+
+Only change from previous deck:
+
+- W changed to 0.375 µm
+- L changed to 0.25 µm
+- All other parameters remain same:
+  - Resistance
+  - VDD
+  - VIN
+  - .op
+  - .dc
+  - Model file
+
+
+## Running New Simulation
+
+1. Source the new circuit file (.cir)
+2. Run simulation:
+
+```
+run
+```
+
+3. Check available plots:
+
+```
+setplot
+```
+
+Select:
+
+```
+dc1
+```
+
+4. Display available nodes:
+
+```
+display
+```
+
+5. Plot drain current:
+
+```
+plot -VDD#branch
+```
+
+(negative sign due to current direction convention)
+
+
+## New Plot Observations
+
+<p align="center">
+  <img src="IMAGE_LOWER_NODE_CURVE" width="700">
+</p>
+
+Observations compared to previous case:
+
+### 1️. Reduced Difference Between Curves
+
+Spacing between adjacent VGS curves is reduced.
+
+
+### 2️. Saturation Current Changed
+
+Current in saturation region is different from previous long-channel case.
+
+
+### 3️. Curve Spacing Behavior Changed
+
+Difference between adjacent curves appears more uniform compared to earlier case.
+
+
+## Comparison: Long Channel vs Short Channel
+
+<p align="center">
+  <img src="IMAGE_COMPARISON_CURVES" width="700">
+</p>
+
+Previous device:
+
+- W = 1.8 µm  
+- L = 1.2 µm  
+
+New device:
+
+- W = 0.375 µm  
+- L = 0.25 µm  
+
+Even though W/L ratio is constant:
+
+- Drain current is not identical.
+- Behavior changes at lower technology nodes.
+
+
+## Key Conclusion
+
+Maintaining constant W/L does **not** guarantee same drain current at lower nodes.
+
+Short-channel effects alter device behavior.
+
+Further explanation of these differences will follow in the next discussion.
+
+---
+
