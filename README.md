@@ -2260,5 +2260,397 @@ Further analysis continues next.
 
 ---
 
+# L3: Velocity Saturation at Lower and Higher Electric Fields
+
+## ID vs VGS Simulation Results
+
+<p align="center">
+  <img width="692" height="322" alt="image" src="https://github.com/user-attachments/assets/8ff06d48-22a9-4955-8178-ac46916b18bd" />
+</p>
+
+We performed ID vs VGS simulations at constant VDS for:
+
+- Long channel device (1.2 µm)
+- Short channel device (0.25 µm)
+
+### Observation
+
+### Long Channel (1.2 µm)
+
+- Drain current shows complete **quadratic dependence** on VGS.
+- Matches derived saturation model:
+
+```
+ID ∝ (VGS − VT)²
+```
+The curve follows quadratic behavior throughout.
+
+### Short Channel (0.25 µm)
+
+For lower VGS:
+
+- Trend is still quadratic.
+- Matches saturation model.
+
+For higher VGS:
+
+- Curve becomes **linear**.
+- No longer follows quadratic dependence.
+
+Thus:
+
+- At low VGS → Quadratic behavior.
+- At high VGS → Linear behavior.
+
+This deviation is a **short channel effect**.
+
+# Velocity Saturation
+
+Velocity saturation is one of the major short channel effects.
+
+## Electric Field vs Velocity
+
+<p align="center">
+  <img width="527" height="189" alt="image" src="https://github.com/user-attachments/assets/02cef8bb-768d-4d83-ac81-b91c58b846e0" />
+</p>
+
+Trend from device physics:
+
+- For low electric field → velocity ∝ electric field (linear).
+- Beyond critical electric field → velocity becomes constant.
+
+This constant value is:
+
+```
+VSAT (Saturation velocity)
+```
+
+## Velocity Model
+
+For electric field E:
+
+### If E < EC (critical field) &  If E ≥ EC
+
+<p align="center">
+<img width="267" height="62" alt="image" src="https://github.com/user-attachments/assets/084deaa0-e7fa-492b-a133-23473add940b" /> </p>
+
+
+## Boundary Condition
+
+<p align="center">
+<img width="130" height="45" alt="image" src="https://github.com/user-attachments/assets/7ff202e1-34a5-4412-984a-d7af25b6166b" />
+</p>
+
+At E = EC:
+
+Equating the two velocity expressions:
+
+```
+μn EC / 2 = VSAT
+```
+
+Rearranging:
+
+```
+EC = 2 VSAT / μn
+```
+
+This defines the critical electric field.
+
+
+# Re-Deriving Drain Current with Velocity Saturation
+
+<p align="center">
+<img width="633" height="225" alt="image" src="https://github.com/user-attachments/assets/35728834-5d3e-49be-b5c8-cec300467206" />
+</p>
+
+Previously:
+
+- Charge = Cox (VGS − VX − VT)
+- Velocity = μn E
+
+Using these, we derived ID.
+
+Now velocity saturates, so drain current model must account for VSAT.
+
+The full derived equation becomes complex and difficult for hand calculation.
+
+Therefore, a simplified model is introduced.
+
+
+# Regions of Operation
+
+<p align="center"> <img width="327" height="142" alt="image" src="https://github.com/user-attachments/assets/7e733104-2458-4fd9-8248-75b9125d0984" />
+ </p>
+
+For long channel devices:
+
+1. Cutoff
+2. Linear
+3. Saturation
+
+For short channel devices:
+
+1. Cutoff
+2. Linear
+3. Saturation (low VGS)
+4. Velocity Saturation (high VGS)
+
+---
+
+# Simplified Notation
+
+Define:
+
+```
+VGT = VGS − VT
+```
+
+This simplifies equations.
+
+---
+
+# Complete Drain Current Model
+
+<p align="center"> <img width="512" height="177" alt="image" src="https://github.com/user-attachments/assets/9d79f9f9-3f84-4400-a3f9-1fac2290cb70" />
+ </p>
+  
+### Cutoff Region
+
+If:
+
+```
+VGT < 0
+```
+
+Then:
+
+```
+ID = 0
+```
+
+(Device OFF)
+
+---
+
+### Unified Model for Other Regions
+
+Drain current:
+
+```
+ID = kn [ VGT · Vmin − (Vmin² / 2) ] (1 + λVDS)
+```
+
+Where:
+
+```
+Vmin = min (VGT, VDS, VDSAT)
+```
+
+## Interpretation of Vmin
+
+- If VGT is minimum → behaves like saturation region.
+- If VDS is minimum → behaves like linear region.
+- If VDSAT is minimum → velocity saturation region dominates.
+
+This single model accounts for:
+
+- Linear region
+- Saturation region
+- Velocity saturation region
+
+---
+
+# L4: Velocity Saturation Drain Current Model
+
+## Unified Drain Current Model
+
+In the previous discussions, a unified drain current model was introduced to represent all regions of operation, including velocity saturation.
+
+The model is:
+
+```
+ID = kn (VGT · Vmin − Vmin² / 2) (1 + λVDS)
+```
+
+Where:
+
+```
+VGT = VGS − VT
+Vmin = min (VGT, VDS, VDSAT)
+```
+
+The term `(1 + λVDS)` is retained for all regions.
+
+For very low values of λVDS, this term approaches 1 and can effectively be ignored.
+
+## Cutoff Region
+
+If:
+
+```
+VGT ≤ 0
+```
+
+Then:
+
+```
+ID = 0
+```
+
+The device is completely OFF.
+
+This applies to both long and short channel devices.
+
+# Technology Parameter: VDSAT
+
+<p align="center"> <img width="452" height="113" alt="image" src="https://github.com/user-attachments/assets/0108d8c5-ce3d-466c-9f36-fb382285236a" />
+  </p>
+
+For short channel devices (< 250 nm), a technology parameter called **VDSAT** is defined.
+
+- Provided by foundry
+- Present in model file
+- Constant for a given technology node
+- Independent of VGS and VDS
+
+VDSAT defines the voltage at which velocity saturation begins.
+
+
+# Case Analysis of Vmin
+
+We now evaluate the unified model for different minimum conditions.
+
+## Case 1: VGT is Minimum
+
+<p align="center"> <img width="495" height="232" alt="image" src="https://github.com/user-attachments/assets/bb6615a2-c6e2-4f08-9f60-2f38fce4dac2" />
+ </p>
+
+If:
+
+```
+Vmin = VGT
+```
+
+Substitute into model:
+
+```
+ID = kn (VGT² − VGT² / 2)(1 + λVDS)
+```
+
+Which simplifies to:
+
+```
+ID = (kn / 2) VGT² (1 + λVDS)
+```
+
+This is the familiar **saturation region equation**.
+
+### Interpretation
+
+If VGT is minimum:
+
+- VDS must be high
+- Device operates in saturation
+- Valid for both long and short channel
+
+## Case 2: VDS is Minimum
+
+<p align="center"> <img width="495" height="233" alt="image" src="https://github.com/user-attachments/assets/215ed6ca-9c49-4cf5-9e41-a34b4fbf2977" />
+</p>
+
+If:
+
+```
+Vmin = VDS
+```
+
+Substitute into model:
+
+```
+ID = kn (VGT·VDS − VDS²/2)(1 + λVDS)
+```
+
+For small VDS:
+
+```
+(1 + λVDS) ≈ 1
+```
+
+Thus:
+
+```
+ID = kn (VGS − VT)VDS − VDS²/2
+```
+
+This matches the **linear (resistive) region equation**.
+
+### Interpretation
+
+- Occurs at small VDS
+- Device behaves resistively
+- Drain current increases linearly with VDS
+
+---
+
+## Case 3: VDSAT is Minimum (Velocity Saturation)
+
+<p align="center"> <img width="482" height="227" alt="image" src="https://github.com/user-attachments/assets/0f4ddbd5-2c86-4197-a564-3b7d86a3e201" />
+ </p>
+  
+If:
+
+```
+Vmin = VDSAT
+```
+
+Substitute into model:
+
+```
+ID = kn (VGT·VDSAT − VDSAT²/2)(1 + λVDS)
+```
+
+This is the drain current equation for **velocity saturation region**.
+
+This region exists only in short channel devices.
+
+# Expanded Form
+
+<p align="center">
+<img width="437" height="34" alt="image" src="https://github.com/user-attachments/assets/726f1b5d-66ed-4d65-9ea1-246ff40d84a4" />
+</p>
+
+Expanding kn:
+
+```
+kn = μn Cox (W/L)
+```
+
+Thus:
+
+```
+ID = μn Cox (W/L) [VGT·VDSAT − VDSAT²/2]
+```
+
+# Important Observation
+
+<p align="center">
+<img width="1322" height="607" alt="image" src="https://github.com/user-attachments/assets/f8d2cfcc-c2e3-4c15-9e31-3da4d1674cb2" /> </p>
+
+If W/L is kept constant:
+
+The long channel expectation is that drain current remains same.
+
+However, experimentally:
+
+- Long channel (1.8µm / 1.2µm) → Peak current ≈ 410 µA
+- Short channel (scaled device) → Peak current ≈ 210 µA
+
+The peak current reduces in short channel devices.
+
+This deviation occurs due to **velocity saturation**.
+
+---
+
 
 
