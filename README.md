@@ -3956,13 +3956,11 @@ If bump height lies in:
 ```
 VIH → VOH
 ```
-
----
-
-
-
 It will be detected as **logic '1'**
 
 This is harmful and must be corrected.
 
 ---
+
+
+
