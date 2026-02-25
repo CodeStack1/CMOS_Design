@@ -3336,3 +3336,175 @@ Now we have:
 - NMOS load curve → IDSN vs VOUT (parameter VIN)
 
 ---
+
+# L6: Step 4 – Merge PMOS & NMOS Load Curves and Plot VTC
+
+# Objective
+
+<p align="center">
+<img width="497" height="215" alt="image" src="https://github.com/user-attachments/assets/a0c65714-daaf-4fd8-af27-e53b97bbe5fd" />
+</p>
+
+Generate the **Voltage Transfer Characteristics (VTC)** of a CMOS inverter  
+using:
+
+- PMOS load curve  
+- NMOS load curve  
+
+The VTC is obtained from the **intersection points** of the two load curves.
+
+# Step 1: Superimpose Load Curves
+
+<p align="center">
+  <img width="272" height="195" alt="image" src="https://github.com/user-attachments/assets/7641bb7a-6486-44bf-a964-eec24bdd930c" />
+</p>
+
+Both PMOS and NMOS load curves:
+
+- Are functions of **VIN**
+- Are functions of **VOUT**
+- Share the same current axis
+
+To derive VTC:
+
+- For a given VIN  
+- Find the intersection of PMOS and NMOS curves  
+- That intersection gives corresponding VOUT  
+
+# Voltage Range
+
+```
+VIN  : 0 → 2 V
+VOUT : 0 → 2 V
+```
+
+We sweep VIN from 0 to 2 volts and determine VOUT from intersection points.
+
+# Case 1: VIN = 0 V
+
+<p align="center">
+<img width="1297" height="708" alt="image" src="https://github.com/user-attachments/assets/359dcfd8-5e72-4df0-882e-87bf131bfb06" /> </p>
+
+From load curves:
+
+- NMOS → Cutoff (OFF)
+- PMOS → Linear region
+
+Intersection point gives:
+
+```
+VOUT = 2 V
+```
+
+So:
+
+- VIN = 0
+- VOUT = 2
+- PMOS → Linear
+- NMOS → Cutoff
+
+Plot this point on VTC.
+
+# Case 2: VIN = 0.5 V
+
+<p align="center">
+<img width="1307" height="712" alt="image" src="https://github.com/user-attachments/assets/5e251dc3-efc3-4779-b44f-25cbf4316279" />
+</p>
+
+From intersection:
+
+- PMOS → Linear region
+- NMOS → Saturation region
+
+VOUT lies between:
+
+```
+1.5 V and 2 V
+```
+
+Plot:
+
+- VIN = 0.5
+- VOUT ≈ between 1.5 and 2
+
+# Case 3: VIN = 1 V
+
+<p align="center">
+<img width="1287" height="715" alt="image" src="https://github.com/user-attachments/assets/bab20e59-94e1-41ed-b756-f233691a89b0" /> </p>
+
+Intersection lies near center.
+
+Both:
+
+- PMOS → Saturation
+- NMOS → Saturation
+
+VOUT lies between:
+
+```
+0.5 V and 1.5 V
+```
+
+This is the **sharp transition region**.
+
+This region has:
+
+- Very high gain
+- Small change in VIN
+- Large change in VOUT
+
+This is the steep switching region of CMOS.
+
+# Case 4: VIN = 1.5 V
+
+<p align="center">
+<img width="1297" height="716" alt="image" src="https://github.com/user-attachments/assets/a24d4627-b7e6-47fd-bec0-07ef45eff4fc" />
+</p>
+
+From load curves:
+
+- PMOS → Saturation
+- NMOS → Linear
+
+VOUT lies between:
+
+```
+0 V and 0.5 V
+```
+
+Plot corresponding point.
+
+# Case 5: VIN = 2 V
+
+<p align="center">
+<img width="1298" height="717" alt="image" src="https://github.com/user-attachments/assets/e055a03d-2bad-479d-9733-aaab4916f429" />
+</p>
+
+From intersection:
+
+- NMOS → Linear
+- PMOS → Cutoff
+
+Result:
+
+```
+VOUT = 0 V
+```
+
+Plot final point.
+
+# Constructing VTC
+
+<p align="center">
+  <img width="490" height="353" alt="image" src="https://github.com/user-attachments/assets/350f9dd5-d74a-4565-b4fc-43593cd3ff35" />
+</p>
+
+Steps:
+
+1. Plot all intersection points
+2. Connect them
+
+This gives the **CMOS Voltage Transfer Characteristic**.
+
+---
+
