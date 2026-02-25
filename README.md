@@ -3508,3 +3508,316 @@ This gives the **CMOS Voltage Transfer Characteristic**.
 
 ---
 
+# Day 4:
+
+---
+
+# L1: Introduction to Noise Margin
+
+# Objective
+
+Determine the robustness of a CMOS inverter by identifying its **noise margin**.
+
+Noise margin is related to:
+
+- Crosstalk noise  
+- Glitches  
+
+These effects are common in lower technology nodes.
+
+Noise margin helps identify how robust a logic gate is against such disturbances.
+
+
+# Basic Inverter Operation
+
+For an inverter:
+
+- Logic LOW input → Logic HIGH output  
+- Logic HIGH input → Logic LOW output  
+
+# Ideal Voltage Transfer Characteristic (VTC)
+
+<p align="center">
+ <img width="617" height="505" alt="image" src="https://github.com/user-attachments/assets/164e856c-b294-40d5-a364-3557d7d5dfec" />
+</p>
+
+Axes:
+
+- X-axis → VIN  
+- Y-axis → VOUT  
+
+Behavior:
+
+- VIN = 0 → VOUT = VDD  
+- VIN = VDD → VOUT = 0  
+
+Switching occurs at:
+
+```
+VIN = VDD / 2
+```
+
+# Ideal Slope at Switching Point
+
+<p align="center">
+<img width="612" height="511" alt="image" src="https://github.com/user-attachments/assets/f42d7f40-41f8-4d0a-9a39-540b30cfc9a6" />
+</>
+
+Slope definition:
+
+```
+Slope = dVOUT / dVIN
+```
+
+At switching point:
+
+- Output changes from VDD to 0  
+- Input change ≈ 0  
+
+Therefore:
+
+```
+Slope = VDD / 0 → Infinite
+```
+
+Ideal inverter has **infinite gain** at switching threshold.
+
+# Practical VTC
+
+In reality:
+
+- NMOS and PMOS have finite resistances  
+- Capacitances exist  
+- Transition is not instantaneous  
+
+Result:
+
+<p align="center">
+  <img width="388" height="373" alt="image" src="https://github.com/user-attachments/assets/229ba82e-07d4-4c16-87c2-25984b5cf6a4" />
+</p>
+
+Characteristics:
+
+- Finite slope  
+- Gradual transition  
+- Output does not drop exactly instantaneously  
+
+Slope becomes finite.
+
+# Define Important Voltage Levels
+
+From practical VTC:
+
+### 1️. VIL (Input Low Voltage)
+
+<p align="center">
+<img width="723" height="413" alt="image" src="https://github.com/user-attachments/assets/9f2854cc-a35e-47ad-b5d3-a80b44d5fed8" />
+</p>
+
+Range:
+
+```
+0 → VIL
+```
+
+If:
+
+```
+VIN ∈ [0 , VIL]
+```
+
+Then:
+
+```
+VOUT = VOH
+```
+
+Output remains HIGH.
+
+
+### 2️. VIH (Input High Voltage)
+
+<p align="center">
+<img width="717" height="417" alt="image" src="https://github.com/user-attachments/assets/b3b67080-29eb-4faa-86af-11b1734fb44f" />
+</>
+
+Range:
+
+```
+VIH → VDD
+```
+
+If:
+
+```
+VIN ∈ [VIH , VDD]
+```
+
+Then:
+
+```
+VOUT = VOL
+```
+
+Output remains LOW.
+
+---
+<p align="center"> </p>
+
+# L2: Noise Margin Voltage Parameters
+
+# Meaningful Inference from VTC
+
+Assume:
+
+```
+VDD = 1 V
+```
+
+Let:
+
+```
+VIL  ≈ 0.25 V  (250 mV)
+VIH  ≈ 0.75 V  (750 mV)
+```
+
+# Input Logic Recognition
+
+### Logic 0 Recognition
+
+If input voltage lies in:
+
+```
+0 → VIL   (0 → 250 mV)
+```
+
+It is recognized as:
+
+```
+Logic 0
+```
+
+### Logic 1 Recognition
+
+If input voltage lies in:
+
+```
+VIH → VDD   (750 mV → 1 V)
+```
+
+It is recognized as:
+
+```
+Logic 1
+```
+
+# Output Voltage Requirements
+
+Since the output of one inverter feeds the next stage:
+
+### Output Low Voltage (VOL)
+
+VOL must lie in:
+
+```
+0 → VIL
+```
+
+Reason:
+
+- Next stage detects logic 0 only if input < VIL.
+- Therefore:
+
+```
+VOL < VIL
+```
+
+### Output High Voltage (VOH)
+
+VOH must lie in:
+
+```
+VIH → VDD
+```
+
+Reason:
+
+- Next stage detects logic 1 only if input > VIH.
+- Therefore:
+
+```
+VOH > VIH
+```
+
+# More Practical VTC
+
+<p align="center">
+  <img src="IMAGE_PRACTICAL_VTC_CURVED" width="650">
+</p>
+
+This curve differs from earlier near-ideal curve because:
+
+- Non-ideal resistances exist
+- Capacitances exist
+- Device nonlinearities exist
+
+Transition is curved and not straight.
+
+# Marking VIL, VIH, VOL, VOH
+
+<p align="center">
+  <img src="IMAGE_VTC_WITH_PARAMETERS" width="650">
+</p>
+
+From the curve:
+
+- Region 1 → VIN < VIL → VOUT ≈ VOH  
+- Region 2 → Transition region  
+- Region 3 → VIN > VIH → VOUT ≈ VOL  
+
+# Slope Around Mid Region
+
+Slope definition:
+
+```
+Slope = dVOUT / dVIN
+```
+
+Example:
+
+If:
+
+- Input increases from 100 mV → 200 mV  
+- Output decreases from 900 mV → 800 mV  
+
+Then:
+
+```
+ΔVOUT = 800 − 900 = −100 mV
+ΔVIN  = 200 − 100 = +100 mV
+```
+
+Therefore:
+
+```
+Slope = −100 / 100 = −1
+```
+
+Slope in transition region ≈ −1.
+
+# Important Inferences
+
+1. ```
+   VOL < VIL
+   ```
+
+2. ```
+   VOH > VIH
+   ```
+
+Reason:
+
+- Output of one stage becomes input of next stage.
+- Logic recognition depends on these voltage ranges.
+
+---
