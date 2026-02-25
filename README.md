@@ -3186,3 +3186,153 @@ Shows conversion of PMOS gate voltage into input voltage.
 
 ---
 
+# L5: Step 2 & Step 3 – Convert PMOS and NMOS Drain–Source Voltage to VOUT
+
+# Step 1 Completed
+
+Previously:
+
+- Converted **VGSP** → function of **VIN**
+- Converted **IDSP** → expressed as **IDSN**
+- PMOS load curve expressed as function of **VIN**
+
+Remaining variable:
+
+```
+VDSP
+```
+
+Now we convert **VDSP to VOUT**
+
+# Step 2: Convert VDSP to VOUT (PMOS)
+
+From earlier relation:
+
+```
+VOUT = VDD + VDSP
+```
+
+Rearranged from:
+
+```
+VDSP = VOUT − VDD
+```
+
+This means:
+
+- Entire PMOS curve shifts by **+VDD**
+- X-axis (VDSP) becomes **VOUT**
+
+
+## Understanding the Shift
+
+If:
+
+```
+VDSP = −2 V
+VDD = 2 V
+```
+
+Then:
+
+```
+VOUT = −2 + 2 = 0 V
+```
+
+So:
+
+- When VOUT = 0  
+- Capacitor is completely discharged  
+- Charging current flows  
+
+Finite current exists at VOUT = 0.
+
+If:
+
+```
+VDSP = 0
+```
+
+Then:
+
+```
+VOUT = 2 V
+```
+
+At:
+
+```
+VOUT = VDD
+```
+
+Capacitor fully charged → Current = 0
+
+## PMOS Load Curve (After Conversion)
+
+<p align="center">
+ <img width="687" height="215" alt="image" src="https://github.com/user-attachments/assets/439d09e1-73a9-4e65-922f-d054e9bca01b" />
+</p>
+
+# Step 3: Table to Derive NMOS Load Curve
+
+For NMOS:
+
+```
+VGSN = VIN − VSS
+```
+
+Since:
+
+```
+VSS = 0
+```
+
+Therefore:
+
+```
+VGSN = VIN
+```
+
+Also:
+
+```
+VDSN = VOUT
+```
+
+<p align="center">
+<img width="315" height="238" alt="image" src="https://github.com/user-attachments/assets/e047e1cd-7a0e-4226-8efa-b539105e4afd" />
+</p>
+
+NMOS conversion is straightforward.
+
+## Original NMOS Curve
+
+<p align="center">
+  <img width="240" height="203" alt="image" src="https://github.com/user-attachments/assets/931557fb-99bc-4a03-b51d-9c485c1937e7" />
+</p>
+
+## After Conversion
+
+<p align="center">
+  <img width="465" height="202" alt="image" src="https://github.com/user-attachments/assets/84f27652-e854-4c87-9265-23c0d53e5ec9" />
+</p>
+
+NMOS load curve now becomes:
+
+- Function of VIN
+- Function of VOUT
+- Current = IDSN
+
+This is the **NMOS load curve**.
+
+# Result of Step 2 & Step 3
+
+<p align="center">
+<img width="500" height="230" alt="image" src="https://github.com/user-attachments/assets/4e7426e3-5dd8-4949-b96f-807f229ede49" /> </p>
+
+Now we have:
+
+- PMOS load curve → IDSN vs VOUT (parameter VIN)
+- NMOS load curve → IDSN vs VOUT (parameter VIN)
+
+---
