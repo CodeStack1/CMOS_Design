@@ -1897,10 +1897,6 @@ plot -VDD#branch
 
 ## SPICE Simulation Results
 
-<p align="center">
-  <img src="IMAGE_ID_VDS_CURVE" width="700">
-</p>
-
 In the previous simulation:
 
 - Y-axis → Drain Current (ID)  
@@ -1910,6 +1906,10 @@ Multiple curves correspond to different values of VGS.
 
 
 ## Understanding the Curves
+
+<p align="center">
+  <img width="587" height="337" alt="image" src="https://github.com/user-attachments/assets/0c5b4a7a-549b-4ce7-91fa-38107724f6c4" />
+</p>
 
 ### VGS = 0 V
 
@@ -1942,10 +1942,10 @@ All previously derived equations are encapsulated in these curves.
 Each curve represents ID vs VDS for a specific VGS.
 
 
-## Two Distinct Regions of Operation
+## Regions of Operation
 
 <p align="center">
-  <img src="IMAGE_LINEAR_SATURATION_SPLIT" width="700">
+ <img width="546" height="308" alt="image" src="https://github.com/user-attachments/assets/8f156429-8598-45d3-9de7-b80534748e7d" />
 </p>
 
 The curve has two behavioral regions:
@@ -2079,10 +2079,6 @@ plot -VDD#branch
 
 ## New Plot Observations
 
-<p align="center">
-  <img src="IMAGE_LOWER_NODE_CURVE" width="700">
-</p>
-
 Observations compared to previous case:
 
 ### 1️. Reduced Difference Between Curves
@@ -2103,7 +2099,7 @@ Difference between adjacent curves appears more uniform compared to earlier case
 ## Comparison: Long Channel vs Short Channel
 
 <p align="center">
-  <img src="IMAGE_COMPARISON_CURVES" width="700">
+  <img width="697" height="296" alt="image" src="https://github.com/user-attachments/assets/62f0443f-ebbd-41de-a45e-46201785ddcc" />
 </p>
 
 Previous device:
@@ -2122,13 +2118,147 @@ Even though W/L ratio is constant:
 - Behavior changes at lower technology nodes.
 
 
-## Key Conclusion
+## Conclusion
 
 Maintaining constant W/L does **not** guarantee same drain current at lower nodes.
 
 Short-channel effects alter device behavior.
 
-Further explanation of these differences will follow in the next discussion.
+---
+
+
+# L2: Drain Current vs Gate Voltage – Long and Short Channel Device
+
+## Previous Simulation Context
+
+In the previous SPICE simulation, two devices were analyzed:
+
+- **Long channel device** → 1.2 µm  
+- **Short channel device** → 0.25 µm  
+
+We now focus on:
+
+> Drain Current (ID) vs Gate Voltage (VGS)  
+> At constant Drain Voltage (VDS)
+
+## Observation for Long Channel Device (1.2 µm)
+
+<p align="center">
+  <img width="685" height="295" alt="image" src="https://github.com/user-attachments/assets/f2c8c513-bf7c-4469-918a-86484babfce0" />
+</p>
+
+Let:
+
+- VDS = 2.5 V (constant)
+
+Observations:
+
+- At VGS = 0 → ID = 0  
+- At VGS = 0.5 V → small ID (~10 µA)  
+- At VGS = 1 V → larger ID (~40 µA)  
+
+ID does **not** increase linearly with VGS.
+
+It shows **quadratic dependence**.
+
+This matches the derived equation:
+
+```
+ID = (kn/2) (VGS − VT)²
+```
+
+So:
+
+- ID ∝ (VGS − VT)²  
+- Drain current increases quadratically with gate voltage.
 
 ---
+
+## Observation for Short Channel Device (0.25 µm)
+
+<p align="center">
+  <img width="691" height="287" alt="image" src="https://github.com/user-attachments/assets/15b8ab6d-26aa-4f71-8225-440ecfe95716" />
+</p>
+
+Initial region:
+
+- At VGS = 0 → ID = 0  
+- At VGS = 0.5 V → small ID  
+- At VGS = 1 V → larger ID  
+
+Here also, initially:
+
+- ID shows quadratic dependence.
+
+But after a certain VGS:
+
+- ID increases **linearly** with VGS.
+
+This behavior is different from long channel device.
+
+---
+
+## Key Difference
+
+<p align="center">
+<img width="698" height="318" alt="image" src="https://github.com/user-attachments/assets/235dbec3-c3de-4fd4-8a90-4eb3fee6491e" /> </p>
+
+| Device Type | Behavior |
+|-------------|----------|
+| Long Channel (1.2 µm) | Quadratic throughout |
+| Short Channel (0.25 µm) | Quadratic initially → Linear at higher VGS |
+
+This effect is due to:
+
+> **Velocity Saturation**
+
+(Explanation continues later.)
+
+
+# SPICE Simulation Setup – ID vs VGS
+
+We now perform:
+
+- ID vs VGS
+- At constant VDS = 2.5 V
+
+
+## SPICE Deck Change
+
+Only one line changes:
+New sweep condition:
+
+- Sweep VGS from 0 → 2.5 V  
+- Step = 0.1 V  
+- VDS held constant at 2.5 V  
+
+Syntax meaning:
+
+- Left-hand variable is swept
+- Right-hand variable defines outer sweep
+
+# Direct Comparison
+
+<p align="center">
+  <img src="IMAGE_COMPARISON_ID_VGS" width="700">
+</p>
+
+Comparison:
+
+- Long channel → Fully quadratic
+- Short channel → Becomes linear at high VGS
+
+# Conclusion
+
+For constant VDS:
+
+- Long channel device follows quadratic model.
+- Short channel device deviates due to velocity saturation.
+- This is a short channel effect observed at lower nodes.
+
+Further analysis continues next.
+
+---
+
+
 
