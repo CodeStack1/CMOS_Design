@@ -3815,3 +3815,154 @@ Slope = −100 / 100 = −1
 Slope in transition region ≈ −1.
 
 ---
+
+
+# L3: Noise Margin Equation and Summary
+
+# Plotting Voltage Levels on Single Scale
+
+We place the voltage levels in descending order.
+
+Given:
+
+- VOH > VIH  
+- VIL > VOL  
+
+Descending order:
+
+```
+VOH
+VIH
+VIL
+VOL
+```
+
+Reasoning:
+
+- VOH must be greater than VIH  
+  → So next stage detects logic '1'
+
+- VOL must be less than VIL  
+  → So next stage detects logic '0'
+
+
+# Voltage Scale Representation
+
+<p align="center"><img width="146" height="336" alt="image" src="https://github.com/user-attachments/assets/826a9d21-3e73-4a89-b568-abb1488fb99a" />
+</p>
+
+
+# Noise Margin Definitions
+
+## 1. Noise Margin High (NMH)
+
+<p align="center"> <img width="702" height="422" alt="image" src="https://github.com/user-attachments/assets/d2521796-2806-4a48-9fb9-0b9c1a6e516a" />
+ </p>
+
+Range:
+
+```
+VIH → VOH
+```
+
+Definition:
+
+Any voltage in this range (at input or output) is detected as **logic '1'**
+
+Equation:
+
+```
+NMH = VOH − VIH
+```
+
+## 2. Noise Margin Low (NML)
+
+<p align="center"> <img width="708" height="410" alt="image" src="https://github.com/user-attachments/assets/6e1acdeb-f49a-46dc-884e-d0156e27aae4" />
+ </p>
+  
+Range:
+
+```
+VOL → VIL
+```
+
+Definition:
+
+Any voltage in this range (at input or output) is detected as **logic '0'**
+
+Equation:
+
+```
+NML = VIL − VOL
+```
+
+# Undefined Region
+
+<p align="center">
+<img width="698" height="401" alt="image" src="https://github.com/user-attachments/assets/a2787f1f-eb50-4bc4-9bdb-263dabaa5f9b" /> </p>
+
+Region between:
+
+```
+VIH and VIL
+```
+
+This is the **undefined region**.
+
+Any voltage in this range:
+
+- May be interpreted as logic '0'
+- May be interpreted as logic '1'
+- Unpredictable behavior
+
+
+# Noise Bump Interpretation
+
+<p align="center">
+ <img width="927" height="536" alt="image" src="https://github.com/user-attachments/assets/43b396db-9693-410d-82d0-a90bba12442a" />
+</p>
+
+The chart summarizes noise tolerance.
+
+## Case 1: Small Bump (Safe)
+
+If bump height lies in:
+
+```
+VOL → VIL
+```
+
+It is still detected as **logic '0'**
+
+Safe glitch.
+
+## Case 2: Undefined Bump (Unsafe)
+
+If bump height lies in:
+
+```
+VIL → VIH
+```
+
+It enters **undefined region**
+
+- May flip logic
+- Must be fixed
+
+## Case 3: Large Bump (Logic Flip)
+
+If bump height lies in:
+
+```
+VIH → VOH
+```
+
+---
+
+
+
+It will be detected as **logic '1'**
+
+This is harmful and must be corrected.
+
+---
