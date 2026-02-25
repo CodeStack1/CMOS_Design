@@ -2991,3 +2991,88 @@ IDSP = − IDSN
 Current itself is not negative physically — sign only represents direction reference.
 
 ---
+
+# L4: Step 1 – Convert PMOS Gate-Source Voltage to VIN
+
+## CMOS Inverter Reference
+
+We previously defined:
+
+- VGSN, VDSN → NMOS voltages  
+- VGSP, VDSP → PMOS voltages  
+
+However, in digital logic:
+
+- Only **VIN** and **VOUT** are visible.
+- Internal voltages (VGSP, VDSP, etc.) are not visible.
+
+Therefore, all curves must be expressed as functions of:
+
+```
+VIN and VOUT only
+```
+
+# Express VGSP in terms of VIN
+
+From earlier derivation:
+
+```
+VGSP = VIN − VDD
+```
+
+Rearranging:
+
+```
+VIN = VGSP + VDD
+```
+
+Assume:
+
+```
+VDD = 2 V
+```
+
+Each PMOS curve can be re-plotted as:
+
+```
+IDSN vs VIN
+```
+
+Example:
+
+- VGSP = 0 → VIN = 2 V → ID = 0
+- VGSP = −0.5 → VIN = 1.5 V
+- VGSP = −1 → VIN = 1 V
+- VGSP = −1.5 → VIN = 0.5 V
+- VGSP = −2 → VIN = 0 V
+
+Drain current values remain same in magnitude, but sign flips to match NMOS convention.
+
+
+## Conversion Table
+
+<p align="center">
+<img width="342" height="217" alt="image" src="https://github.com/user-attachments/assets/d53beaae-1cb5-44b7-9f32-d888c71d0f98" />
+</p
+
+Shows conversion of PMOS gate voltage into input voltage.
+
+
+# NMOS ID–VDS Curves & PMOS ID–VDS Curves
+
+<p align="center">
+<img width="443" height="368" alt="image" src="https://github.com/user-attachments/assets/3d7ac33e-9461-47d8-b8d4-4af062390b7e" /> </p>
+
+
+# Result After Conversion
+
+<p align="center"> <img width="327" height="317" alt="image" src="https://github.com/user-attachments/assets/96d89aa1-bf57-4651-a4c4-8358458fe6b1" />
+</p>
+  
+- VGSP eliminated
+- IDSP eliminated
+- Only IDSN retained
+- Current now expressed as function of VIN
+
+---
+
