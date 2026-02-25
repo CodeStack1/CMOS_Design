@@ -3662,7 +3662,7 @@ VOUT = VOL
 Output remains LOW.
 
 ---
-<p align="center"> </p>
+
 
 # L2: Noise Margin Voltage Parameters
 
@@ -3682,6 +3682,8 @@ VIH  ≈ 0.75 V  (750 mV)
 ```
 
 # Input Logic Recognition
+
+<p align="center"> <img width="730" height="412" alt="image" src="https://github.com/user-attachments/assets/cea007d7-a3e1-4f28-b5eb-07187c222aff" /> </p>
 
 ### Logic 0 Recognition
 
@@ -3712,6 +3714,9 @@ Logic 1
 ```
 
 # Output Voltage Requirements
+
+<p align="center"> <img width="730" height="360" alt="image" src="https://github.com/user-attachments/assets/9715ba03-d354-4e4b-86a7-b34e9cd10905" />
+</p>
 
 Since the output of one inverter feeds the next stage:
 
@@ -3752,7 +3757,7 @@ VOH > VIH
 # More Practical VTC
 
 <p align="center">
-  <img src="IMAGE_PRACTICAL_VTC_CURVED" width="650">
+ <img width="362" height="332" alt="image" src="https://github.com/user-attachments/assets/6ce565b2-915f-4a56-983d-bfb325f5d998" />
 </p>
 
 This curve differs from earlier near-ideal curve because:
@@ -3766,7 +3771,7 @@ Transition is curved and not straight.
 # Marking VIL, VIH, VOL, VOH
 
 <p align="center">
-  <img src="IMAGE_VTC_WITH_PARAMETERS" width="650">
+  <img width="361" height="335" alt="image" src="https://github.com/user-attachments/assets/245c6940-44ca-4342-a66b-de9d6224cddb" />
 </p>
 
 From the curve:
@@ -3776,6 +3781,10 @@ From the curve:
 - Region 3 → VIN > VIH → VOUT ≈ VOL  
 
 # Slope Around Mid Region
+
+<p align="center">
+<img width="395" height="340" alt="image" src="https://github.com/user-attachments/assets/caeb1e05-587e-4f4e-8cd3-87de0df3dc51" />
+</p>
 
 Slope definition:
 
@@ -3804,20 +3813,5 @@ Slope = −100 / 100 = −1
 ```
 
 Slope in transition region ≈ −1.
-
-# Important Inferences
-
-1. ```
-   VOL < VIL
-   ```
-
-2. ```
-   VOH > VIH
-   ```
-
-Reason:
-
-- Output of one stage becomes input of next stage.
-- Logic recognition depends on these voltage ranges.
 
 ---
