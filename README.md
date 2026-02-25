@@ -2652,5 +2652,342 @@ This deviation occurs due to **velocity saturation**.
 
 ---
 
+# L5 Labs Sky130 Id-Vgs
+
+## Device Parameters
+
+- **Technology:** Sky130  
+- **Corner:** Typical (TT)  
+- **Width (W):** 0.39 µm  
+- **Length (L):** 0.15 µm (Short channel)  
+- **VDS Max:** 1.8 V  
+
+## ID vs VDS
+
+**Sweep Conditions:**
+- VDS: 0 → 1.8 V (step 0.1 V)  
+- VGS: 0 → 1.8 V (step 0.2 V)  
+
+**Result:**
+
+<p align="center"></p>
+
+- Low VGS → Quadratic behavior  
+- High VGS (≥ ~1 V) → Linear behavior  
+- Peak current ≈ **196 µA**  
+- Shows **velocity saturation**
+
+## ID vs VGS
+
+**Sweep Conditions:**
+- VDS = 1.8 V (constant)  
+- VGS: 0 → 1.8 V  
+
+**Result:**
+<p align="center"> </p>
+
+- Linear trend at higher VGS  
+- Confirms **short channel velocity saturation**
+
+## Conclusion
+
+For **L = 0.15 µm**:
+- Current saturates earlier  
+- ID becomes linear at higher voltages  
+- Velocity saturation dominates
+
+---
+
+# L6: Sky130 Lab – Threshold Voltage (VT) Extraction
+
+## Device / Simulation Setup
+
+- **Technology:** Sky130  
+- **Corner:** Typical (TT)  
+- **Curve Used:** ID vs VGS  
+- **VDS:** 1.8 V (constant)  
+- **Method:** Tangent method on ID–VGS curve  
 
 
+## Result
+
+<p align="center"> </p>
+  
+- **Threshold Voltage (VT) ≈ 0.77 V**
+
+(Obtained by extending tangent of steep ID–VGS slope to X-axis.)
+
+---
+
+# L1: MOSFET as a Switch
+
+## MOSFET from a Switch Perspective
+
+<p align="center"> <img width="272" height="261" alt="image" src="https://github.com/user-attachments/assets/4ec2905b-0ac2-47ac-884f-94896847ba0e" />
+ </p>
+
+To understand CMOS voltage transfer characteristics, the MOSFET must be viewed from a **switch point of view** instead of only a device physics perspective.
+
+Consider a generic MOS transistor (NMOS or PMOS).
+
+The device turns **ON** when:
+
+```
+|VGS| ≥ |VT|
+```
+
+- For NMOS → VGS is positive  
+- For PMOS → VGS is negative  
+
+The magnitude condition applies in both cases.
+
+## MOSFET Switch Representation
+
+<p align="center">
+ <img width="490" height="221" alt="image" src="https://github.com/user-attachments/assets/9b372da3-2060-4125-8d0e-8e1ba01f8486" />
+</p>
+
+### Case 1: VGS < VT
+
+- Device is OFF  
+- Infinite resistance between drain and source  
+- Open circuit  
+- No current flow  
+
+### Case 2: VGS ≥ VT
+
+- Device is ON  
+- Finite resistance between drain and source  
+- Closed switch  
+- Current flows  
+
+The ON resistance is finite and nonlinear.
+
+
+# CMOS Structure
+
+Now bias the devices to form a CMOS inverter.
+
+<p align="center">
+  <img width="362" height="317" alt="image" src="https://github.com/user-attachments/assets/fb8d6143-7780-4c01-8a35-ede5361c9a53" />
+</p>
+
+### Connections
+
+- PMOS at top → Source connected to VDD  
+- NMOS at bottom → Source connected to VSS (ground)  
+- Gates tied together → Input (VIN)  
+- Drains tied together → Output  
+- Load capacitance → CL  
+
+CMOS = Complementary MOS  
+When one device is ON, the other is OFF.
+
+
+# Case Analysis
+
+## Case: VIN = VDD (Input High)
+
+```
+VIN = VDD
+```
+
+### PMOS
+
+<p align="center">
+<img width="293" height="357" alt="image" src="https://github.com/user-attachments/assets/897a7831-57f8-4688-9c82-2cf422acca07" />
+</p>
+
+VGS (PMOS):
+
+```
+VGS = VG − VS
+```
+
+Here:
+
+```
+VG = VDD
+VS = VDD
+```
+
+Therefore:
+
+```
+VGS = 0
+```
+
+Since |VGS| < |VT|:
+
+- PMOS turns OFF  
+- Represented as open switch
+
+### NMOS
+
+<p align="center">
+<img width="327" height="357" alt="image" src="https://github.com/user-attachments/assets/ee3a19d3-bc06-4d47-b966-aa2f0762a85f" />
+</p>
+
+VGS (NMOS):
+
+```
+VGS = VIN − VSS
+```
+
+Since VSS = 0:
+
+```
+VGS = VDD
+```
+
+If VDD > VT:
+
+- NMOS turns ON  
+- Represented as resistor  
+ 
+
+## Resulting Circuit (VIN = VDD)
+
+<p align="center">
+  <img width="172" height="307" alt="image" src="https://github.com/user-attachments/assets/c5835715-66f6-4cb8-af4b-7008a0ff6516" />
+</p>
+
+- PMOS → Open  
+- NMOS → Resistor  
+- Output connected to ground through NMOS  
+- Output pulled LOW  
+
+# Important Observation
+
+The gate-to-source voltage depends on node potentials:
+
+- NMOS → VGS = VIN − VSS  
+- PMOS → VGS = VIN − VDD  
+
+Correct polarity and node reference are essential to determine ON/OFF state.
+
+# Summary
+
+MOSFET as Switch:
+
+| Condition | State | Representation |
+|------------|--------|----------------|
+| VGS < VT | OFF | Open switch |
+| VGS ≥ VT | ON | Finite resistor |
+
+For VIN = VDD:
+
+- NMOS → ON  
+- PMOS → OFF  
+- Output → LOW  
+
+This forms the basis for CMOS voltage transfer characteristics.
+
+---
+
+# L3: PMOS / NMOS Drain Current vs Drain Voltage
+
+## CMOS Inverter Reference
+
+<p align="center">
+  <img width="660" height="357" alt="image" src="https://github.com/user-attachments/assets/7ac0d853-546a-4eb1-9411-f74e7207bca4" />
+</p>
+
+We previously defined voltage naming conventions:
+
+- **VGSN, VDSN** → NMOS voltages  
+- **VGSP, VDSP** → PMOS voltages  
+
+Important observation:
+
+- PMOS and NMOS drain currents flow in opposite directions.
+- Therefore:
+
+```
+IDSP = − IDSN
+```
+(Current sign differs only due to direction.)
+
+
+# Voltage Relationships
+
+## NMOS
+
+Source connected to ground (VSS = 0).
+
+```
+VGSN = VIN − VSS = VIN
+VDSN = VOUT − VSS = VOUT
+```
+
+NMOS voltage expressions are simple because one terminal is grounded.
+
+
+## PMOS
+
+Source connected to VDD.
+
+```
+VGSP = VIN − VDD
+VDSP = VOUT − VDD
+```
+
+PMOS voltages require subtracting VDD.
+
+Care must be taken with sign conventions.
+
+
+# NMOS ID vs VDS Curve
+
+<p align="center">
+  <img width="422" height="356" alt="image" src="https://github.com/user-attachments/assets/44b6b509-c595-40d2-bd63-f6b4824aebc5" />
+</p>
+
+Plot: **IDSN vs VDSN**
+
+Observations:
+
+- When VGSN = 0 → IDSN ≈ 0 (device OFF)
+- When VGSN > VT → current flows
+- Increasing VGSN → higher drain current
+- Curve transitions from linear to saturation
+
+Multiple curves correspond to:
+
+```
+VGSN1 < VGSN2 < VGSN3 < ...
+```
+
+Higher VGS → higher current.
+
+
+# PMOS ID vs VDS Curve
+
+<p align="center">
+  <img width="382" height="432" alt="image" src="https://github.com/user-attachments/assets/bdf03f27-89c3-44e7-835b-6913cb43395f" />
+</p>
+
+Plot: **IDSP vs VDSP**
+
+Key differences:
+
+- IDSP is negative (opposite current direction)
+- VDSP is negative (due to reference to VDD)
+- Magnitude behavior similar to NMOS
+
+Observations:
+
+- If |VGSP| < |VT| → PMOS OFF → IDSP = 0
+- If |VGSP| > |VT| → PMOS ON → current flows
+- Increasing |VGSP| → higher magnitude of drain current
+
+# Current Direction Relationship
+
+Because capacitor charging/discharging directions are opposite:
+
+```
+IDSP = − IDSN
+```
+Current itself is not negative physically — sign only represents direction reference.
+
+---
