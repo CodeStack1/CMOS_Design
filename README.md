@@ -2885,6 +2885,116 @@ This forms the basis for CMOS voltage transfer characteristics.
 
 ---
 
+# L2: Introduction to Standard MOS Voltage–Current Parameters
+
+# Objective
+
+To derive equivalent circuits of a CMOS inverter under different input conditions in order to later obtain the Voltage Transfer Characteristics (VTC) and delay.
+
+We require:
+
+- Equivalent circuit when VIN = High  
+- Equivalent circuit when VIN = Low  
+
+These will later be merged to derive CMOS VTC.
+
+
+# VIN = 0 V (Low Input)
+
+## PMOS Operation
+
+<p align="center">
+<img width="162" height="348" alt="image" src="https://github.com/user-attachments/assets/37680981-09de-49ab-8f0f-d247e76301fe" /> </p>
+
+For PMOS:
+
+```
+VGS(P) = VG − VS
+```
+Condition for PMOS ON:
+
+```
+|VGS| > |VT|
+```
+
+PMOS turns ON.
+
+An ON transistor is modeled as a resistor:
+
+```
+RP
+```
+
+This resistance is **non-linear**, not an ideal resistor.
+
+## NMOS Operation
+
+<p align="center">
+<img width="137" height="347" alt="image" src="https://github.com/user-attachments/assets/d85c39d2-f78e-4686-afbf-87d9cff1f1e6" />
+</p>
+
+For NMOS:
+
+```
+VGS < VT
+```
+
+NMOS turns OFF.
+
+An OFF transistor is modeled as an open switch.
+
+
+## Current Flow (VIN = 0)
+
+<p align="center">
+<img width="645" height="336" alt="image" src="https://github.com/user-attachments/assets/1db56354-3292-4815-ab30-513cdb9d109f" />
+</p>
+
+There is a direct path:
+
+```
+VDD → RP → CL
+```
+
+Capacitor charges.
+
+Final condition:
+
+```
+VOUT = VDD
+```
+
+# Naming Conventions
+
+<p align="center">
+<img width="650" height="331" alt="image" src="https://github.com/user-attachments/assets/5d7601d9-c60c-4a65-9f2d-3b89cd63612c" />
+</p>
+
+To proceed with systematic derivation:
+
+### Gate–Source Voltages
+
+- VGSP → PMOS gate–source voltage
+- VGSN → NMOS gate–source voltage
+
+### Drain–Source Voltages
+
+- VDSP → PMOS drain–source voltage
+- VDSN → NMOS drain–source voltage
+
+### Drain Currents
+
+- IDSP → PMOS drain current
+- IDSN → NMOS drain current
+
+These naming conventions are required to derive:
+
+- Current equations
+- Load curves
+- Voltage Transfer Characteristics (VTC)
+
+---
+
 # L3: PMOS / NMOS Drain Current vs Drain Voltage
 
 ## CMOS Inverter Reference
