@@ -3962,5 +3962,243 @@ This is harmful and must be corrected.
 
 ---
 
+# L4: Noise Margin Variation with Respect to PMOS Width
+
+# Objective
+
+Understand how varying PMOS width affects CMOS inverter robustness.
+
+# Case 1: Wp = Wn
+
+<p align="center">
+  <img width="1235" height="527" alt="image" src="https://github.com/user-attachments/assets/3b6d2095-9e2e-431a-ba90-d7c634569eaa" />
+</p>
+
+Step:
+
+- Find points where slope = −1
+- Extend tangents
+- Calculate margins
+
+Result:
+
+```
+NMH = 0.3 V
+NML = 0.3 V
+Vm  = 0.99 V
+```
+
+Meaning:
+
+- Any voltage in NMH range → Logic 1
+- Any voltage in NML range → Logic 0
+
+Wider margin → More noise immunity.
+
+# Case 2: Wp = 2Wn
+
+<p align="center"><img width="1233" height="528" alt="image" src="https://github.com/user-attachments/assets/e1b658a9-f03d-414c-abd1-e864456b2b7f" />
+ </p>
+
+Slope −1 points identified again.
+
+Result:
+
+```
+NMH = 0.35 V
+NML = 0.3 V
+Vm  = 1.2 V
+```
+
+Observation:
+
+- NMH increased by 50 mV
+- NML unchanged
+
+Reason:
+
+- PMOS holds charge for logic '1'
+- Larger PMOS → lower resistance path to VDD
+- Better ability to hold logic high
+
+# Case 3: Wp = 3Wn
+
+<p align="center"> <img width="1248" height="541" alt="image" src="https://github.com/user-attachments/assets/818e160b-ef20-4a28-995b-9ae2e0add448" />
+</p>
+
+Result:
+
+```
+NMH = 0.4 V
+NML = 0.3 V
+Vm  = 1.25 V
+```
+
+Observation:
+
+- NMH increases further
+- NML still constant
+
+Reason:
+
+- Stronger PMOS improves logic '1' holding capability
+- NMOS responsible for logic '0'
+
+# Case 4: Wp = 4Wn
+
+<p align="center"> <img width="1275" height="556" alt="image" src="https://github.com/user-attachments/assets/21c9781c-5125-47f9-8b2d-8cd97661d65a" />
+ </p>
+
+Result:
+
+```
+NMH = 0.42 V
+NML = 0.27 V
+Vm  = 1.35 V
+```
+
+Observation:
+
+- NMH increase is minimal (~20 mV)
+- NML decreases
+
+Reason:
+
+- PMOS becomes much stronger than NMOS
+- NMOS becomes relatively weaker
+- Logic '0' holding capability reduces
+
+# Case 5: Wp = 5Wn
+
+<p align="center"> <img width="1258" height="551" alt="image" src="https://github.com/user-attachments/assets/80f69bce-9c57-4a83-8b98-71b4a4bc0d94" />
+</p>
+
+Result:
+
+```
+NMH = 0.42 V
+NML = 0.27 V
+Vm  = 1.4 V
+```
+
+Observation:
+
+- NMH saturates
+- NML slightly reduced
+- Further PMOS increase does not significantly improve NMH
+
+# Summary Table
+
+<p align="center">
+ <img width="710" height="232" alt="image" src="https://github.com/user-attachments/assets/f253db8e-705e-494b-98bd-7133ade1d03e" />
+</p>
+
+- Increasing PMOS width increases NMH.
+- NML remains mostly stable.
+- Excessive PMOS sizing reduces NML.
+- NMH increase saturates beyond certain width ratio.
+
+Total variation range:
+
+```
+NMH: 0.3 V → 0.42 V  (≈120 mV range)
+NML: small variation (~30 mV)
+```
+
+# Fabrication Variation Insight
+
+If designed for:
+
+```
+Wp = 2Wn
+NMH = 0.35 V
+NML = 0.3 V
+```
+
+Fabrication may produce:
+
+```
+Wp = 1.8Wn or 2.2Wn
+```
+
+Effect:
+
+- Noise margin variation only ~100 mV
+- Switching threshold variation small
+- Overall variation ~2–3%
+
+CMOS inverter remains robust.
+
+# Digital vs Analog Region
+
+## Digital Design Region
+
+<p align="center">
+  <img width="701" height="571" alt="image" src="https://github.com/user-attachments/assets/29328a1c-a029-4c07-9ef5-6fab101d0c17" />
+</p>
+
+Regions:
+
+- NMH range → Logic 1
+- NML range → Logic 0
+
+CMOS inverter is highly suitable for digital logic.
+
+## Analog Region
+
+<p align="center"> <img width="708" height="571" alt="image" src="https://github.com/user-attachments/assets/2f99e363-2e71-4038-9e82-9fbf2b51bfe9" />
+ </p>
+
+Mid transition region (high gain region):
+
+- Small change in VIN
+- Large change in VOUT
+
+Used for amplification.
+
+---
+
+# L5: Sky130 Noise Margin Lab (Simulation Summary)
+
+## Simulation Parameters
+
+- Circuit: CMOS Inverter
+- PMOS/NMOS (W/L) ratio: 2.77
+- Input sweep: VIN swept (DC sweep)
+- Plot: VOUT vs VIN
+
+## Extracted Values from VTC (Slope = −1 Points)
+
+### Upper Intersection
+
+- VIL  = 0.7741 V
+- VOH  = 1.7088 V
+
+### Lower Intersection
+
+- VIH  = 0.9758 V
+- VOL  = 0.1147 V
 
 
+## Calculated Noise Margins
+
+### Noise Margin High (NMH)
+
+```
+NMH = VOH − VIH
+     = 1.7088 − 0.9758
+     ≈ 0.733 V
+```
+
+### Noise Margin Low (NML)
+
+```
+NML = VIL − VOL
+     = 0.7741 − 0.1147
+     ≈ 0.6594 V
+```
+
+## Final Results
+
+- NMH ≈ 0.733 V
+- NML ≈ 0.659 V
