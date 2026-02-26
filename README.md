@@ -1,5 +1,94 @@
 - [Day 5 – CMOS Power Supply and Device Variation Robustness Evaluation](#ngspicesky130-day5-cmos-power-supply-and-device-variation-robustness-evaluation)
 
+- [NgspiceSky130-Day1-Basics of NMOS Drain Current(Id) vs Drain-to-source Voltage(Vds)](#ngspicesky130-day1-basics-of-nmos-drain-current(id)-vs-drain-to-source-voltage(vds))
+
+- [Introduction to Circuit Design and Spice Simulations](#introduction-to-circuit-design-and-spice-simulations)
+
+- [0 - L1 Why do we need SPICE simulations?](#0---l1-why-do-we-need-spice-simulations?)
+- [1 - L2 Introduction to basic element in circuit design-NMOS](#1-l2-introduction-to-basic-element-in-circuit-design-nmos)
+- [2 - L3 Strong inversion and threshold voltage](#2-l3-strong-inversion-and-threshold-voltage)
+- [3 - L4 Threshold voltage with positive substrate potential](#3-l4-threshold-voltage-with-positive-substrate-potential)
+
+[NMOS resistive region and Saturation region of operation](#nmos-resistive-region-and-saturation-region-of-operation)
+
+[4 - L1 Resistive region of operation with small drain-source voltage](#4---l1-resistive-region-of-operation-with-small-drain-source-voltage)
+[5 - L2 Drift current theory](#5---l2-drift-current-theory)
+[6 - L3 Drain current model for Linear region of operation](#6---l3-drain-current-model-for-linear-region-of-operation)
+[7 - L4 SPICE conclusion to resistive operation](#7---l4-spice-conclusion-to-resistive-operation)
+[8 - L5 Pinch-off region condition](#8---l5-pinch-off-region-condition)
+[9 - L6 Drain current model for saturation region of operation](#9---l6-drain-current-model-for-saturation-region-of-operation)
+
+[Introduction to SPICE](#introduction-to-spice)
+
+[10 - L1 Basic SPICE setup](#10---l1-basic-spice-setup)
+[11 - L2 Circuit description in SPICE syntax](#11---l2-circuit-description-in-spice-syntax)
+[12 - L3 Define Technology parameters](#12---l3-define-technology-parameters)
+[13 - L4 First SPICE simulation](#13---l4-first-spice-simulation)
+[14 - L5 SPICE lab with Sky130 models](#14---l5-spice-lab-with-sky130-models)
+
+[NgspiceSky130-Day2-Velocity saturation and basics of CMOS inverter VTC](#ngspicesky130-day2-velocity-saturation-and-basics-of-cmos-inverter-vtc)
+
+[SPICE simulation for lower nodes and velocity saturation effect](#spice-simulation-for-lower-nodes-and-velocity-saturation-effect)
+
+[15 - L1 SPICE simulation for lower nodes](#15---l1-spice-simulation-for-lower-nodes)
+[16 - L2 Drain current vs gate voltage for long and short channel device](#16---l2-drain-current-vs-gate-voltage-for-long-and-short-channel-device)
+[17 - L3 Velocity saturation at lower and higher electric fields](#17---l3-velocity-saturation-at-lower-and-higher-electric-fields)
+[18 - L4 Velocity saturation drain current model](#18---l4-velocity-saturation-drain-current-model)
+[19 - L5 Labs Sky130 Id-Vgs](#19---l5-labs-sky130-id-vgs)
+[20 - L6 Labs Sky130 Vt](#20---l6-labs-sky130-vt)
+
+[CMOS voltage transfer characteristics (VTC)](#cmos-voltage-transfer-characteristics-(vtc))
+
+[21 - L1 MOSFET as a switch](#21---l1-mosfet-as-a-switch)
+[22 - L2 Introduction to standard MOS voltage current parameters](#22---l2-introduction-to-standard-mos-voltage-current-parameters)
+[23 - L3 PMOS/NMOS drain current vs drain voltage](#23---l3-pmos/nmos-drain-current-vs-drain-voltage)
+[24 - L4 Step1- Convert PMOS gate-source-voltage to Vin](#24---l4-step1--convert-pmos-gate-source-voltage-to-vin)
+[25 - L5 Step2 & Step3- Convert PMOS and NMOS drain-source-voltage to Vout](#25---l5-step2-&-step3--convert-pmos-and-nmos-drain-source-voltage-to-vout)
+[26 - L6 Step4- Merge PMOS-NMOS load curves and plot VTC](#26---l6-step4--merge-pmos-nmos-load-curves-and-plot-vtc)
+
+[NgspiceSky130-Day3-CMOS switching threshold and dynamic simulations](#ngspicesky130-day3-cmos-switching-threshold-and-dynamic-simulations)
+
+[Voltage transfer characteristics-SPICE simulations](#voltage-transfer-characteristics-spice-simulations)
+
+[27 - L1 SPICE deck creation for CMOS inverter](#27---l1-spice-deck-creation-for-cmos-inverter)
+[28 - L2 SPICE simulation for CMOS inverter](#28---l2-spice-simulation-for-cmos-inverter)
+[29 - L3 Labs Sky130 SPICE simulation for CMOS](#29---l3-labs-sky130-spice-simulation-for-cmos)
+
+[Static behaviour evaluation-CMOS inverter robustness-Switching Threshold](#static-behaviour-evaluation-cmos-inverter-robustness-switching-threshold)
+
+[30 - L1 Switching Threshold, Vm](#30---l1-switching-threshold,-vm)
+[31 - L2 Analytical expression of Vm as a function of (W/L)n and (W/L)p](#31---l2-analytical-expression-of-vm-as-a-function-of-(w/l)n-and-(w/l)p)
+[32 - L3 Analytical expression of (W/L)n and (W/L)p as a function of Vm](#32---l3-analytical-expression-of-(w/l)n-and-(w/l)p-as-a-function-of-vm)
+[33 - L4 Static and Dynamic simulation of CMOS inverter](#33---l4-static-and-dynamic-simulation-of-cmos-inverter)
+[34 - L5 Static and Dynamic simulation of CMOS inverter with increased PMOS width](#34---l5-static-and-dynamic-simulation-of-cmos-inverter-with-increased-pmos-width)
+[35 - L6 Applications of CMOS inverter in clock network and STA](#35---l6-applications-of-cmos-inverter-in-clock-network-and-sta)
+
+[NgspiceSky130-Day4-CMOS Noise Margin robustness evaluation](#ngspicesky130-day4-cmos-noise-margin-robustness-evaluation)
+
+[Static behaviour evaluation-CMOS inverter robustness-Noise Margin](#static-behaviour-evaluation-cmos-inverter-robustness-noise-margin)
+
+[36 - L1 Introduction to Noise Margin](#36---l1-introduction-to-noise-margin)
+[37 - L2 Noise Margin voltage paramters](#37--l2-noise-margin-voltage-paramters)
+[38 - L3 Noise margin equation and summary](#38---l3-noise-margin-equation-and-summary)
+[39 - L4 Noise margin variation with respect to PMOS width](#39---l4-noise-margin-variation-with-respect-to-pmos-width)
+[40 - L5 Sky130 Noise margin labs](#40---l5-sky130-noise-margin-labs)
+
+[NgspiceSky130-Day5-CMOS power supply and device variation robustness evaluation](#ngspicesky130-day5-cmos-power-supply-and-device-variation-robustness-evaluation)
+
+[Static behaviour evaluation-CMOS inverter robustness-Power supply variation](#static-behaviour-evaluation-cmos-inverter-robustness-power-supply-variation)
+
+[41 - L1 Smart SPICE simulations for power supply variations](#41---l1-smart-spice-simulations-for-power-supply-variations)
+[42 - L2 Advantages and disadvantages using low supply voltage](#42---l2-advantages-and-disadvantages-using-low-supply-voltage)
+[43 - L3 Sky130 Supply variation Labs](#43---l3-sky130-supply-variation-labs)
+
+[Static behaviour evaluation-CMOS inverter robustness-Device variation](#static-behaviour-evaluation-cmos-inverter-robustness-device-variation)
+
+[44 - L1 Sources of variation - Etching process](#44---l1-sources-of-variation---etching-process)
+[45 - L2 Sources of variation - Oxide thickness](#45---l2-sources-of-variation---oxide-thickness)
+[46 - L3 Smart SPICE simulation for device variations](#46---l3-smart-spice-simulation-for-device-variations)
+[47 - L4 Conclusion](#47---l4-conclusion)
+[48 - L5 Sky130 device variations labs](#48---l5-sky130-device-variations-labs)
+
 
 
 
