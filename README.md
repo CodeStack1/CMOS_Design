@@ -3813,7 +3813,7 @@ Only PMOS width changed.
 
 # Static behaviour evaluation-CMOS inverter robustness-Switching Threshold
 
-# 30 - L1 Switching Threshold, Vm
+# L1 Switching Threshold, Vm
 
 ## Comparison of Waveforms
 
