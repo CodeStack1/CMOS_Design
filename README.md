@@ -46,7 +46,7 @@
   - [Static behaviour evaluation-CMOS inverter robustness-Switching Threshold](#static-behaviour-evaluation-cmos-inverter-robustness-switching-threshold)
     - [L1 Switching Threshold, Vm](#l1-switching-threshold-vm)
     - [L2 Analytical expression of Vm as a function of (W/L)p and (W/L)n](#l2-analytical-expression-of-vm-as-a-function-of-wlp-and-wln)
-    - [L3 Analytical expression of (W/L)p and (W/L)n as a function of Vm](#l3-analytical-expression-of-w-l-n-and-w-l-p-as-a-function-of-vm)
+    - [L3 Analytical expression of (W/L)p and (W/L)n as a function of Vm](#l3-analytical-expression-of-wlp-and-wln-as-a-function-of-vm)
     - [L4 Static and Dynamic simulation of CMOS inverter](#l4-static-and-dynamic-simulation-of-cmos-inverter)
     - [L5 Static and Dynamic simulation of CMOS inverter with increased PMOS width](#l5-static-and-dynamic-simulation-of-cmos-inverter-with-increased-pmos-width)
     - [L6 Applications of CMOS inverter in clock network and STA](#l6-applications-of-cmos-inverter-in-clock-network-and-sta)
@@ -5687,7 +5687,7 @@ These curves show inverter response under extreme width variation.
 
 ---
 
-# L4 Conclusion – CMOS Inverter Robustness
+# L4 Conclusion
 
 ## Switching Threshold Analysis
 
