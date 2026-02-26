@@ -33,8 +33,8 @@
   - [CMOS voltage transfer characteristics VTC](#cmos-voltage-transfer-characteristics-vtc)
     - [L1 MOSFET as a switch](#l1-mosfet-as-a-switch)
     - [L2 Introduction to standard MOS voltage current parameters](#l2-introduction-to-standard-mos-voltage-current-parameters)
-    - [L3 PMOS / NMOS Drain Current vs Drain Voltage](#l3-pmos-nmos-drain-current-vs-drain-voltage)
-    - [L4 Convert PMOS gate-source-voltage to Vin](#l4-convert-pmos-gate-source-voltage-to-vin)
+    - [L3 PMOS / NMOS Drain Current vs Drain Voltage](#l3-pmos--nmos-drain-current-vs-drain-voltage)
+    - [L4 Step 1 – Convert PMOS Gate-Source Voltage to VIN](#l4-step-1--convert-pmos-gate--source-voltage-to-vin)
     - [L5 Convert PMOS and NMOS drain-source-voltage to Vout](#l5-convert-pmos-and-nmos-drain-source-voltage-to-vout)
     - [L6 Merge PMOS-NMOS load curves and plot VTC](#l6-merge-pmos-nmos-load-curves-and-plot-vtc)
 
@@ -3152,7 +3152,7 @@ Current itself is not negative physically — sign only represents direction ref
 
 ---
 
-# 24 - L4 Step 1 – Convert PMOS Gate-Source Voltage to VIN
+# L4 Step 1 – Convert PMOS Gate-Source Voltage to VIN
 
 ## CMOS Inverter Reference
 
