@@ -44,7 +44,7 @@
     - [L2 SPICE simulation for CMOS inverter](#l2-spice-simulation-for-cmos-inverter)
     - [L3 Labs Sky130 SPICE simulation for CMOS](#l3-labs-sky130-spice-simulation-for-cmos)
   - [Static behaviour evaluation-CMOS inverter robustness-Switching Threshold](#static-behaviour-evaluation-cmos-inverter-robustness-switching-threshold)
-    - [L1 Switching Threshold Vm](#l1-switching-threshold-vm)
+    - [L1 Switching Threshold, Vm](#l1-switching-threshold,-vm)
     - [L2 Analytical expression of Vm as a function of W L n and W L p](#l2-analytical-expression-of-vm-as-a-function-of-w-l-n-and-w-l-p)
     - [L3 Analytical expression of W L n and W L p as a function of Vm](#l3-analytical-expression-of-w-l-n-and-w-l-p-as-a-function-of-vm)
     - [L4 Static and Dynamic simulation of CMOS inverter](#l4-static-and-dynamic-simulation-of-cmos-inverter)
@@ -398,7 +398,7 @@ The Fermi potential (ΦF) appears in the threshold voltage equation.
 
 # NMOS resistive region and Saturation region of operation
 
-# 4 - L1 Resistive region of operation with small drain-source voltage
+# L1 Resistive region of operation with small drain-source voltage
 
 ## Three Modes of Operation
 
@@ -549,7 +549,7 @@ The derivation in the resistive region will continue in the next discussion.
 
 ---
 
-# 5 - L2 Drift Current Theory
+# L2 Drift Current Theory
 
 ## Definition of V(x) Along the Channel
 
@@ -750,7 +750,7 @@ To derive the drain current equation:
 
 ---
 
-# 6 - L3 Drain current model for linear region of operation
+# L3 Drain current model for linear region of operation
 
 ## Objective of Derivation
 
@@ -957,7 +957,7 @@ I<sub>D</sub> = k<sub>n</sub> (V<sub>GS</sub> − V<sub>T</sub>) V<sub>DS</sub>
 
 ---
 
-# 8 - L5 Pinch-Off Region Condition
+# L5 Pinch-Off Region Condition
 
 ## Sweeping VDS
 
@@ -1116,7 +1116,7 @@ From this point onward:
 
 ---
 
-# 9 - L6 Drain current model for saturation region of operation
+# L6 Drain current model for saturation region of operation
 
 ## When VDS Increases Beyond Limit
 
@@ -1268,7 +1268,7 @@ There exists a channel length modulation factor that can be added to the equatio
 
 # Introduction to SPICE
 
-# 10 - L1 Basic SPICE Setup
+# L1 Basic SPICE Setup
 
 ## Feeding Models to SPICE Engine
 
@@ -1601,7 +1601,7 @@ VIN in 0 2.5
 ---
 
 
-# 12 - L3 Define Technology Parameters
+# L3 Define Technology Parameters
 
 ## Model Definition for NMOS
 
@@ -1796,7 +1796,7 @@ This replaces manual hand calculation.
 ---
 
 
-# 13 - L4 First SPICE simulation
+# L4 First SPICE simulation
 
 ## Clone Repository
 
@@ -1884,7 +1884,7 @@ plot -i(VDS)
 
 ---
 
-# 14 - L5 SPICE Lab with sky130 models
+# L5 SPICE Lab with sky130 models
 
 ## Clone and Navigate
 
@@ -1945,7 +1945,7 @@ plot -VDD#branch
 
 # SPICE simulation for lower nodes and velocity saturation effect
 
-# 15 - L1 SPICE simulation for lower nodes
+# L1 SPICE simulation for lower nodes
 
 ## SPICE Simulation Results
 
@@ -2179,7 +2179,7 @@ Short-channel effects alter device behavior.
 ---
 
 
-# 16 - L2 Drain Current vs Gate Voltage – Long and Short Channel Device
+# L2 Drain current vs gate voltage for long and short channel device
 
 ## Previous Simulation Context
 
@@ -2309,7 +2309,7 @@ Further analysis continues next.
 
 ---
 
-# 17 - L3 Velocity Saturation at Lower and Higher Electric Fields
+# L3 Velocity Saturation at Lower and Higher Electric Fields
 
 ## ID vs VGS Simulation Results
 
@@ -2510,7 +2510,7 @@ This single model accounts for:
 
 ---
 
-# 18 - L4 Velocity Saturation Drain Current Model
+# L4 Velocity Saturation Drain Current Model
 
 ## Unified Drain Current Model
 
@@ -2699,7 +2699,7 @@ This deviation occurs due to **velocity saturation**.
 
 ---
 
-# 19 - L5 Labs Sky130 Id-Vgs
+# L5 Labs Sky130 Id-Vgs
 
 ## Device Parameters
 
@@ -2936,7 +2936,7 @@ This forms the basis for CMOS voltage transfer characteristics.
 
 ---
 
-# 22 - L2 Introduction to Standard MOS Voltage–Current Parameters
+# L2 Introduction to Standard MOS Voltage–Current Parameters
 
 ## Objective
 
@@ -3045,7 +3045,7 @@ These naming conventions are required to derive:
 
 ---
 
-## 23 - L3 PMOS / NMOS Drain Current vs Drain Voltage
+## L3 PMOS / NMOS Drain Current vs Drain Voltage
 
 ### CMOS Inverter Reference
 
@@ -3387,7 +3387,7 @@ Now we have:
 
 ---
 
-# 26 - L6 Step 4 – Merge PMOS & NMOS Load Curves and Plot VTC
+# L6 Step 4 – Merge PMOS & NMOS Load Curves and Plot VTC
 
 ## Objective
 
@@ -3564,7 +3564,7 @@ This gives the **CMOS Voltage Transfer Characteristic**.
 
 # Voltage transfer characteristics-SPICE simulations
 
-# 27 - L1 SPICE Deck Creation for CMOS Inverter
+# L1 SPICE Deck Creation for CMOS Inverter
 
 ## What is a SPICE Deck?
 
@@ -3695,7 +3695,7 @@ This line completely defines the PMOS transistor.
 
 ---
 
-# 28 - L2 SPICE Simulation for CMOS Inverter
+# L2 SPICE Simulation for CMOS Inverter
 
 ## Component Values
 
@@ -3813,7 +3813,7 @@ Only PMOS width changed.
 
 # Static behaviour evaluation-CMOS inverter robustness-Switching Threshold
 
-# 30 - L1 Switching Threshold (Vm)
+# 30 - L1 Switching Threshold, Vm
 
 ## Comparison of Waveforms
 
@@ -3960,7 +3960,7 @@ Idsp + Idsn = 0
 
 ---
 
-# 32 - L3 Analytical Expression of (W/L)p and (W/L)n as a Function of Vm
+# L3 Analytical Expression of (W/L)p and (W/L)n as a Function of Vm
 
 ## Starting Point
 
@@ -4033,7 +4033,7 @@ Vm ≈ 0.98 V.
 
 ---
 
-# 33 - L4 Static and Dynamic Simulation of CMOS Inverter
+# L4 Static and Dynamic Simulation of CMOS Inverter
 
 ## Objective
 
@@ -4121,7 +4121,7 @@ t_fall = t₂ − t₁
 
 ---
 
-# 34 - L5 Static and Dynamic Simulation of CMOS Inverter with Increased PMOS Width
+# L5 Static and Dynamic Simulation of CMOS Inverter with Increased PMOS Width
 
 ## Case 1: PMOS = NMOS
 
@@ -4227,7 +4227,7 @@ Results:
 
 ---
 
-# 35 - L6 Applications of CMOS Inverter in Clock Network and STA
+# L6 Applications of CMOS Inverter in Clock Network and STA
 
 ## Review of Experimental Observations
 
@@ -4345,7 +4345,7 @@ Tradeoff:
 
 # Static behaviour evaluation-CMOS inverter robustness-Noise Margin
 
-# 36 - L1 Introduction to Noise Margin
+# L1 Introduction to Noise Margin
 
 ## Objective
 
@@ -4495,7 +4495,7 @@ Output remains LOW.
 
 ---
 
-# 37 - L2 Noise Margin Voltage Parameters
+# L2 Noise Margin Voltage Parameters
 
 ## Meaningful Inference from VTC
 
@@ -4647,7 +4647,7 @@ Slope in transition region ≈ −1.
 
 ---
 
-# 38 - L3 Noise Margin Equation and Summary
+# L3 Noise Margin Equation and Summary
 
 ## Plotting Voltage Levels on Single Scale
 
@@ -4792,7 +4792,7 @@ This is harmful and must be corrected.
 
 ---
 
-# 39 - L4 Noise Margin Variation with Respect to PMOS Width
+# L4 Noise Margin Variation with Respect to PMOS Width
 
 ## Objective
 
@@ -5146,7 +5146,7 @@ Title: Inverter DC characteristics as a function of supply voltage
 
 ---
 
-## 42 - L2 Advantages and Disadvantages Using Low Supply Voltage
+## L2 Advantages and Disadvantages Using Low Supply Voltage
 
 ### Analysis of Supply Scaling Curves
 
@@ -5275,7 +5275,7 @@ This is a significant increase in delay compared to 2.5 V.
 
 # Static behaviour evaluation-CMOS inverter robustness-Device variation
 
-# 44 - L1 Sources of Variation – Etching Process
+# L1 Sources of Variation – Etching Process
 
 ## Introduction
 
@@ -5459,7 +5459,7 @@ Etching variation → W/L variation → Drain current variation → Delay variat
 
 ---
 
-# 45 - L2 Sources of Variation – Oxide Thickness
+# L2 Sources of Variation – Oxide Thickness
 
 ## Introduction
 
@@ -5567,7 +5567,7 @@ More oxide thickness variation → More drain current variation.
 
 ---
 
-# 46 - L3 Smart SPICE Simulation for Device Variations
+# L3 Smart SPICE Simulation for Device Variations
 
 ## Objective
 
@@ -5687,7 +5687,7 @@ These curves show inverter response under extreme width variation.
 
 ---
 
-# 47 - L4 Conclusion – CMOS Inverter Robustness
+# L4 Conclusion – CMOS Inverter Robustness
 
 ## Switching Threshold Analysis
 
@@ -5819,7 +5819,7 @@ It always behaves as:
 
 ---
 
-# 48 - L5 Sky130 device variations labs
+# L5 Sky130 device variations labs
 
 <p align="center">
 <img width="1148" height="560" alt="image" src="https://github.com/user-attachments/assets/f1674a69-3d8a-479b-a7d1-28987fa35143" />
