@@ -3508,6 +3508,15 @@ This gives the **CMOS Voltage Transfer Characteristic**.
 
 ---
 
+# Day 3:
+
+---
+
+# L1: Introduction to Noise Margin
+
+
+---
+
 # Day 4:
 
 ---
@@ -4860,3 +4869,134 @@ These curves show inverter response under extreme width variation.
 
 ---
 
+# L4 Conclusion – CMOS Inverter Robustness
+
+## Switching Threshold Analysis
+
+To determine switching threshold:
+
+<p align="center">
+<img width="828" height="603" alt="image" src="https://github.com/user-attachments/assets/59263d4f-1825-4784-9c99-ec52d9469364" />
+</p>
+
+From the curves:
+
+- One extreme case gives switching threshold ≈ 0.2 V
+- Other extreme case gives switching threshold ≈ 1.4 V
+
+Total variation ≈ 1.2 V
+
+### Interpretation
+
+<p align="center">
+<img width="1082" height="600" alt="image" src="https://github.com/user-attachments/assets/9b87dfe6-60e3-4d52-bc0b-f1097e57f7ea" />
+</p>
+
+Even though switching threshold shifts:
+
+- The inverter still behaves as an inverter.
+- It does not convert into another logic gate.
+- Operation remains intact.
+
+If inverter was designed for:
+
+- Switching threshold ≈ 0.4 V  
+or
+- Switching threshold ≈ 1.4 V  
+
+Even with device variation:
+
+- The shift remains within tested range.
+- Inverter behavior is preserved.
+
+The shift is minimal compared to supply voltage.
+
+
+## Noise Margin Analysis
+
+<p align="center"> <img width="1043" height="602" alt="image" src="https://github.com/user-attachments/assets/be384109-5ef5-4cd6-b46d-764a281c8852" />
+ </p>
+
+### High Noise Margin
+
+From curve:
+
+- VOH ≈ 2.5 V
+- VIH ≈ 2.1 V
+
+Noise Margin High:
+
+\[
+NMH = 2.5 - 2.1 = 0.4 V
+\]
+
+≈ 400 mV
+
+This is large enough to tolerate:
+
+- Supply noise
+- Voltage ripple
+
+### Low Noise Margin
+
+From curve:
+
+- VOL ≈ 0 V
+- VIL ≈ 0.3 V
+
+Noise Margin Low:
+
+\[
+NML ≈ 0.3 V
+\]
+
+≈ 300 mV
+
+This is sufficient to tolerate:
+
+- Ground bounce
+- Voltage droop
+- Low-level noise
+
+## Behavior Under Extreme Device Variation
+
+Even when sweeping:
+
+- Strong PMOS → Weak PMOS
+- Weak NMOS → Strong NMOS
+
+Observations:
+
+- Noise margin variation is small.
+- High margin varies ≈ 300 mV.
+- Low margin varies ≈ 100 mV.
+- Still within acceptable limits.
+
+If noise margin had shifted into the high-gain undefined region:
+
+- Inverter could enter metastable region.
+- Logic state could become undefined.
+
+However, this does not happen. Noise margin stays outside undefined region.
+Thus, inverter remains stable.
+
+## Final Observation
+
+<p align="center"> <img width="555" height="202" alt="image" src="https://github.com/user-attachments/assets/a8d66287-49b3-449d-a0f5-2bcf16a6f941" />
+</p>
+
+Even with:
+
+- Supply voltage variation
+- Device width variation
+- Extreme corner testing
+
+CMOS inverter operation remains intact.
+
+It always behaves as:
+
+- Logic inverter
+- Not another logic gate
+- Not an undefined element
+
+This demonstrates CMOS inverter robustness.
