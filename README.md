@@ -4067,6 +4067,111 @@ t_fall = t₂ − t₁
 
 ---
 
+# L5 Static and Dynamic Simulation of CMOS Inverter with Increased PMOS Width
+
+## Case 1: PMOS = NMOS
+
+<p align="center"> <img width="1218" height="527" alt="image" src="https://github.com/user-attachments/assets/ed219d6c-9096-4e24-9c2b-a20997fb9778" />
+ </p>
+
+- Wp = Wn = 0.375 µm  
+- Lp = Ln = 0.25 µm  
+
+Results:
+
+- Rise delay = 148 ps  
+- Fall delay = 71 ps  
+- Vm ≈ 0.99 V  
+
+## Case 2: PMOS Width = 2 × NMOS
+
+<p align="center">  <img width="1232" height="536" alt="image" src="https://github.com/user-attachments/assets/b37b83f3-4764-4d5b-a265-11dafcb98108" />
+</p>
+
+- Wp = 0.375 × 2 = 0.75 µm  
+- Lp = Ln = 0.25 µm  
+
+### DC Analysis
+
+<p align="center"> <img width="757" height="585" alt="image" src="https://github.com/user-attachments/assets/651725c4-d595-4e26-8dc0-8373603cbb92" />
+</p>
+
+- Plot Vout vs Vin  
+- Transfer curve shifts to the right  
+- Switching threshold moves right  
+
+Vm ≈ 1.2 V  
+
+Reason:  
+PMOS becomes stronger than NMOS, increasing charging capability of load capacitor.
+
+### Transient Analysis
+
+Rise delay:
+
+<p align="center"> <img width="765" height="585" alt="image" src="https://github.com/user-attachments/assets/23edbdcc-e537-4ab8-955c-60f5c5656ae0" />
+ </p>
+
+<p align="center"> <img width="765" height="582" alt="image" src="https://github.com/user-attachments/assets/e07af9cb-ae89-41a0-99bd-d9f127aeb50a" />
+ </p>
+
+- t₁ = 1.01496 ns  
+- t₂ = 1.09496 ns  
+- Rise delay ≈ 0.08 ns ≈ 80 ps  
+
+Fall delay:
+
+<p align="center"> <img width="767" height="588" alt="image" src="https://github.com/user-attachments/assets/1c99f8a4-0822-4392-8939-70e00e4ab482" />
+ </p>
+
+<p align="center"> <img width="757" height="582" alt="image" src="https://github.com/user-attachments/assets/7ece7aa9-9686-432b-85a7-fc82ac0104d6" />
+ </p>
+
+- t₁ = 2.00487 ns  
+- t₂ = 2.08122 ns  
+- Fall delay ≈ 0.076 ns ≈ 76 ps  
+
+## Case 3: PMOS Width = 3 × NMOS
+
+<p align="center"> <img width="1238" height="542" alt="image" src="https://github.com/user-attachments/assets/45afad03-d6db-49fe-8705-bf2411d87a86" />
+ </p>
+
+Results:
+
+- Rise delay ≈ 57 ps  
+- Fall delay ≈ 80 ps  
+- Vm ≈ 1.25 V (near center)
+
+## Case 4: PMOS Width = 4 × NMOS
+
+<p align="center"> <img width="1232" height="540" alt="image" src="https://github.com/user-attachments/assets/8e9ce5df-a5c2-46fc-b791-ce94a3b03693" />
+</p>
+
+Results:
+
+- Rise delay ≈ 45 ps  
+- Fall delay ≈ 84 ps  
+- Vm ≈ 1.35 V  
+
+Switching threshold shifts further right.
+
+## Case 5: PMOS Width = 5 × NMOS
+
+<p align="center"> <img width="1218" height="534" alt="image" src="https://github.com/user-attachments/assets/0fe8c610-414f-454e-869f-37742d2f969a" />
+</p>
+
+Results:
+
+- Rise delay ≈ 37 ps  
+- Fall delay ≈ 88 ps  
+- Vm ≈ 1.4–1.44 V  
+
+## Summary Table
+
+<p align="center"> <img width="710" height="235" alt="image" src="https://github.com/user-attachments/assets/92ff7d5b-495b-4ea2-8662-5fbef9bbcbdf" />
+</p>
+
+---
 
 
 
