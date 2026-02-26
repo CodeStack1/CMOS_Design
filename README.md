@@ -3902,8 +3902,171 @@ Idsp + Idsn = 0
 <p align="center"> <img width="228" height="117" alt="image" src="https://github.com/user-attachments/assets/7e318695-00c5-4aee-b892-5f8f1289debe" />
 </p>
 
+---
+
+# L3 Analytical Expression of (W/L)p and (W/L)n as a Function of Vm
+
+## Starting Point
+
+Previously, Vm was derived as a function of:
+
+- (W/L)p  
+- (W/L)n  
+
+Now we reverse the process:
+
+Given a desired Vm, determine required (W/L)p and (W/L)n.
+
+## Current Equality at Switching Threshold
+
+At Vm:
+
+Idsn = −Idsp  
+
+Using saturation-region current equations:
+
+<p align="center">
+<img width="937" height="153" alt="image" src="https://github.com/user-attachments/assets/305f344e-f1a3-41cb-ad9d-d0b4e0a830f4" /> </p>
+
+Rearranging signs:
+
+<p align="center">
+<img width="850" height="67" alt="image" src="https://github.com/user-attachments/assets/b008af1b-f9ab-4dc5-bc72-16440ec65768" /> </p>
+
+
+## Grouping Terms
+
+<p align="center">
+<img width="570" height="98" alt="image" src="https://github.com/user-attachments/assets/96840736-5ebc-4dee-8ce6-233bd467799a" />
+ </p>
+
+## Expanding Gain Factors
+
+<p align="center">
+<img width="557" height="98" alt="image" src="https://github.com/user-attachments/assets/5fef3cb9-d3ca-4356-b6e8-0bd92e57e99c" /> </p>
+
+
+## Final Result
+
+<p align="center">
+<img width="556" height="113" alt="image" src="https://github.com/user-attachments/assets/817a7c37-2c53-45de-a1e3-78311b578e95" />
+</p>
+
+All terms except Vm are process constants from the model file.
+
+Thus:
+
+- If Vm is specified, required transistor sizing can be calculated.
+- Larger desired Vm → larger (W/L)p relative to (W/L)n.
+- Smaller Vm → stronger NMOS relative to PMOS.
+
+## Example 
+
+If:
+
+(W/L)p = 3.75  
+(W/L)n = 1.5  
+
+Then:
+
+(W/L)p / (W/L)n = 2.5  
+
+This corresponds to Vm ≈ 1.2 V.
+
+If both ratios are equal:
+
+Vm ≈ 0.98 V.
 
 ---
+
+# L4 Static and Dynamic Simulation of CMOS Inverter
+
+## Objective
+
+<p align="center"> <img width="1241" height="537" alt="image" src="https://github.com/user-attachments/assets/7fcaf76c-7645-462b-8bca-e17a01cfe599" />
+ </p>
+
+Modify PMOS size in integer multiples of NMOS and:
+
+- Observe variation in switching threshold (Vm)
+- Measure rise delay and fall delay
+- Study robustness of CMOS inverter
+
+## Static Simulation (DC Analysis)
+
+### Circuit Parameters
+
+- Wn = 0.375 µm  
+- Wp = 0.375 µm  
+- Ln = Lp = 0.25 µm  
+- (W/L)n = (W/L)p = 1.5  
+
+## Dynamic Simulation (Transient Analysis)
+
+To evaluate delay:
+
+- Replace DC input with pulse input
+- Use transient (`.tran`) analysis
+
+### Pulse Definition
+
+- Initial value = 0 V
+- Final value = 2.5 V
+- Time delay = 0
+- Rise time = 10 ps
+- Fall time = 10 ps
+- Pulse width = 1 ns
+- Period = 2 ns
+- 50% duty cycle
+
+Pulse starts at time zero.
+
+## Rise Delay Calculation
+
+<p align="center"> <img width="770" height="592" alt="image" src="https://github.com/user-attachments/assets/6d553686-9c76-4dfb-a4fb-2acb6c8850b1" />
+ </p>
+
+<p align="center"> <img width="756" height="583" alt="image" src="https://github.com/user-attachments/assets/bd81fa04-4782-4909-817f-1a22599458ec" />
+ </p>
+
+From waveform:
+
+First point (input 50% crossing):
+t₁ = 1.01446 ns  
+
+Second point (output 50% crossing):
+t₂ = 1.16277 ns  
+
+Rise delay:
+
+t_rise = t₂ − t₁  
+= 1.16277 − 1.01446  
+≈ 0.148 ns  
+≈ 148 ps  
+
+## Fall Delay Calculation
+
+<p align="center"> <img width="763" height="582" alt="image" src="https://github.com/user-attachments/assets/ccde050c-9613-4b8a-90bc-b112bafd4533" />
+ </p>
+
+<p align="center"> <img width="771" height="576" alt="image" src="https://github.com/user-attachments/assets/5adeacb8-a162-4ad3-b7d1-468d632e3c85" />
+ </p>
+
+First point:
+t₁ = 2.00486 ns  
+
+Second point:
+t₂ = 2.07653 ns  
+
+Fall delay:
+
+t_fall = t₂ − t₁  
+= 2.07653 − 2.00486  
+≈ 0.071 ns  
+≈ 71 ps  
+
+---
+
 
 
 
