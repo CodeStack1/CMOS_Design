@@ -2,7 +2,7 @@
 
 ## 📚 Table Of Contents
 
-- [NgspiceSky130-Day1-Basics of NMOS Drain Current Id vs Drain-to-source Voltage Vds](#ngspicesky130-day1-basics-of-nmos-drain-current-id-vs-drain-to-source-voltage-vds)
+ ### [NgspiceSky130-Day1-Basics of NMOS Drain Current Id vs Drain-to-source Voltage Vds](#ngspicesky130-day1-basics-of-nmos-drain-current-id-vs-drain-to-source-voltage-vds)
   - [Introduction to Circuit Design and Spice Simulations](#introduction-to-circuit-design-and-spice-simulations)
     - [L1 Why do we need SPICE simulations](#l1-why-do-we-need-spice-simulations)
     - [L2 Introduction to basic element in circuit design NMOS](#l2-introduction-to-basic-element-in-circuit-design-nmos)
@@ -22,7 +22,7 @@
     - [L4 First SPICE simulation](#l4-first-spice-simulation)
     - [L5 SPICE lab with Sky130 models](#l5-spice-lab-with-sky130-models)
 
-- [NgspiceSky130-Day2-Velocity saturation and basics of CMOS inverter VTC](#ngspicesky130-day2-velocity-saturation-and-basics-of-cmos-inverter-vtc)
+ ### [NgspiceSky130-Day2-Velocity saturation and basics of CMOS inverter VTC](#ngspicesky130-day2-velocity-saturation-and-basics-of-cmos-inverter-vtc)
   - [SPICE simulation for lower nodes and velocity saturation effect](#spice-simulation-for-lower-nodes-and-velocity-saturation-effect)
     - [L1 SPICE simulation for lower nodes](#l1-spice-simulation-for-lower-nodes)
     - [L2 Drain current vs gate voltage for long and short channel device](#l2-drain-current-vs-gate-voltage-for-long-and-short-channel-device)
@@ -38,7 +38,7 @@
     - [L5 Convert PMOS and NMOS drain-source-voltage to Vout](#l5-convert-pmos-and-nmos-drain-source-voltage-to-vout)
     - [L6 Merge PMOS-NMOS load curves and plot VTC](#l6-merge-pmos-nmos-load-curves-and-plot-vtc)
 
-- [NgspiceSky130-Day3-CMOS switching threshold and dynamic simulations](#ngspicesky130-day3-cmos-switching-threshold-and-dynamic-simulations)
+ ### [NgspiceSky130-Day3-CMOS switching threshold and dynamic simulations](#ngspicesky130-day3-cmos-switching-threshold-and-dynamic-simulations)
   - [Voltage transfer characteristics-SPICE simulations](#voltage-transfer-characteristics-spice-simulations)
     - [L1 SPICE deck creation for CMOS inverter](#l1-spice-deck-creation-for-cmos-inverter)
     - [L2 SPICE simulation for CMOS inverter](#l2-spice-simulation-for-cmos-inverter)
@@ -51,7 +51,7 @@
     - [L5 Static and Dynamic simulation of CMOS inverter with increased PMOS width](#l5-static-and-dynamic-simulation-of-cmos-inverter-with-increased-pmos-width)
     - [L6 Applications of CMOS inverter in clock network and STA](#l6-applications-of-cmos-inverter-in-clock-network-and-sta)
 
-- [NgspiceSky130-Day4-CMOS Noise Margin robustness evaluation](#ngspicesky130-day4-cmos-noise-margin-robustness-evaluation)
+ ### [NgspiceSky130-Day4-CMOS Noise Margin robustness evaluation](#ngspicesky130-day4-cmos-noise-margin-robustness-evaluation)
   - [Static behaviour evaluation-CMOS inverter robustness-Noise Margin](#static-behaviour-evaluation-cmos-inverter-robustness-noise-margin)
     - [L1 Introduction to Noise Margin](#l1-introduction-to-noise-margin)
     - [L2 Noise Margin voltage parameters](#l2-noise-margin-voltage-parameters)
