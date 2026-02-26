@@ -33,7 +33,7 @@
   - [CMOS voltage transfer characteristics VTC](#cmos-voltage-transfer-characteristics-vtc)
     - [L1 MOSFET as a switch](#l1-mosfet-as-a-switch)
     - [L2 Introduction to standard MOS voltage current parameters](#l2-introduction-to-standard-mos-voltage-current-parameters)
-    - [L3 PMOS NMOS drain current vs drain voltage](#l3-pmos-nmos-drain-current-vs-drain-voltage)
+    - [L3 PMOS / NMOS Drain Current vs Drain Voltage](#l3-pmos-nmos-drain-current-vs-drain-voltage)
     - [L4 Convert PMOS gate-source-voltage to Vin](#l4-convert-pmos-gate-source-voltage-to-vin)
     - [L5 Convert PMOS and NMOS drain-source-voltage to Vout](#l5-convert-pmos-and-nmos-drain-source-voltage-to-vout)
     - [L6 Merge PMOS-NMOS load curves and plot VTC](#l6-merge-pmos-nmos-load-curves-and-plot-vtc)
@@ -61,12 +61,12 @@
 
 - [NgspiceSky130-Day5-CMOS power supply and device variation robustness evaluation](#ngspicesky130-day5-cmos-power-supply-and-device-variation-robustness-evaluation)
   - [Static behaviour evaluation-CMOS inverter robustness-Power supply variation](#static-behaviour-evaluation-cmos-inverter-robustness-power-supply-variation)
-    - [L1 Smart SPICE simulations for power supply variations](#l1-smart-spice-simulations-for-power-supply-variations)
+    - [L1 Smart SPICE Simulation for Power Supply Variations](#l1-smart-spice-simulation-for-power-supply-variations)
     - [L2 Advantages and disadvantages using low supply voltage](#l2-advantages-and-disadvantages-using-low-supply-voltage)
     - [L3 Sky130 Supply variation Labs](#l3-sky130-supply-variation-labs)
   - [Static behaviour evaluation-CMOS inverter robustness-Device variation](#static-behaviour-evaluation-cmos-inverter-robustness-device-variation)
-    - [L1 Sources of variation Etching process](#l1-sources-of-variation-etching-process)
-    - [L2 Sources of variation Oxide thickness](#l2-sources-of-variation-oxide-thickness)
+    - [L1 Sources of variation Etching process](#l1-sources-of-variation--etching-process)
+    - [L2 Sources of variation Oxide thickness](#l2-sources-of-variation--oxide-thickness)
     - [L3 Smart SPICE simulation for device variations](#l3-smart-spice-simulation-for-device-variations)
     - [L4 Conclusion](#l4-conclusion)
     - [L5 Sky130 device variations labs](#l5-sky130-device-variations-labs)
@@ -2770,7 +2770,7 @@ For **L = 0.15 µm**:
 
 # CMOS voltage transfer characteristics (VTC)
 
-# 21 - L1 MOSFET as a Switch
+# L1 MOSFET as a Switch
 
 ## MOSFET from a Switch Perspective
 
@@ -2936,7 +2936,7 @@ This forms the basis for CMOS voltage transfer characteristics.
 
 ---
 
-# L2 Introduction to Standard MOS Voltage–Current Parameters
+# L2 Introduction to standard MOS voltage current parameters
 
 ## Objective
 
@@ -5037,7 +5037,7 @@ NML = VIL − VOL
 
 # Static behaviour evaluation-CMOS inverter robustness-Power supply variation
 
-# 41 - L1 Smart SPICE Simulation for Power Supply Variations
+# L1 Smart SPICE Simulation for Power Supply Variations
 
 ## Power Supply Scaling Concept
 
