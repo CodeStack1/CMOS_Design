@@ -3915,7 +3915,7 @@ Devices are in saturation.
 
 ---
 
-# 31 - L2 Analytical Expression of Vm as a Function of (W/L)p and (W/L)n
+# L2 Analytical Expression of Vm as a Function of (W/L)p and (W/L)n
 
 ## Switching Threshold Condition
 
