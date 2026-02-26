@@ -3512,7 +3512,399 @@ This gives the **CMOS Voltage Transfer Characteristic**.
 
 ---
 
-# L1: Introduction to Noise Margin
+# L1 SPICE Deck Creation for CMOS Inverter
+
+## What is a SPICE Deck?
+
+SPICE Deck → Connectivity + Component Values + Nodes
+
+A SPICE deck (netlist) contains:
+
+- Component connectivity
+- Component values
+- Input definitions
+- Output nodes
+- Model references
+
+It completely defines the circuit for simulation.
+
+Previously, SPICE decks were created for a single NMOS.  
+
+## CMOS Inverter Circuit Description
+
+<p align="center">
+<img width="465" height="461" alt="image" src="https://github.com/user-attachments/assets/b9b24a20-d5ab-4632-91b3-7e36104d6637" />
+</p>
+
+### Transistor Symbols
+
+- PMOS symbol: Arrow pointing outward
+- NMOS symbol: Arrow pointing inward
+
+Each transistor has:
+
+- Drain
+- Gate
+- Source
+- Substrate terminal
+
+The substrate terminal must also be defined in the SPICE netlist because it affects threshold voltage.
+
+## Connectivity Description
+
+<p align="center">
+<img width="586" height="462" alt="image" src="https://github.com/user-attachments/assets/065d90e2-2749-4ec4-9656-8507455f387d" /> </p>
+
+- PMOS source → VDD
+- NMOS source → VSS
+- Gates of both → Input (Vin)
+- Drains connected together → Output (Vout)
+- Output connected to load capacitor
+- Other terminal of load capacitor → VSS
+
+## Component Values
+
+<p align="center"> <img width="556" height="442" alt="image" src="https://github.com/user-attachments/assets/836e6a86-4c41-41fe-9522-a646c336ed85" />
+</p>
+
+### Technology
+
+- Channel length = 0.25 µm (250 nm technology)
+
+### Transistor Dimensions
+
+Both transistors initially assumed equal:
+
+- W = 0.375 µm
+- L = 0.25 µm
+
+Although ideally:
+
+- PMOS should be 2× or 3× wider than NMOS
+
+For now, equal sizing is used to observe characteristics.
+
+### Supply and Input Voltage
+
+- VDD = 2.5 V
+- Vin = 2.5 V (maximum value during sweep)
+
+For 250 nm technology:
+
+- Supply voltage typically around 2.5 V
+
+## Identifying Nodes
+
+<p align="center"> <img width="721" height="552" alt="image" src="https://github.com/user-attachments/assets/661a1422-6a37-4101-b9d5-cb2793d95a14" />
+</p>
+
+Nodes are required to define components in SPICE.
+
+A node is:
+
+- A point between which no component exists
+- A unique electrical connection point
+
+### Assigned Node Names
+
+- Input node → `in`
+- Output node → `out`
+- Supply node → `VDD`
+- Ground node → `0` (VSS)
+
+## Writing the SPICE Deck
+
+<p align="center"> <img width="1220" height="472" alt="image" src="https://github.com/user-attachments/assets/7f57edfc-3f7d-41e5-9f7a-56c625efd74b" />
+</p>
+
+Lines beginning with `*` are comments.
+
+### PMOS Definition (M1)
+
+SPICE MOS syntax:
+
+Drain Gate Source Substrate
+
+```
+M1 out in VDD VDD PMOS W=0.375u L=0.25u
+```
+
+Explanation:
+
+- Drain → out
+- Gate → in
+- Source → VDD
+- Substrate → VDD
+- Type → PMOS
+- Width → 0.375 µm
+- Length → 0.25 µm
+
+This line completely defines the PMOS transistor.
+
+---
+
+# L2 SPICE Simulation for CMOS Inverter
+
+## Component Values
+
+<p align="center"> <img width="653" height="271" alt="image" src="https://github.com/user-attachments/assets/cbca37a9-32b0-4d29-a24d-2845884f8eac" />
+ </p>
+
+### Output Load Capacitor
+
+```
+Cload out 0 10f
+```
+
+- Between out and 0  
+- Value = 10 fF  
+
+### Supply Voltage
+
+```
+VDD VDD 0 2.5
+```
+
+- Between VDD and 0  
+- Value = 2.5 V  
+
+### Input Voltage
+
+```
+Vin in 0 2.5
+```
+
+- Between in and 0  
+- Value = 2.5 V
+
+## NMOS Description
+
+<p align="center"> <img width="568" height="493" alt="image" src="https://github.com/user-attachments/assets/043ee861-cdaa-487e-b2d2-548f8d9e99f0" />
+ </p>
+
+### NMOS (M2)
+
+```
+M2 out in 0 0 NMOS W=0.375u L=0.25u
+```
+
+- Drain → out  
+- Gate → in  
+- Source → 0  
+- Substrate → 0  
+- Type → NMOS  
+- W = 0.375 µm  
+- L = 0.25 µm  
+
+This completes transistor connectivity.
+
+## Model File Inclusion
+
+The model file contains complete technological parameters:
+
+- Threshold voltage
+- Oxide thickness
+- Mobility
+- Body effect coefficients
+
+Model file contains:
+
+```
+.model NMOS ...
+.model PMOS ...
+```
+
+Included using:
+
+```
+.include model_file.mod
+```
+
+## Simulation 
+
+### Case 1: Equal Width PMOS and NMOS
+
+<p align="center"> <img width="710" height="537" alt="image" src="https://github.com/user-attachments/assets/b265db13-35e8-4fe7-bacd-f7c146e2c035" />
+ </p>
+
+- Wn = 0.375 µm  
+- Wp = 0.375 µm  
+- Ln = Lp = 0.25 µm  
+
+
+### Case 2: PMOS Width = 2.5 × NMOS Width
+
+<p align="center"> <img width="767" height="585" alt="image" src="https://github.com/user-attachments/assets/82db499d-6195-45c6-a5ef-66934fe6a57e" />
+ </p>
+
+New PMOS width:
+
+\[
+0.375 \times 2.5 = 0.9375 \text{ µm}
+\]
+
+So:
+
+- Wn = 0.375 µm  
+- Wp = 0.9375 µm  
+- Ln = Lp = 0.25 µm  
+
+Only PMOS width changed.
+
+---
+
+# L3 Labs Sky130 SPICE simulation for CMOS
+
+---
+
+# L1 Switching Threshold (Vm)
+
+# Comparison of Waveforms
+
+<p align="center">
+<img width="1198" height="578" alt="image" src="https://github.com/user-attachments/assets/963357f1-bed3-4da7-8d91-343bc98f2ddc" />
+</p>
+
+Observation:
+
+- Shape of both curves is similar.
+- Switching point shifts.
+- Inverter behavior is preserved.
+
+This confirms CMOS inverter robustness.
+
+Whenever:
+
+- Vin = 0 → Vout = High  
+- Vin = High → Vout = Low  
+
+The inversion property remains intact across device sizes.
+
+# Switching Threshold (Vm)
+
+<p align="center"> </p>
+
+Switching threshold is defined as:
+
+Vin = Vout
+
+To find Vm:
+
+<p align="center">
+<img width="1195" height="490" alt="image" src="https://github.com/user-attachments/assets/0e440b67-9966-4486-8e82-a15bdcdf5630" />
+</p>
+
+## Switching Threshold – Case 1
+
+<p align="center"> <img width="1206" height="458" alt="image" src="https://github.com/user-attachments/assets/02446376-c6ed-45cd-9f21-983f1fdd4da0" />
+</p>
+
+From waveform:
+Vm ≈ 0.9 V
+
+More precisely:
+Vm ≈ 0.98 V
+
+This corresponds to equal sizing case.
+
+## Switching Threshold – Case 2
+
+<p align="center"> <img width="1188" height="455" alt="image" src="https://github.com/user-attachments/assets/88225961-82ba-4330-8703-e914cbaacf53" />
+ </p>
+
+From waveform:
+
+V_m ≈ 1.2 
+
+Switching point shifts toward center when PMOS is stronger.
+
+
+# Significance of Switching Region
+
+The switching region is critical because:
+
+- Vin = Vout
+- Both PMOS and NMOS operate in saturation
+- Both devices are turned ON
+
+In this region:
+
+- Direct current flows from VDD to VSS
+- Short-circuit current exists
+- Maximum current conduction occurs
+
+Outside this region:
+
+- One device OFF, one device ON
+- No direct current from supply to ground
+
+Thus, switching region is the highest current region.
+
+# Electrical Conditions at Vm
+
+<p align="center"> <img width="1051" height="462" alt="image" src="https://github.com/user-attachments/assets/d7cb89c6-147e-435d-91b7-534ccc2625af" />
+</p>
+  
+At switching threshold:
+
+IDSP = - IDSN
+
+Currents are equal in magnitude and opposite in direction.
+
+Also:
+
+VGS = VDS
+
+Devices are in saturation.
+
+---
+
+# L2 Analytical Expression of Vm as a Function of (W/L)p and (W/L)n
+
+## Switching Threshold Condition
+
+Switching threshold (Vm) occurs when:
+
+Vin = Vout = Vm  
+VGS = VDS  
+
+At this point:
+
+Idsp + Idsn = 0  
+Idsp = −Idsn  
+
+Both NMOS and PMOS operate in saturation.
+
+## Drain Current Equations (λ ≈ 0)
+
+<p align="center"> <img width="822" height="308" alt="image" src="https://github.com/user-attachments/assets/b4c5782c-00db-4642-8dc5-082b68ae248c" />
+  <img width="527" height="48" alt="image" src="https://github.com/user-attachments/assets/988ecb1e-cec1-4249-ab55-57cadcb22456" />
+ </p>
+
+## Solving for Vm
+
+Applying:
+
+Idsp + Idsn = 0  
+
+<p align="center"> <img width="503" height="120" alt="image" src="https://github.com/user-attachments/assets/cb12f5ca-4446-4eaa-8f4f-026d72abb777" />
+</p>
+
+<p align="center"> <img width="838" height="55" alt="image" src="https://github.com/user-attachments/assets/806cffa5-1b89-4997-aaef-7d0da5893915" />
+ </p>
+
+<p align="center"> 
+ <img width="385" height="152" alt="image" src="https://github.com/user-attachments/assets/2f54324f-f32d-486a-8390-dc74858f1acf" />
+</p>
+
+## Final equation
+
+<p align="center"> <img width="228" height="117" alt="image" src="https://github.com/user-attachments/assets/7e318695-00c5-4aee-b892-5f8f1289debe" />
+</p>
+
+
+---
+
 
 
 ---
