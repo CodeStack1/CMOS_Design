@@ -4164,8 +4164,7 @@ Used for amplification.
 
 - Circuit: CMOS Inverter
 - PMOS/NMOS (W/L) ratio: 2.77
-- Input sweep: VIN swept (DC sweep)
-- Plot: VOUT vs VIN
+- Input sweep: Sweeping the Vin from 0 to 1.8V with stepsize of 0.01V
 
 ## Extracted Values from VTC (Slope = −1 Points)
 
@@ -4202,3 +4201,244 @@ NML = VIL − VOL
 
 - NMH ≈ 0.733 V
 - NML ≈ 0.659 V
+
+---
+
+# Day 5:
+
+---
+
+# L1 Smart SPICE Simulation for Power Supply Variations
+
+## Power Supply Scaling Concept
+
+While evaluating CMOS inverter robustness, power supply scaling must also be considered.
+
+When technology scales from 250 nm to lower nodes such as 20 nm, supply voltage is also scaled.
+
+- Circuits operating at 2.5 V years back now operate at 1 V.
+- Circuits operating at 1 V may operate at 0.7 V.
+
+The CMOS inverter must behave correctly under supply scaling.
+
+The goal of this experiment is to verify that CMOS inverter behavior does not change under reduced supply voltage and thereby prove inverter robustness.
+
+## Inverter Setup
+
+<p align="center">
+<img width="1088" height="521" alt="image" src="https://github.com/user-attachments/assets/805fdd36-b570-4cd9-b8ac-58614a4c63e0" />
+</p>
+
+- PMOS width (Wp) = 0.9375 µm  
+- NMOS width (Wn) = 0.375 µm  
+- Channel length (L) = 0.25 µm  
+- Load capacitor = 10 fF  
+- PMOS width is greater than NMOS width to match resistances.
+
+The same CMOS inverter configuration is used while sweeping supply voltage.
+
+Supply voltage is swept from:
+
+2.5 V → 2.0 V → 1.5 V → 1.0 V → 0.5 V  
+
+Step size = 0.5 V  
+
+The objective is to ensure inverter behavior remains unchanged under supply scaling.
+
+## SPICE Simulation Approach
+
+<p align="center">
+<img width="633" height="457" alt="image" src="https://github.com/user-attachments/assets/50378050-744b-4008-96a1-d28b5823f553" />
+  <img width="683" height="167" alt="image" src="https://github.com/user-attachments/assets/0fc1c361-fb6d-43fe-a86c-d7be083a1212" />
+<img width="452" height="160" alt="image" src="https://github.com/user-attachments/assets/17419e7c-d05f-4fb6-a251-56a9c0282919" />
+</p>
+
+Instead of creating multiple SPICE netlists for different VDD values, a single SPICE netlist is used.
+
+Everything between:
+
+```
+.control
+...
+.endc
+```
+
+allows scripting.
+
+## Script Explanation 
+
+1. `let powerSupply = 2.5`  
+   Define initial supply voltage.
+
+2. `alter Vdd = powerSupply`  
+   Update VDD dynamically.
+
+3. `let voltageSupplyVariation = 0`  
+   Initialize loop counter.
+
+4. `dowhile voltageSupplyVariation < 5`  
+   Perform simulation five times.
+
+5. `dc Vin 0 2.5 0.01`  
+   Sweep input from 0 to 2.5 V.
+
+6. `let powerSupply = powerSupply - 0.5`  
+   Reduce supply by 0.5 V each iteration.
+
+7. `alter Vdd = powerSupply`  
+   Apply updated supply.
+
+8. `let voltageSupplyVariation = voltageSupplyVariation + 1`  
+   Increment loop counter.
+
+This produces five DC simulations corresponding to:
+
+- DC1 → 2.5 V  
+- DC2 → 2.0 V  
+- DC3 → 1.5 V  
+- DC4 → 1.0 V  
+- DC5 → 0.5 V  
+
+## Plotting
+
+<p align="center">
+<img width="747" height="557" alt="image" src="https://github.com/user-attachments/assets/dc0703f4-d2a5-4c55-884c-3cb34ec5b5fe" /> </p>
+
+All curves are plotted in a single command:
+
+```
+plot dc1.out vs in dc2.out vs in dc3.out vs in dc4.out vs in dc5.out vs in
+```
+
+X-axis: Input Voltage  
+Y-axis: Output Voltage  
+
+Title: Inverter DC characteristics as a function of supply voltage
+
+---
+
+# L2 Advantages and Disadvantages Using Low Supply Voltage
+
+## Analysis of Supply Scaling Curves
+
+In the previous simulation, a CMOS inverter was operated at multiple supply voltages.
+
+Observation:
+
+The CMOS inverter is able to operate even at 0.5 V.
+
+Question:  
+Why not use 0.5 V operation?
+
+There are advantages and disadvantages.
+
+## Gain Comparison (2.5 V vs 0.5 V)
+
+Gain = (Change in Output Voltage) / (Change in Input Voltage)
+
+To calculate gain:
+
+1. Select two points around the region of steep slope.
+2. Compute:
+   - ΔVout
+   - ΔVin
+3. Gain = ΔVout / ΔVin
+
+### Gain at 2.5 V
+
+<p align="center">
+<img width="926" height="552" alt="image" src="https://github.com/user-attachments/assets/28f0bb0d-4e21-45b0-a609-caf27489dc24" />
+</p>
+
+Calculated gain ≈ **7.38**
+
+### Gain at 0.5 V
+
+<p align="center">
+<img width="923" height="547" alt="image" src="https://github.com/user-attachments/assets/df721ba7-7343-42f4-9bd3-e4f884669606" />
+</p>
+
+Calculated gain ≈ **11.53**
+
+This corresponds to approximately **56% improvement in gain**.
+
+Advantage:
+
+Lower supply voltage produces a sharper transition region.  
+A small change in input results in a larger change in output.
+
+This is beneficial for analog design.
+
+
+## Energy Consumption Comparison
+
+Energy formula:
+
+E = 1/2 C V^2
+
+Where:
+- C = Load capacitance
+- V = Supply voltage
+
+### At 2.5 V
+
+<p align="center"> <img width="955" height="547" alt="image" src="https://github.com/user-attachments/assets/4e31daed-f300-433e-b59f-77863c837687" />
+</p>
+  
+### At 0.5 V
+
+<p align="center"> <img width="957" height="547" alt="image" src="https://github.com/user-attachments/assets/f85b24c4-814a-49cc-9dfd-e87b1cf7a759" />
+ </p>
+
+Energy reduction =
+((2.5)^2 - (0.5)^2) / (2.5)^2 ≈ 96%
+
+Approximately **96% reduction in energy consumption**.
+
+Advantage:
+
+- Significant power saving
+- Beneficial for battery-powered devices
+
+## Performance Impact (Major Disadvantage)
+
+### Delay at 2.5 V
+
+<p align="center"> <img width="987" height="539" alt="image" src="https://github.com/user-attachments/assets/525192e5-3ae2-4d34-ad5a-cd66f00bb640" />
+ </p>
+
+Rise delay ≈ **66 ps**  
+Fall delay ≈ **78 ps**
+
+Output capacitor charges and discharges quickly.
+
+### Delay at 0.5 V
+
+<p align="center"> <img width="983" height="566" alt="image" src="https://github.com/user-attachments/assets/5adab3a8-749e-4626-8b64-cf6573206f83" />
+ </p>
+
+<p align="center">
+Transient response at VDD = 0.5 V
+</p>
+
+Observations:
+
+- Output does not fully charge/discharge within same time.
+- Rise time is insufficient to charge load capacitance completely.
+- Reduced voltage limits charging capability.
+
+Device becomes slower.
+
+### Delay at 1 V 
+
+<p align="center">
+<img width="990" height="542" alt="image" src="https://github.com/user-attachments/assets/fa2ff93d-3d3c-469e-8cfe-ec03cfd6ed11" />
+</p>
+
+Rise delay ≈ **220 ps**  
+Fall delay ≈ **160 ps**
+
+This is a significant increase in delay compared to 2.5 V.
+
+---
+
