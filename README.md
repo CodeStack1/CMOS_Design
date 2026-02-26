@@ -44,7 +44,7 @@
     - [L2 SPICE simulation for CMOS inverter](#l2-spice-simulation-for-cmos-inverter)
     - [L3 Labs Sky130 SPICE simulation for CMOS](#l3-labs-sky130-spice-simulation-for-cmos)
   - [Static behaviour evaluation-CMOS inverter robustness-Switching Threshold](#static-behaviour-evaluation-cmos-inverter-robustness-switching-threshold)
-    - [L1 Switching Threshold, Vm](#l1-switching-threshold,-vm)
+    - [L1 Switching Threshold, Vm](#l1-switching-threshold-vm)
     - [L2 Analytical expression of Vm as a function of W L n and W L p](#l2-analytical-expression-of-vm-as-a-function-of-w-l-n-and-w-l-p)
     - [L3 Analytical expression of W L n and W L p as a function of Vm](#l3-analytical-expression-of-w-l-n-and-w-l-p-as-a-function-of-vm)
     - [L4 Static and Dynamic simulation of CMOS inverter](#l4-static-and-dynamic-simulation-of-cmos-inverter)
