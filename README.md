@@ -1,3 +1,12 @@
+- [Day 5 – CMOS Power Supply and Device Variation Robustness Evaluation](#ngspicesky130-day5-cmos-power-supply-and-device-variation-robustness-evaluation)
+
+
+
+
+
+---
+
+
 # NgspiceSky130-Day1-Basics of NMOS Drain Current(Id) vs Drain-to-source Voltage(Vds):
 
 # Introduction to Circuit Design and Spice Simulations
@@ -54,7 +63,7 @@ Understanding this physical process is essential because SPICE models are built 
 
 ---
 
-# 2 - L3: Strong Inversion and Threshold Voltage
+# 2 - L3 Strong Inversion and Threshold Voltage
 
 ## Initial Condition – VGS = 0 (Cutoff Region)
 
@@ -184,7 +193,7 @@ Therefore, inversion is delayed.
 
 ---
 
-# 3 - L4: Threshold voltage with positive substrate potential
+# 3 - L4 Threshold voltage with positive substrate potential
 
 ## Comparing Two Cases: VSB = 0 and VSB > 0
 
@@ -319,7 +328,7 @@ The Fermi potential (ΦF) appears in the threshold voltage equation.
 
 # NMOS resistive region and Saturation region of operation
 
-# 4 - L1: Resistive region of operation with small drain-source voltage
+# 4 - L1 Resistive region of operation with small drain-source voltage
 
 ## Three Modes of Operation
 
@@ -486,7 +495,7 @@ The derivation in the resistive region will continue in the next discussion.
 
 ---
 
-# 5 - L2: Drift Current Theory
+# 5 - L2 Drift Current Theory
 
 ## Definition of V(x) Along the Channel
 
@@ -894,9 +903,9 @@ I<sub>D</sub> = k<sub>n</sub> (V<sub>GS</sub> − V<sub>T</sub>) V<sub>DS</sub>
 
 ---
 
-# L5: Pinch-Off Region Condition
+# 8 - L5 Pinch-Off Region Condition
 
-## 1. Sweeping VDS
+## Sweeping VDS
 
 <p align="center">
 <img width="1112" height="607" alt="image" src="https://github.com/user-attachments/assets/133c40e1-d2b5-480b-b374-f3e969f30c52" />
@@ -914,7 +923,7 @@ This sweep could be fed directly into a SPICE engine.
 But before simulations, the physical concept must be understood.
 
 
-## 2. Linear Region Behavior 
+## Linear Region Behavior 
 
 <p align="center">
 <img width="1260" height="620" alt="image" src="https://github.com/user-attachments/assets/64c1c298-daa4-40b2-b2fe-71e815a2a946" />
@@ -945,7 +954,7 @@ Therefore:
 - Device operates in linear region
 
 
-## 3. Critical Condition: VDS = 0.55 V
+## Critical Condition: VDS = 0.55 V
 
 <p align="center">
 <img width="1208" height="591" alt="image" src="https://github.com/user-attachments/assets/24237e50-417c-4fd8-a066-5f7fa152b518" />
@@ -978,7 +987,7 @@ This creates a mixed condition:
 - Near drain → inversion just disappears  
 
 
-## 4. Beginning of Channel Disappearance
+## Beginning of Channel Disappearance
 
 <p align="center">
 <img width="1230" height="586" alt="image" src="https://github.com/user-attachments/assets/4548c733-ce9c-495c-b059-86cba4e6427b" />
@@ -993,7 +1002,7 @@ The channel begins to disappear near the drain region.
 The channel still exists near the source.
 
 
-## 5. Does Current Stop?
+## Does Current Stop?
 
 No.
 
@@ -1008,7 +1017,7 @@ However:
 - Behavior transitions from linear region
 
 
-## 6. When VDS Increases Further
+## When VDS Increases Further
 
 <p align="center">
 <img width="656" height="308" alt="image" src="https://github.com/user-attachments/assets/bc86950b-baca-4d95-843c-a0d2cdafeaa2" />
@@ -1032,7 +1041,7 @@ In this condition:
 - Drain-end channel completely disappears
 
 
-## 7. Saturation Region Condition
+## Saturation Region Condition
 
 This condition is referred to as:
 
@@ -1054,7 +1063,6 @@ From this point onward:
 ---
 
 # 9 - L6 Drain current model for saturation region of operation
-
 
 ## When VDS Increases Beyond Limit
 
@@ -1206,7 +1214,7 @@ There exists a channel length modulation factor that can be added to the equatio
 
 # Introduction to SPICE
 
-# 10 - L1: Basic SPICE Setup
+# 10 - L1 Basic SPICE Setup
 
 ## Feeding Models to SPICE Engine
 
@@ -1379,7 +1387,7 @@ Current should not directly enter the gate and damage it.
 
 ---
 
-# L2: Circuit Description in SPICE Syntax
+# L2 Circuit Description in SPICE Syntax
 
 ## Writing the SPICE Netlist
 
@@ -1548,7 +1556,8 @@ VIN in 0 2.5
 
 ---
 
-# L3: Define Technology Parameters
+
+# 12 - L3 Define Technology Parameters
 
 ## Model Definition for NMOS
 
@@ -1743,9 +1752,9 @@ This replaces manual hand calculation.
 ---
 
 
-# L4 First SPICE simulation
+# 13 - L4 First SPICE simulation
 
-## 1️. Clone Repository
+## Clone Repository
 
 ```bash
 git clone https://github.com/kunalg123/sky130CircuitDesignWorkshop
@@ -1753,8 +1762,7 @@ cd sky130CircuitDesignWorkshop/design
 ls
 ```
 
-
-## 2️. Go to Device Models
+## Go to Device Models
 
 ```bash
 cd sky130
@@ -1769,7 +1777,7 @@ Use:
 Only use **W/L values provided inside the model corner files**.
 
 
-## 3️. Select Corner
+## Select Corner
 
 Open library file:
 
@@ -1787,7 +1795,7 @@ Corners available:
 Modify `.lib` line to change corner.
 
 
-## 4️. Transistor Format
+## Transistor Format
 
 SPICE syntax:
 
@@ -1800,7 +1808,7 @@ Bulk = 0
 Supply = 1.8V  
 
 
-## 5️. DC Sweep
+## DC Sweep
 
 Sweep:
 
@@ -1812,7 +1820,7 @@ Sweep:
 ```
 
 
-## 6️. Run Simulation
+## Run Simulation
 
 Inside NGSpice:
 
@@ -1832,9 +1840,9 @@ plot -i(VDS)
 
 ---
 
-# SL5 SPICE Lab with sky130 models
+# 14 - L5 SPICE Lab with sky130 models
 
-## 1️. Clone and Navigate
+## Clone and Navigate
 
 ```bash
 cd
@@ -1845,7 +1853,7 @@ cd cells
 cd nfet_01v8
 ```
 
-## 2️. Open Library File
+## Open Library File
 
 ```bash
 less sky130.lib.spice
@@ -1853,7 +1861,7 @@ less sky130.lib.spice
 
 Use **TT (Typical corner)**.
 
-## 3️. Transistor Parameters
+## Transistor Parameters
 
 - Model: `nfet_01v8`
 - W = **5 µm**
@@ -1862,13 +1870,13 @@ Use **TT (Typical corner)**.
 - Source = 0
 - Bulk = 0
 
-## 4️. DC Sweep Settings
+## DC Sweep Settings
 
 - VDS: 0 → 1.8 V (step 0.1 V)
 - VGS: 0 → 1.8 V (step 0.2 V)
 
 
-## 5️. Run Simulation
+## Run Simulation
 
 Inside NGSpice:
 
@@ -1876,7 +1884,7 @@ Inside NGSpice:
 plot -VDD#branch
 ```
 
-## 6️. Results
+## Results
 
 <p align="center"> <img width="493" height="318" alt="image" src="https://github.com/user-attachments/assets/56efd682-2a6b-472c-926f-1602bf6c2ac4" />
 </p>
@@ -1887,9 +1895,13 @@ plot -VDD#branch
 
 ---
 
-# Day 2:
----
-# L1 SPICE simulation for lower nodes
+<br><br>
+
+# NgspiceSky130-Day2-Velocity saturation and basics of CMOS inverter VTC
+
+# SPICE simulation for lower nodes and velocity saturation effect
+
+# 15 - L1 SPICE simulation for lower nodes
 
 ## SPICE Simulation Results
 
@@ -2123,7 +2135,7 @@ Short-channel effects alter device behavior.
 ---
 
 
-# L2: Drain Current vs Gate Voltage – Long and Short Channel Device
+# 16 - L2 Drain Current vs Gate Voltage – Long and Short Channel Device
 
 ## Previous Simulation Context
 
@@ -2256,7 +2268,7 @@ Further analysis continues next.
 
 ---
 
-# L3: Velocity Saturation at Lower and Higher Electric Fields
+# 17 - L3 Velocity Saturation at Lower and Higher Electric Fields
 
 ## ID vs VGS Simulation Results
 
@@ -2457,7 +2469,7 @@ This single model accounts for:
 
 ---
 
-# L4: Velocity Saturation Drain Current Model
+# 18 - L4 Velocity Saturation Drain Current Model
 
 ## Unified Drain Current Model
 
@@ -2587,8 +2599,6 @@ This matches the **linear (resistive) region equation**.
 - Device behaves resistively
 - Drain current increases linearly with VDS
 
----
-
 ## Case 3: VDSAT is Minimum (Velocity Saturation)
 
 <p align="center"> <img width="482" height="227" alt="image" src="https://github.com/user-attachments/assets/0f4ddbd5-2c86-4197-a564-3b7d86a3e201" />
@@ -2648,7 +2658,7 @@ This deviation occurs due to **velocity saturation**.
 
 ---
 
-# L5 Labs Sky130 Id-Vgs
+# 19 - L5 Labs Sky130 Id-Vgs
 
 ## Device Parameters
 
@@ -2694,7 +2704,7 @@ For **L = 0.15 µm**:
 
 ---
 
-# L6: Sky130 Lab – Threshold Voltage (VT) Extraction
+# 20 - L6 Sky130 Lab – Threshold Voltage (VT) Extraction
 
 ## Device / Simulation Setup
 
@@ -2715,7 +2725,11 @@ For **L = 0.15 µm**:
 
 ---
 
-# L1: MOSFET as a Switch
+<br>
+
+# CMOS voltage transfer characteristics (VTC)
+
+# 21 - L1 MOSFET as a Switch
 
 ## MOSFET from a Switch Perspective
 
@@ -2760,7 +2774,7 @@ The magnitude condition applies in both cases.
 The ON resistance is finite and nonlinear.
 
 
-# CMOS Structure
+## CMOS Structure
 
 Now bias the devices to form a CMOS inverter.
 
@@ -2780,7 +2794,7 @@ CMOS = Complementary MOS
 When one device is ON, the other is OFF.
 
 
-# Case Analysis
+## Case Analysis
 
 ## Case: VIN = VDD (Input High)
 
@@ -2853,7 +2867,7 @@ If VDD > VT:
 - Output connected to ground through NMOS  
 - Output pulled LOW  
 
-# Important Observation
+## Important Observation
 
 The gate-to-source voltage depends on node potentials:
 
@@ -2862,7 +2876,7 @@ The gate-to-source voltage depends on node potentials:
 
 Correct polarity and node reference are essential to determine ON/OFF state.
 
-# Summary
+## Summary
 
 MOSFET as Switch:
 
@@ -2881,9 +2895,9 @@ This forms the basis for CMOS voltage transfer characteristics.
 
 ---
 
-# L2: Introduction to Standard MOS Voltage–Current Parameters
+# 22 - L2 Introduction to Standard MOS Voltage–Current Parameters
 
-# Objective
+## Objective
 
 To derive equivalent circuits of a CMOS inverter under different input conditions in order to later obtain the Voltage Transfer Characteristics (VTC) and delay.
 
@@ -2895,9 +2909,9 @@ We require:
 These will later be merged to derive CMOS VTC.
 
 
-# VIN = 0 V (Low Input)
+## VIN = 0 V (Low Input)
 
-## PMOS Operation
+### PMOS Operation
 
 <p align="center">
 <img width="162" height="348" alt="image" src="https://github.com/user-attachments/assets/37680981-09de-49ab-8f0f-d247e76301fe" /> </p>
@@ -2923,7 +2937,7 @@ RP
 
 This resistance is **non-linear**, not an ideal resistor.
 
-## NMOS Operation
+### NMOS Operation
 
 <p align="center">
 <img width="137" height="347" alt="image" src="https://github.com/user-attachments/assets/d85c39d2-f78e-4686-afbf-87d9cff1f1e6" />
@@ -2960,7 +2974,7 @@ Final condition:
 VOUT = VDD
 ```
 
-# Naming Conventions
+## Naming Conventions
 
 <p align="center">
 <img width="650" height="331" alt="image" src="https://github.com/user-attachments/assets/5d7601d9-c60c-4a65-9f2d-3b89cd63612c" />
@@ -2991,9 +3005,9 @@ These naming conventions are required to derive:
 
 ---
 
-# L3: PMOS / NMOS Drain Current vs Drain Voltage
+## 23 - L3 PMOS / NMOS Drain Current vs Drain Voltage
 
-## CMOS Inverter Reference
+### CMOS Inverter Reference
 
 <p align="center">
   <img width="660" height="357" alt="image" src="https://github.com/user-attachments/assets/7ac0d853-546a-4eb1-9411-f74e7207bca4" />
@@ -3015,9 +3029,9 @@ IDSP = − IDSN
 (Current sign differs only due to direction.)
 
 
-# Voltage Relationships
+## Voltage Relationships
 
-## NMOS
+### NMOS
 
 Source connected to ground (VSS = 0).
 
@@ -3029,7 +3043,7 @@ VDSN = VOUT − VSS = VOUT
 NMOS voltage expressions are simple because one terminal is grounded.
 
 
-## PMOS
+### PMOS
 
 Source connected to VDD.
 
@@ -3043,7 +3057,7 @@ PMOS voltages require subtracting VDD.
 Care must be taken with sign conventions.
 
 
-# NMOS ID vs VDS Curve
+## NMOS ID vs VDS Curve
 
 <p align="center">
   <img width="422" height="356" alt="image" src="https://github.com/user-attachments/assets/44b6b509-c595-40d2-bd63-f6b4824aebc5" />
@@ -3067,7 +3081,7 @@ VGSN1 < VGSN2 < VGSN3 < ...
 Higher VGS → higher current.
 
 
-# PMOS ID vs VDS Curve
+## PMOS ID vs VDS Curve
 
 <p align="center">
   <img width="382" height="432" alt="image" src="https://github.com/user-attachments/assets/bdf03f27-89c3-44e7-835b-6913cb43395f" />
@@ -3087,7 +3101,7 @@ Observations:
 - If |VGSP| > |VT| → PMOS ON → current flows
 - Increasing |VGSP| → higher magnitude of drain current
 
-# Current Direction Relationship
+## Current Direction Relationship
 
 Because capacitor charging/discharging directions are opposite:
 
@@ -3098,7 +3112,7 @@ Current itself is not negative physically — sign only represents direction ref
 
 ---
 
-# L4: Step 1 – Convert PMOS Gate-Source Voltage to VIN
+# 24 - L4 Step 1 – Convert PMOS Gate-Source Voltage to VIN
 
 ## CMOS Inverter Reference
 
@@ -3118,7 +3132,7 @@ Therefore, all curves must be expressed as functions of:
 VIN and VOUT only
 ```
 
-# Express VGSP in terms of VIN
+## Express VGSP in terms of VIN
 
 From earlier derivation:
 
@@ -3164,13 +3178,13 @@ Drain current values remain same in magnitude, but sign flips to match NMOS conv
 Shows conversion of PMOS gate voltage into input voltage.
 
 
-# NMOS ID–VDS Curves & PMOS ID–VDS Curves
+## NMOS ID–VDS Curves & PMOS ID–VDS Curves
 
 <p align="center">
 <img width="443" height="368" alt="image" src="https://github.com/user-attachments/assets/3d7ac33e-9461-47d8-b8d4-4af062390b7e" /> </p>
 
 
-# Result After Conversion
+## Result After Conversion
 
 <p align="center"> <img width="327" height="317" alt="image" src="https://github.com/user-attachments/assets/96d89aa1-bf57-4651-a4c4-8358458fe6b1" />
 </p>
@@ -3182,9 +3196,9 @@ Shows conversion of PMOS gate voltage into input voltage.
 
 ---
 
-# L5: Step 2 & Step 3 – Convert PMOS and NMOS Drain–Source Voltage to VOUT
+# L5 Step 2 & Step 3 – Convert PMOS and NMOS Drain–Source Voltage to VOUT
 
-# Step 1 Completed
+## Step 1 Completed
 
 Previously:
 
@@ -3200,7 +3214,7 @@ VDSP
 
 Now we convert **VDSP to VOUT**
 
-# Step 2: Convert VDSP to VOUT (PMOS)
+## Step 2: Convert VDSP to VOUT (PMOS)
 
 From earlier relation:
 
@@ -3269,7 +3283,7 @@ Capacitor fully charged → Current = 0
  <img width="687" height="215" alt="image" src="https://github.com/user-attachments/assets/439d09e1-73a9-4e65-922f-d054e9bca01b" />
 </p>
 
-# Step 3: Table to Derive NMOS Load Curve
+## Step 3: Table to Derive NMOS Load Curve
 
 For NMOS:
 
@@ -3321,7 +3335,7 @@ NMOS load curve now becomes:
 
 This is the **NMOS load curve**.
 
-# Result of Step 2 & Step 3
+## Result of Step 2 & Step 3
 
 <p align="center">
 <img width="500" height="230" alt="image" src="https://github.com/user-attachments/assets/4e7426e3-5dd8-4949-b96f-807f229ede49" /> </p>
@@ -3333,9 +3347,9 @@ Now we have:
 
 ---
 
-# L6: Step 4 – Merge PMOS & NMOS Load Curves and Plot VTC
+# 26 - L6 Step 4 – Merge PMOS & NMOS Load Curves and Plot VTC
 
-# Objective
+## Objective
 
 <p align="center">
 <img width="497" height="215" alt="image" src="https://github.com/user-attachments/assets/a0c65714-daaf-4fd8-af27-e53b97bbe5fd" />
@@ -3349,7 +3363,7 @@ using:
 
 The VTC is obtained from the **intersection points** of the two load curves.
 
-# Step 1: Superimpose Load Curves
+## Step 1: Superimpose Load Curves
 
 <p align="center">
   <img width="272" height="195" alt="image" src="https://github.com/user-attachments/assets/7641bb7a-6486-44bf-a964-eec24bdd930c" />
@@ -3367,7 +3381,7 @@ To derive VTC:
 - Find the intersection of PMOS and NMOS curves  
 - That intersection gives corresponding VOUT  
 
-# Voltage Range
+## Voltage Range
 
 ```
 VIN  : 0 → 2 V
@@ -3376,7 +3390,7 @@ VOUT : 0 → 2 V
 
 We sweep VIN from 0 to 2 volts and determine VOUT from intersection points.
 
-# Case 1: VIN = 0 V
+## Case 1: VIN = 0 V
 
 <p align="center">
 <img width="1297" height="708" alt="image" src="https://github.com/user-attachments/assets/359dcfd8-5e72-4df0-882e-87bf131bfb06" /> </p>
@@ -3401,7 +3415,7 @@ So:
 
 Plot this point on VTC.
 
-# Case 2: VIN = 0.5 V
+## Case 2: VIN = 0.5 V
 
 <p align="center">
 <img width="1307" height="712" alt="image" src="https://github.com/user-attachments/assets/5e251dc3-efc3-4779-b44f-25cbf4316279" />
@@ -3423,7 +3437,7 @@ Plot:
 - VIN = 0.5
 - VOUT ≈ between 1.5 and 2
 
-# Case 3: VIN = 1 V
+## Case 3: VIN = 1 V
 
 <p align="center">
 <img width="1287" height="715" alt="image" src="https://github.com/user-attachments/assets/bab20e59-94e1-41ed-b756-f233691a89b0" /> </p>
@@ -3451,7 +3465,7 @@ This region has:
 
 This is the steep switching region of CMOS.
 
-# Case 4: VIN = 1.5 V
+## Case 4: VIN = 1.5 V
 
 <p align="center">
 <img width="1297" height="716" alt="image" src="https://github.com/user-attachments/assets/a24d4627-b7e6-47fd-bec0-07ef45eff4fc" />
@@ -3470,7 +3484,7 @@ VOUT lies between:
 
 Plot corresponding point.
 
-# Case 5: VIN = 2 V
+## Case 5: VIN = 2 V
 
 <p align="center">
 <img width="1298" height="717" alt="image" src="https://github.com/user-attachments/assets/e055a03d-2bad-479d-9733-aaab4916f429" />
@@ -3489,7 +3503,7 @@ VOUT = 0 V
 
 Plot final point.
 
-# Constructing VTC
+## Constructing VTC
 
 <p align="center">
   <img width="490" height="353" alt="image" src="https://github.com/user-attachments/assets/350f9dd5-d74a-4565-b4fc-43593cd3ff35" />
@@ -3504,11 +3518,13 @@ This gives the **CMOS Voltage Transfer Characteristic**.
 
 ---
 
-# Day 3:
+<br><<br>
 
----
+# NgspiceSky130-Day3-CMOS switching threshold and dynamic simulations
 
-# L1 SPICE Deck Creation for CMOS Inverter
+# Voltage transfer characteristics-SPICE simulations
+
+# 27 - L1 SPICE Deck Creation for CMOS Inverter
 
 ## What is a SPICE Deck?
 
@@ -3639,7 +3655,7 @@ This line completely defines the PMOS transistor.
 
 ---
 
-# L2 SPICE Simulation for CMOS Inverter
+# 28 - L2 SPICE Simulation for CMOS Inverter
 
 ## Component Values
 
@@ -3753,9 +3769,13 @@ Only PMOS width changed.
 
 ---
 
-# L1 Switching Threshold (Vm)
+<br>
 
-# Comparison of Waveforms
+# Static behaviour evaluation-CMOS inverter robustness-Switching Threshold
+
+# 30 - L1 Switching Threshold (Vm)
+
+## Comparison of Waveforms
 
 <p align="center">
 <img width="1198" height="578" alt="image" src="https://github.com/user-attachments/assets/963357f1-bed3-4da7-8d91-343bc98f2ddc" />
@@ -3776,7 +3796,7 @@ Whenever:
 
 The inversion property remains intact across device sizes.
 
-# Switching Threshold (Vm)
+## Switching Threshold (Vm)
 
 <p align="center"> </p>
 
@@ -3790,7 +3810,7 @@ To find Vm:
 <img width="1195" height="490" alt="image" src="https://github.com/user-attachments/assets/0e440b67-9966-4486-8e82-a15bdcdf5630" />
 </p>
 
-## Switching Threshold – Case 1
+### Switching Threshold – Case 1
 
 <p align="center"> <img width="1206" height="458" alt="image" src="https://github.com/user-attachments/assets/02446376-c6ed-45cd-9f21-983f1fdd4da0" />
 </p>
@@ -3803,7 +3823,7 @@ Vm ≈ 0.98 V
 
 This corresponds to equal sizing case.
 
-## Switching Threshold – Case 2
+### Switching Threshold – Case 2
 
 <p align="center"> <img width="1188" height="455" alt="image" src="https://github.com/user-attachments/assets/88225961-82ba-4330-8703-e914cbaacf53" />
  </p>
@@ -3815,7 +3835,7 @@ V_m ≈ 1.2
 Switching point shifts toward center when PMOS is stronger.
 
 
-# Significance of Switching Region
+## Significance of Switching Region
 
 The switching region is critical because:
 
@@ -3836,7 +3856,7 @@ Outside this region:
 
 Thus, switching region is the highest current region.
 
-# Electrical Conditions at Vm
+## Electrical Conditions at Vm
 
 <p align="center"> <img width="1051" height="462" alt="image" src="https://github.com/user-attachments/assets/d7cb89c6-147e-435d-91b7-534ccc2625af" />
 </p>
@@ -3855,7 +3875,7 @@ Devices are in saturation.
 
 ---
 
-# L2 Analytical Expression of Vm as a Function of (W/L)p and (W/L)n
+# 31 - L2 Analytical Expression of Vm as a Function of (W/L)p and (W/L)n
 
 ## Switching Threshold Condition
 
@@ -3900,7 +3920,7 @@ Idsp + Idsn = 0
 
 ---
 
-# L3 Analytical Expression of (W/L)p and (W/L)n as a Function of Vm
+# 32 - L3 Analytical Expression of (W/L)p and (W/L)n as a Function of Vm
 
 ## Starting Point
 
@@ -3929,7 +3949,6 @@ Rearranging signs:
 <p align="center">
 <img width="850" height="67" alt="image" src="https://github.com/user-attachments/assets/b008af1b-f9ab-4dc5-bc72-16440ec65768" /> </p>
 
-
 ## Grouping Terms
 
 <p align="center">
@@ -3940,7 +3959,6 @@ Rearranging signs:
 
 <p align="center">
 <img width="557" height="98" alt="image" src="https://github.com/user-attachments/assets/5fef3cb9-d3ca-4356-b6e8-0bd92e57e99c" /> </p>
-
 
 ## Final Result
 
@@ -3975,7 +3993,7 @@ Vm ≈ 0.98 V.
 
 ---
 
-# L4 Static and Dynamic Simulation of CMOS Inverter
+# 33 - L4 Static and Dynamic Simulation of CMOS Inverter
 
 ## Objective
 
@@ -4063,7 +4081,7 @@ t_fall = t₂ − t₁
 
 ---
 
-# L5 Static and Dynamic Simulation of CMOS Inverter with Increased PMOS Width
+# 34 - L5 Static and Dynamic Simulation of CMOS Inverter with Increased PMOS Width
 
 ## Case 1: PMOS = NMOS
 
@@ -4169,7 +4187,7 @@ Results:
 
 ---
 
-# L6 Applications of CMOS Inverter in Clock Network and STA
+# 35 - L6 Applications of CMOS Inverter in Clock Network and STA
 
 ## Review of Experimental Observations
 
@@ -4207,7 +4225,7 @@ There exists a PMOS/NMOS size ratio where:
 
 This symmetry is critical for clock network cells.
 
-# Application 1: Clock Network (Clock Inverter / Clock Buffer)
+## Application 1: Clock Network (Clock Inverter / Clock Buffer)
 
 <p align="center"> <img width="1177" height="267" alt="image" src="https://github.com/user-attachments/assets/d0cfcc3c-be2c-474e-b5b2-cc10fe5c6ef1" /> </p>
 
@@ -4240,7 +4258,7 @@ Result:
 
 Such cells are referred to as clock inverters or clock buffers.
 
-# Application 2: Data Path Optimization (Static Timing Analysis - STA)
+## Application 2: Data Path Optimization (Static Timing Analysis - STA)
 
 <p align="center">
 <img width="1123" height="285" alt="image" src="https://github.com/user-attachments/assets/3b0a2808-ad68-4a10-9b0f-2db6575dfe9d" /> </p>
@@ -4281,13 +4299,15 @@ Tradeoff:
 
 ---
 
-# Day 4:
+<br><br>
 
----
+# NgspiceSky130-Day4-CMOS Noise Margin robustness evaluation
 
-# L1: Introduction to Noise Margin
+# Static behaviour evaluation-CMOS inverter robustness-Noise Margin
 
-# Objective
+# 36 - L1 Introduction to Noise Margin
+
+## Objective
 
 Determine the robustness of a CMOS inverter by identifying its **noise margin**.
 
@@ -4300,15 +4320,14 @@ These effects are common in lower technology nodes.
 
 Noise margin helps identify how robust a logic gate is against such disturbances.
 
-
-# Basic Inverter Operation
+## Basic Inverter Operation
 
 For an inverter:
 
 - Logic LOW input → Logic HIGH output  
 - Logic HIGH input → Logic LOW output  
 
-# Ideal Voltage Transfer Characteristic (VTC)
+## Ideal Voltage Transfer Characteristic (VTC)
 
 <p align="center">
  <img width="617" height="505" alt="image" src="https://github.com/user-attachments/assets/164e856c-b294-40d5-a364-3557d7d5dfec" />
@@ -4330,7 +4349,7 @@ Switching occurs at:
 VIN = VDD / 2
 ```
 
-# Ideal Slope at Switching Point
+## Ideal Slope at Switching Point
 
 <p align="center">
 <img width="612" height="511" alt="image" src="https://github.com/user-attachments/assets/f42d7f40-41f8-4d0a-9a39-540b30cfc9a6" />
@@ -4355,7 +4374,7 @@ Slope = VDD / 0 → Infinite
 
 Ideal inverter has **infinite gain** at switching threshold.
 
-# Practical VTC
+## Practical VTC
 
 In reality:
 
@@ -4377,7 +4396,7 @@ Characteristics:
 
 Slope becomes finite.
 
-# Define Important Voltage Levels
+## Define Important Voltage Levels
 
 From practical VTC:
 
@@ -4436,10 +4455,9 @@ Output remains LOW.
 
 ---
 
+# 37 - L2 Noise Margin Voltage Parameters
 
-# L2: Noise Margin Voltage Parameters
-
-# Meaningful Inference from VTC
+## Meaningful Inference from VTC
 
 Assume:
 
@@ -4454,7 +4472,7 @@ VIL  ≈ 0.25 V  (250 mV)
 VIH  ≈ 0.75 V  (750 mV)
 ```
 
-# Input Logic Recognition
+## Input Logic Recognition
 
 <p align="center"> <img width="730" height="412" alt="image" src="https://github.com/user-attachments/assets/cea007d7-a3e1-4f28-b5eb-07187c222aff" /> </p>
 
@@ -4486,7 +4504,7 @@ It is recognized as:
 Logic 1
 ```
 
-# Output Voltage Requirements
+## Output Voltage Requirements
 
 <p align="center"> <img width="730" height="360" alt="image" src="https://github.com/user-attachments/assets/9715ba03-d354-4e4b-86a7-b34e9cd10905" />
 </p>
@@ -4527,7 +4545,7 @@ Reason:
 VOH > VIH
 ```
 
-# More Practical VTC
+## More Practical VTC
 
 <p align="center">
  <img width="362" height="332" alt="image" src="https://github.com/user-attachments/assets/6ce565b2-915f-4a56-983d-bfb325f5d998" />
@@ -4541,7 +4559,7 @@ This curve differs from earlier near-ideal curve because:
 
 Transition is curved and not straight.
 
-# Marking VIL, VIH, VOL, VOH
+## Marking VIL, VIH, VOL, VOH
 
 <p align="center">
   <img width="361" height="335" alt="image" src="https://github.com/user-attachments/assets/245c6940-44ca-4342-a66b-de9d6224cddb" />
@@ -4553,7 +4571,7 @@ From the curve:
 - Region 2 → Transition region  
 - Region 3 → VIN > VIH → VOUT ≈ VOL  
 
-# Slope Around Mid Region
+## Slope Around Mid Region
 
 <p align="center">
 <img width="395" height="340" alt="image" src="https://github.com/user-attachments/assets/caeb1e05-587e-4f4e-8cd3-87de0df3dc51" />
@@ -4589,10 +4607,9 @@ Slope in transition region ≈ −1.
 
 ---
 
+# 38 - L3 Noise Margin Equation and Summary
 
-# L3: Noise Margin Equation and Summary
-
-# Plotting Voltage Levels on Single Scale
+## Plotting Voltage Levels on Single Scale
 
 We place the voltage levels in descending order.
 
@@ -4619,13 +4636,13 @@ Reasoning:
   → So next stage detects logic '0'
 
 
-# Voltage Scale Representation
+## Voltage Scale Representation
 
 <p align="center"><img width="146" height="336" alt="image" src="https://github.com/user-attachments/assets/826a9d21-3e73-4a89-b568-abb1488fb99a" />
 </p>
 
 
-# Noise Margin Definitions
+## Noise Margin Definitions
 
 ## 1. Noise Margin High (NMH)
 
@@ -4669,7 +4686,7 @@ Equation:
 NML = VIL − VOL
 ```
 
-# Undefined Region
+## Undefined Region
 
 <p align="center">
 <img width="698" height="401" alt="image" src="https://github.com/user-attachments/assets/a2787f1f-eb50-4bc4-9bdb-263dabaa5f9b" /> </p>
@@ -4689,7 +4706,7 @@ Any voltage in this range:
 - Unpredictable behavior
 
 
-# Noise Bump Interpretation
+## Noise Bump Interpretation
 
 <p align="center">
  <img width="927" height="536" alt="image" src="https://github.com/user-attachments/assets/43b396db-9693-410d-82d0-a90bba12442a" />
@@ -4697,7 +4714,7 @@ Any voltage in this range:
 
 The chart summarizes noise tolerance.
 
-## Case 1: Small Bump (Safe)
+### Case 1: Small Bump (Safe)
 
 If bump height lies in:
 
@@ -4709,7 +4726,7 @@ It is still detected as **logic '0'**
 
 Safe glitch.
 
-## Case 2: Undefined Bump (Unsafe)
+### Case 2: Undefined Bump (Unsafe)
 
 If bump height lies in:
 
@@ -4722,7 +4739,7 @@ It enters **undefined region**
 - May flip logic
 - Must be fixed
 
-## Case 3: Large Bump (Logic Flip)
+### Case 3: Large Bump (Logic Flip)
 
 If bump height lies in:
 
@@ -4735,13 +4752,13 @@ This is harmful and must be corrected.
 
 ---
 
-# L4: Noise Margin Variation with Respect to PMOS Width
+# 39 - L4 Noise Margin Variation with Respect to PMOS Width
 
-# Objective
+## Objective
 
 Understand how varying PMOS width affects CMOS inverter robustness.
 
-# Case 1: Wp = Wn
+## Case 1: Wp = Wn
 
 <p align="center">
   <img width="1235" height="527" alt="image" src="https://github.com/user-attachments/assets/3b6d2095-9e2e-431a-ba90-d7c634569eaa" />
@@ -4768,7 +4785,7 @@ Meaning:
 
 Wider margin → More noise immunity.
 
-# Case 2: Wp = 2Wn
+## Case 2: Wp = 2Wn
 
 <p align="center"><img width="1233" height="528" alt="image" src="https://github.com/user-attachments/assets/e1b658a9-f03d-414c-abd1-e864456b2b7f" />
  </p>
@@ -4794,7 +4811,7 @@ Reason:
 - Larger PMOS → lower resistance path to VDD
 - Better ability to hold logic high
 
-# Case 3: Wp = 3Wn
+## Case 3: Wp = 3Wn
 
 <p align="center"> <img width="1248" height="541" alt="image" src="https://github.com/user-attachments/assets/818e160b-ef20-4a28-995b-9ae2e0add448" />
 </p>
@@ -4817,7 +4834,7 @@ Reason:
 - Stronger PMOS improves logic '1' holding capability
 - NMOS responsible for logic '0'
 
-# Case 4: Wp = 4Wn
+## Case 4: Wp = 4Wn
 
 <p align="center"> <img width="1275" height="556" alt="image" src="https://github.com/user-attachments/assets/21c9781c-5125-47f9-8b2d-8cd97661d65a" />
  </p>
@@ -4841,7 +4858,7 @@ Reason:
 - NMOS becomes relatively weaker
 - Logic '0' holding capability reduces
 
-# Case 5: Wp = 5Wn
+## Case 5: Wp = 5Wn
 
 <p align="center"> <img width="1258" height="551" alt="image" src="https://github.com/user-attachments/assets/80f69bce-9c57-4a83-8b98-71b4a4bc0d94" />
 </p>
@@ -4860,7 +4877,7 @@ Observation:
 - NML slightly reduced
 - Further PMOS increase does not significantly improve NMH
 
-# Summary Table
+## Summary Table
 
 <p align="center">
  <img width="710" height="232" alt="image" src="https://github.com/user-attachments/assets/f253db8e-705e-494b-98bd-7133ade1d03e" />
@@ -4878,7 +4895,7 @@ NMH: 0.3 V → 0.42 V  (≈120 mV range)
 NML: small variation (~30 mV)
 ```
 
-# Fabrication Variation Insight
+## Fabrication Variation Insight
 
 If designed for:
 
@@ -4902,9 +4919,9 @@ Effect:
 
 CMOS inverter remains robust.
 
-# Digital vs Analog Region
+## Digital vs Analog Region
 
-## Digital Design Region
+### Digital Design Region
 
 <p align="center">
   <img width="701" height="571" alt="image" src="https://github.com/user-attachments/assets/29328a1c-a029-4c07-9ef5-6fab101d0c17" />
@@ -4917,7 +4934,7 @@ Regions:
 
 CMOS inverter is highly suitable for digital logic.
 
-## Analog Region
+### Analog Region
 
 <p align="center"> <img width="708" height="571" alt="image" src="https://github.com/user-attachments/assets/2f99e363-2e71-4038-9e82-9fbf2b51bfe9" />
  </p>
@@ -4931,7 +4948,7 @@ Used for amplification.
 
 ---
 
-# L5: Sky130 Noise Margin Lab (Simulation Summary)
+# 40 - L5 Sky130 Noise Margin Lab
 
 ## Simulation Parameters
 
@@ -4950,7 +4967,6 @@ Used for amplification.
 
 - VIH  = 0.9758 V
 - VOL  = 0.1147 V
-
 
 ## Calculated Noise Margins
 
@@ -4977,11 +4993,11 @@ NML = VIL − VOL
 
 ---
 
-# Day 5:
+# NgspiceSky130-Day5-CMOS power supply and device variation robustness evaluation
 
----
+# Static behaviour evaluation-CMOS inverter robustness-Power supply variation
 
-# L1 Smart SPICE Simulation for Power Supply Variations
+# 41 - L1 Smart SPICE Simulation for Power Supply Variations
 
 ## Power Supply Scaling Concept
 
@@ -5090,9 +5106,9 @@ Title: Inverter DC characteristics as a function of supply voltage
 
 ---
 
-# L2 Advantages and Disadvantages Using Low Supply Voltage
+## 42 - L2 Advantages and Disadvantages Using Low Supply Voltage
 
-## Analysis of Supply Scaling Curves
+### Analysis of Supply Scaling Curves
 
 In the previous simulation, a CMOS inverter was operated at multiple supply voltages.
 
@@ -5105,7 +5121,7 @@ Why not use 0.5 V operation?
 
 There are advantages and disadvantages.
 
-## Gain Comparison (2.5 V vs 0.5 V)
+### Gain Comparison (2.5 V vs 0.5 V)
 
 Gain = (Change in Output Voltage) / (Change in Input Voltage)
 
@@ -5215,7 +5231,11 @@ This is a significant increase in delay compared to 2.5 V.
 
 ---
 
-# L1 Sources of Variation – Etching Process
+<br>
+
+# Static behaviour evaluation-CMOS inverter robustness-Device variation
+
+# 44 - L1 Sources of Variation – Etching Process
 
 ## Introduction
 
@@ -5242,7 +5262,6 @@ It is a very important fabrication step because:
 
 The structures defined during etching determine transistor dimensions.
 
-
 ## CMOS Inverter Structure
 
 <p align="center">
@@ -5264,7 +5283,6 @@ If we deep dive into the transistor structure:
 
 Each of these elements is created through fabrication processes including etching.
 
-
 ## Layout View
 
 <p align="center">
@@ -5285,7 +5303,6 @@ The shape of every layer is defined by the etching process.
 
 If etching is ideal → perfect rectangular shapes.  
 If not ideal → distorted edges.
-
 
 ## Gate Length and Width
 
@@ -5353,7 +5370,6 @@ Effects:
 - Area becomes W' × L'
 - Edges are not well defined.
 
-
 ## Accumulated Variation in Chain
 
 <p align="center">
@@ -5380,7 +5396,6 @@ Edge gates:
 
 Thus, variation depends on surrounding layout context.
 
-
 ## Impact on Drain Current
 
 Drain current equation of MOSFET:
@@ -5405,7 +5420,7 @@ Etching variation → W/L variation → Drain current variation → Delay variat
 
 ---
 
-# L2 Sources of Variation – Oxide Thickness
+# 45 - L2 Sources of Variation – Oxide Thickness
 
 ## Introduction
 
@@ -5513,7 +5528,7 @@ More oxide thickness variation → More drain current variation.
 
 ---
 
-# L3 Smart SPICE Simulation for Device Variations
+# 46 - L3 Smart SPICE Simulation for Device Variations
 
 ## Objective
 
@@ -5633,7 +5648,7 @@ These curves show inverter response under extreme width variation.
 
 ---
 
-# L4 Conclusion – CMOS Inverter Robustness
+# 47 - L4 Conclusion – CMOS Inverter Robustness
 
 ## Switching Threshold Analysis
 
@@ -5762,5 +5777,15 @@ It always behaves as:
 - Logic inverter
 - Not another logic gate
 - Not an undefined element
+
+---
+
+# 48 - L5 Sky130 device variations labs
+
+<p align="center">
+<img width="1148" height="560" alt="image" src="https://github.com/user-attachments/assets/f1674a69-3d8a-479b-a7d1-28987fa35143" />
+</p>
+
+
 
 This demonstrates CMOS inverter robustness.
