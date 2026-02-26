@@ -5,7 +5,7 @@
 ### [NgspiceSky130-Day1-Basics of NMOS Drain Current Id vs Drain-to-source Voltage Vds](#ngspicesky130-day1-basics-of-nmos-drain-current-id-vs-drain-to-source-voltage-vds)
   - [Introduction to Circuit Design and Spice Simulations](#introduction-to-circuit-design-and-spice-simulations)
     - [L1 Why do we need SPICE simulations](#l1-why-do-we-need-spice-simulations)
-    - [L2 Introduction to basic element in circuit design NMOS](#l2-introduction-to-basic-element-in-circuit-design---nmos)
+    - [L2 Introduction to basic element in circuit design NMOS](#l2-introduction-to-basic-element-in-circuit-design-nmos)
     - [L3 Strong inversion and threshold voltage](#l3-strong-inversion-and-threshold-voltage)
     - [L4 Threshold voltage with positive substrate potential](#l4-threshold-voltage-with-positive-substrate-potential)
   - [NMOS resistive region and Saturation region of operation](#nmos-resistive-region-and-saturation-region-of-operation)
@@ -106,7 +106,7 @@ The lecture raises three critical questions: (1) Where do delay tables come from
 
 ---
 
-# L2 Introduction to basic element in Circuit design – NMOS
+# L2 Introduction to basic element in Circuit design NMOS
 
 This lecture explains the fundamental structure of an NMOS transistor and builds the foundation for understanding threshold voltage and SPICE modeling. An NMOS is a four-terminal device consisting of gate, source, drain, and body (or bulk). It is built on a p-type substrate, and the source and drain are formed using heavily doped n+ diffusion regions. Above the substrate lies a thin gate oxide layer, and on top of the oxide is a polysilicon or metal gate. Isolation regions are also present to electrically separate adjacent transistors so that the operation of one device does not affect another. While the body terminal is often not explicitly shown in simplified circuit symbols because it is usually grounded, it plays a very important role in determining the threshold voltage. Any potential applied to the body can modify the threshold voltage, which directly affects device behavior.
 
