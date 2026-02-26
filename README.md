@@ -4173,7 +4173,115 @@ Results:
 
 ---
 
+# L6 Applications of CMOS Inverter in Clock Network and STA
 
+## Review of Experimental Observations
+
+PMOS size was varied as an integer multiple of NMOS.
+
+For each case, the following were obtained:
+
+- Rise delay  
+- Fall delay  
+- Switching threshold (Vm)  
+
+### Observation 1: Small Variation in Switching Threshold
+
+<p align="center">
+<img width="710" height="235" alt="image" src="https://github.com/user-attachments/assets/30862f30-7b36-448e-a342-79a89512b5eb" />
+</p>
+
+When PMOS size varies between nearby integers (e.g., 2× to 3× NMOS):
+
+- Vm changes only slightly (~50 mV).
+- Even fabrication variations (e.g., 4.5× becoming 4.7× or 5×) result in small Vm variation.
+- CMOS inverter behavior remains intact.
+
+This demonstrates robustness of switching threshold against process variations.
+
+### Observation 2: Symmetry of Rise and Fall Delay
+
+<p align="center"> <img width="1172" height="272" alt="image" src="https://github.com/user-attachments/assets/210a4374-4eec-4cec-aec5-45ee96a39db8" />
+</p>
+
+There exists a PMOS/NMOS size ratio where:
+
+- Rise delay ≈ Fall delay  
+- Switching threshold ≈ 1.2–1.25 V (near Vdd/2 for 2.5 V supply)
+
+This symmetry is critical for clock network cells.
+
+# Application 1: Clock Network (Clock Inverter / Clock Buffer)
+
+<p align="center"> <img width="1177" height="267" alt="image" src="https://github.com/user-attachments/assets/d0cfcc3c-be2c-474e-b5b2-cc10fe5c6ef1" /> </p>
+
+<p align="center"> <img width="1257" height="713" alt="image" src="https://github.com/user-attachments/assets/7440d97d-ec18-410b-9ee5-4d5ca7c89966" />
+ </p>
+
+In a clock distribution network:
+
+- Input clock waveform must maintain symmetry.
+- Rise delay must equal fall delay.
+- Low-to-high delay must equal high-to-low delay.
+
+If an inverter has unequal rise and fall delays:
+
+- Output waveform becomes distorted.
+- Duty cycle changes.
+- Timing errors propagate across clock tree.
+
+To achieve symmetry:
+
+- PMOS must be larger than NMOS.
+- PMOS is typically ~2 to 2.5× NMOS.
+- This compensates for mobility differences.
+- Effective resistances of PMOS and NMOS become approximately equal.
+
+Result:
+
+- Symmetric output waveform.
+- Clock integrity preserved.
+
+Such cells are referred to as clock inverters or clock buffers.
+
+# Application 2: Data Path Optimization (Static Timing Analysis - STA)
+
+<p align="center">
+<img width="1123" height="285" alt="image" src="https://github.com/user-attachments/assets/3b0a2808-ad68-4a10-9b0f-2db6575dfe9d" /> </p>
+
+<p align="center"> <img width="1278" height="692" alt="image" src="https://github.com/user-attachments/assets/9d2b962d-c299-4c52-8df1-cfd2a98d3d25" />
+</p>
+
+In data paths:
+
+Condition for valid timing:
+
+Data arrival time ≤ Data required time  
+Slack ≥ 0  
+
+If:
+
+Data arrival time > Data required time  
+
+Then:
+
+- Combinational delay is too high.
+- Path violates timing.
+
+Solution:
+
+- Replace inverter with a faster variant.
+- Use inverter with larger PMOS size.
+- Reduced rise delay improves arrival time.
+
+Clock inverter → symmetric delays  
+Regular inverters → optimized for data paths  
+
+Tradeoff:
+
+- Larger PMOS → faster rise
+- Slightly increased fall delay
+- Increased area
 
 ---
 
