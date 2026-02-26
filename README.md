@@ -35,8 +35,8 @@
     - [L2 Introduction to standard MOS voltage current parameters](#l2-introduction-to-standard-mos-voltage-current-parameters)
     - [L3 PMOS / NMOS Drain Current vs Drain Voltage](#l3-pmos--nmos-drain-current-vs-drain-voltage)
     - [L4 Step 1 – Convert PMOS Gate-Source Voltage to VIN](#l4-step-1--convert-pmos-gate-source-voltage-to-vin)
-    - [L5 Convert PMOS and NMOS drain-source-voltage to Vout](#l5-step-2-step-3--convert-pmos-and-nmos-drain-source-voltage-to-vout)
-    - [L6 Merge PMOS-NMOS load curves and plot VTC](#l6-merge-pmos-nmos-load-curves-and-plot-vtc)
+    - [L5 Convert PMOS and NMOS drain-source-voltage to Vout](#l5-step-2--step-3--convert-pmos-and-nmos-drainsource-voltage-to-vout)
+    - [L6 Merge PMOS-NMOS load curves and plot VTC](#l6-step-4--merge-pmos--nmos-load-curves-and-plot-vtc)
 
  ### [NgspiceSky130-Day3-CMOS switching threshold and dynamic simulations](#ngspicesky130-day3-cmos-switching-threshold-and-dynamic-simulations)
   - [Voltage transfer characteristics-SPICE simulations](#voltage-transfer-characteristics-spice-simulations)
