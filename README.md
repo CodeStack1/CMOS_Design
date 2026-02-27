@@ -27,7 +27,7 @@
     - [L1 SPICE simulation for lower nodes](#l1-spice-simulation-for-lower-nodes)
     - [L2 Drain current vs gate voltage for long and short channel device](#l2-drain-current-vs-gate-voltage-for-long-and-short-channel-device)
     - [L3 Velocity saturation at lower and higher electric fields](#l3-velocity-saturation-at-lower-and-higher-electric-fields)
-    - [L4 Velocity saturation drain current model](#l4-velocity-saturation-drain-current-model)
+    - [L4 Velocity saturation ](#l4-velocity-saturation-drain-current-model)
     - [L5 Labs Sky130 Id Vgs](#l5-labs-sky130-id-vgs)
     - [L6 Labs Sky130 Vt](#l6-labs-sky130-vt)
   - [CMOS voltage transfer characteristics VTC](#cmos-voltage-transfer-characteristics-vtc)
@@ -884,8 +884,6 @@ The drain current becomes:
 I<sub>D</sub> = k<sub>n</sub>  
 [(V<sub>GS</sub> − V<sub>T</sub>) V<sub>DS</sub> − V<sub>DS</sub><sup>2</sup> / 2]
 
-
-
 ## Observation: Quadratic Term in VDS
 
 The equation contains:
@@ -954,6 +952,115 @@ V<sub>DS</sub> < (V<sub>GS</sub> − V<sub>T</sub>)
 The drain current model is:
 
 I<sub>D</sub> = k<sub>n</sub> (V<sub>GS</sub> − V<sub>T</sub>) V<sub>DS</sub>
+
+---
+
+# L4 SPICE conclusion to resistive operation
+
+## Linear Region Condition
+
+<p align="center">
+<img width="1252" height="682" alt="image" src="https://github.com/user-attachments/assets/c3c2a4d2-f2f5-4e9d-ac2f-bfb50310ac89" />
+</p>
+
+We are at a point where the drain current is a linear function of VDS.
+
+The condition for linear mode of operation is:
+
+VDS ≤ VGS − VT  
+
+When this condition is satisfied, the device operates in the linear region.
+
+The drain current equation in this region is:
+
+Id ∝ (VGS − VT) · VDS  
+
+## Objective
+
+We need to study:
+
+- Effect of varying VGS  
+- Effect of varying VDS  
+- Impact on drain current  
+
+There are applications operating at:
+
+- Lower VGS  
+- Higher VGS  
+
+So we must simulate device behavior across different voltage levels.
+
+## VGS Sweep
+
+<p align="center">
+<img width="743" height="423" alt="image" src="https://github.com/user-attachments/assets/5ce884b9-dbce-4e79-83b6-7c85fa589fea" /> </p>
+
+Sweep VGS from 0 to 2.5 V in steps of 0.5 V:
+
+- 0.5 V  
+- 1.0 V  
+- 1.5 V  
+- 2.0 V  
+- 2.5 V  
+
+For each VGS value, determine allowable VDS range such that:
+
+VDS ≤ VGS − VT  
+
+## Corresponding VDS Sweep Ranges
+
+<p align="center">
+<img width="521" height="138" alt="image" src="https://github.com/user-attachments/assets/204082fd-dbd5-4f13-a0d4-41508060f34c" />
+<img width="520" height="140" alt="image" src="https://github.com/user-attachments/assets/96ec9153-8a13-4333-a766-8f48a0b9ea51" />
+<img width="508" height="138" alt="image" src="https://github.com/user-attachments/assets/938a210e-0395-4f70-8a51-b4d7d65c79a1" />
+<img width="526" height="131" alt="image" src="https://github.com/user-attachments/assets/70db48b3-b276-4af0-aa19-9e42b47eafb6" />
+</p>
+
+For each VGS:
+
+- VGS = 0.5 V → VDS: 0 to 0.05 V  
+- VGS = 1.0 V → VDS: 0 to 0.55 V  
+- VGS = 1.5 V → VDS: 0 to 1.05 V  
+- VGS = 2.0 V → VDS: 0 to 1.55 V  
+- VGS = 2.5 V → VDS: 0 to 2.05 V  
+
+At every VGS value, VDS must be swept only up to (VGS − VT) to keep the device in linear region.
+
+## Challenge
+
+Manually calculating drain current for:
+
+- All VGS values  
+- All corresponding VDS values  
+
+is not feasible.
+
+We require:
+
+- Accurate models  
+- Automated computation  
+
+## Solution: SPICE Simulation
+
+We can:
+
+- Provide sweep conditions for VGS  
+- Sweep VDS from 0 to (VGS − VT)  
+- Obtain drain current characteristics  
+
+SPICE engine performs:
+
+- Accurate current calculations  
+- Automated sweeping  
+- Waveform generation  
+
+## Important Question
+
+What happens when:
+
+VDS > VGS − VT ?
+
+In this case, the device enters the saturation region of operation.
 
 ---
 
@@ -1930,7 +2037,7 @@ plot -VDD#branch
 
 ## Results
 
-<p align="center"> <img width="493" height="318" alt="image" src="https://github.com/user-attachments/assets/56efd682-2a6b-472c-926f-1602bf6c2ac4" />
+<p align="center"> <img width="990" height="472" alt="image" src="https://github.com/user-attachments/assets/0ecc3ac7-4874-42a0-a9f2-d5c7699d98b7" />
 </p>
   
 - ID vs VDS curves generated  
@@ -2285,17 +2392,6 @@ Syntax meaning:
 
 - Left-hand variable is swept
 - Right-hand variable defines outer sweep
-
-# Direct Comparison
-
-<p align="center">
-  <img src="IMAGE_COMPARISON_ID_VGS" width="700">
-</p>
-
-Comparison:
-
-- Long channel → Fully quadratic
-- Short channel → Becomes linear at high VGS
 
 # Conclusion
 
@@ -2709,7 +2805,7 @@ This deviation occurs due to **velocity saturation**.
 - **Length (L):** 0.15 µm (Short channel)  
 - **VDS Max:** 1.8 V  
 
-## ID vs VDS
+## Plot - 1
 
 **Sweep Conditions:**
 - VDS: 0 → 1.8 V (step 0.1 V)  
@@ -2717,35 +2813,29 @@ This deviation occurs due to **velocity saturation**.
 
 **Result:**
 
-<p align="center"></p>
+<p align="center"> <img width="995" height="486" alt="image" src="https://github.com/user-attachments/assets/814fa3ad-dd21-4fdc-b67b-3bd0004381ce" />
+</p>
 
 - Low VGS → Quadratic behavior  
 - High VGS (≥ ~1 V) → Linear behavior  
-- Peak current ≈ **196 µA**  
 - Shows **velocity saturation**
 
-## ID vs VGS
+## Plot - 2
 
 **Sweep Conditions:**
 - VDS = 1.8 V (constant)  
 - VGS: 0 → 1.8 V  
 
 **Result:**
-<p align="center"> </p>
+<p align="center"> <img width="993" height="486" alt="image" src="https://github.com/user-attachments/assets/4c55d4dd-988c-41e5-ad55-eed76779f315" />
+</p>
 
 - Linear trend at higher VGS  
 - Confirms **short channel velocity saturation**
 
-## Conclusion
-
-For **L = 0.15 µm**:
-- Current saturates earlier  
-- ID becomes linear at higher voltages  
-- Velocity saturation dominates
-
 ---
 
-# 20 - L6 Sky130 Lab – Threshold Voltage (VT) Extraction
+# L6 Sky130 Lab – Threshold Voltage (VT) Extraction
 
 ## Device / Simulation Setup
 
@@ -2758,9 +2848,10 @@ For **L = 0.15 µm**:
 
 ## Result
 
-<p align="center"> </p>
+<p align="center"> <img width="381" height="293" alt="image" src="https://github.com/user-attachments/assets/bf44a03a-afb6-4971-ad36-60309ec43d13" />
+ </p>
   
-- **Threshold Voltage (VT) ≈ 0.77 V**
+- **Threshold Voltage (VT) ≈ 0.76 V**
 
 (Obtained by extending tangent of steep ID–VGS slope to X-axis.)
 
@@ -3806,6 +3897,88 @@ Only PMOS width changed.
 ---
 
 # L3 Labs Sky130 SPICE simulation for CMOS
+
+## DC Analysis – VTC Characteristics
+
+We are using both PFET and NFET for the CMOS inverter.
+
+- (W/L)p = 2.33 × (W/L)n  
+- Vin sweep: 0 V to 1.8 V  
+- Step size: 0.01 V  
+
+To generate the plot:
+- Type `ngspice`
+- Then type `plot out vs in`
+
+This gives the Voltage Transfer Characteristic (VTC).
+
+<p align="center"> <img width="1600" height="1084" alt="image" src="https://github.com/user-attachments/assets/492117f0-a1b0-492c-8333-34c36841bc41" />
+</p>
+
+### Switching Threshold
+
+Switching threshold is the point where:
+
+Vin = Vout  
+
+<p align="center">
+<img width="654" height="499" alt="Screenshot 2026-02-27 145637" src="https://github.com/user-attachments/assets/6b1682c6-2200-4506-87ba-fff4c0b53315" />
+</p>
+
+From the graph:
+
+Switching threshold for W/L = 2.3 is approximately:
+
+Vm ≈ 0.876 V  
+
+## Transient Analysis
+
+Open the transient SPICE file (day3).
+
+- Process corner: Typical  
+- (W/L) ratio: Same as DC case  
+
+Pulse input parameters:
+
+- Initial value: 0 V  
+- Final value: 1 V  
+- Time shift: 0  
+- Rise time: 0.1 ns  
+- Fall time: 0.1 ns  
+- Pulse width: 2 ns  
+- Total time period: 4 ns  
+
+Run the simulation.
+
+## Delay Calculation
+
+<p align="center">
+<img width="992" height="487" alt="image" src="https://github.com/user-attachments/assets/e7a99a3d-f86f-4bbc-b27b-847c4c39b766" />
+ </p>
+
+<p align="center"> <img width="992" height="480" alt="image" src="https://github.com/user-attachments/assets/7d61b25a-dc77-4925-a5fe-9538b7204cfc" />
+ </p>
+
+For rise and fall delay:
+
+- Consider 50% of output voltage.
+- 50% of 1.8 V = 0.9 V  
+
+### Rise Delay
+  
+Measure time difference at 0.9 V crossing.
+
+Rise delay:
+
+2.482 ns − 2.15 ns = 0.333 ns  
+
+### Fall Delay
+
+Measure during falling transition at 0.9 V.
+
+Fall delay:
+
+4.334 ns − 4.050 ns = 0.285 ns  
 
 ---
 
@@ -4988,7 +5161,7 @@ Used for amplification.
 
 ---
 
-# 40 - L5 Sky130 Noise Margin Lab
+# L5 Sky130 Noise Margin Lab
 
 ## Simulation Parameters
 
@@ -4996,40 +5169,40 @@ Used for amplification.
 - PMOS/NMOS (W/L) ratio: 2.77
 - Input sweep: Sweeping the Vin from 0 to 1.8V with stepsize of 0.01V
 
-## Extracted Values from VTC (Slope = −1 Points)
+<p align="center">
+<img width="941" height="482" alt="image" src="https://github.com/user-attachments/assets/706c36af-29b7-4751-8639-68fb3ba85030" />
+</p>
 
 ### Upper Intersection
 
-- VIL  = 0.7741 V
-- VOH  = 1.7088 V
+- VIL  = 0.7733 V
+- VOH  = 1.70952 V
 
 ### Lower Intersection
 
-- VIH  = 0.9758 V
-- VOL  = 0.1147 V
+- VIH  = 0.98778 V
+- VOL  = 0.09523 V
 
 ## Calculated Noise Margins
 
 ### Noise Margin High (NMH)
 
 ```
-NMH = VOH − VIH
-     = 1.7088 − 0.9758
-     ≈ 0.733 V
+NMH = VOH - VIH
+    = 1.70952 - 0.98778 = 0.72174
 ```
 
 ### Noise Margin Low (NML)
 
 ```
 NML = VIL − VOL
-     = 0.7741 − 0.1147
-     ≈ 0.6594 V
+    = 0.7733 - 0.09523 = 0.67807
 ```
 
 ## Final Results
 
-- NMH ≈ 0.733 V
-- NML ≈ 0.659 V
+- NMH ≈ 0.72174 V
+- NML ≈ 0.67807 V
 
 ---
 
@@ -5268,6 +5441,65 @@ Rise delay ≈ **220 ps**
 Fall delay ≈ **160 ps**
 
 This is a significant increase in delay compared to 2.5 V.
+
+---
+
+# L3 Sky130 Supply variation Labs
+
+## Supply Variation Setup
+
+Initial supply voltage:
+
+Vdd = 1.8 V  
+
+We reduce the supply voltage in steps of 0.2 V.
+
+Total iterations:
+
+1.8 V  
+1.6 V  
+1.4 V  
+1.2 V  
+1.0 V  
+0.8 V  
+
+Total = 6 iterations  
+
+<p align="center">
+<img width="1255" height="647" alt="image" src="https://github.com/user-attachments/assets/3a32680b-7434-4cc5-b922-8f71f817eb25" />
+</p>
+
+## Gain Calculation
+
+Gain is calculated from the slope of the VTC in the transition region.
+
+### Case 1: Vdd = 1.8 V
+
+Selected points from VTC:
+
+Point 1:  
+x₀ = 0.78427, y₀ = 1.68571  
+
+Point 2:  
+x₀ = 0.994382, y₀ = 0.0833333  
+
+Magnitude of Gain:
+
+|Gain| = 7.6229  
+
+### Case 2: Vdd = 0.8 V
+
+Selected points from VTC:
+
+Point 1:  
+x₀ = 0.423596, y₀ = 0.771429  
+
+Point 2:  
+x₀ = 0.502247, y₀ = 0.0333333  
+
+Magnitude of Gain:
+
+|Gain| = 9.3844  
 
 ---
 
