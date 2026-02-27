@@ -2848,7 +2848,8 @@ This deviation occurs due to **velocity saturation**.
 
 ## Result
 
-<p align="center"> <img width="381" height="293" alt="image" src="https://github.com/user-attachments/assets/bf44a03a-afb6-4971-ad36-60309ec43d13" />
+<p align="center"> <img width="933" height="672" alt="image" src="https://github.com/user-attachments/assets/34fe5b0c-e214-43d2-bdc2-53698b3231a9" />
+
  </p>
   
 - **Threshold Voltage (VT) ≈ 0.76 V**
