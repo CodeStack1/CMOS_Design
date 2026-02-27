@@ -2835,7 +2835,7 @@ This deviation occurs due to **velocity saturation**.
 
 ---
 
-# L6 Sky130 Lab
+# L6 Labs Sky130 Vt
 
 ## Device / Simulation Setup
 
@@ -5161,7 +5161,7 @@ Used for amplification.
 
 ---
 
-# L5 Sky130 Noise Margin Lab
+# L5 Sky130 Noise margin labs
 
 ## Simulation Parameters
 
