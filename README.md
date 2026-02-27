@@ -2835,7 +2835,7 @@ This deviation occurs due to **velocity saturation**.
 
 ---
 
-# L6 Sky130 Lab – Threshold Voltage (VT) Extraction
+# L6 Sky130 Lab
 
 ## Device / Simulation Setup
 
